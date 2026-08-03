@@ -40,8 +40,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13, 17, 23, 0.95);
-      backdrop-filter: blur(8px);
+      background: var(--bg);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
       display: flex;
@@ -215,9 +214,7 @@
       padding: 16px;
     }
 
-    .skill-icon { font-size: 22px; margin-bottom: 8px; }
-
-    .skill-name {
+.skill-name {
       font-size: 13px;
       font-weight: 600;
       color: var(--bright);
@@ -423,25 +420,6 @@
       font-size: 13px;
     }
 
-    /* ── STAT ROW ────────────────────────────────── */
-    .stat-row {
-      display: flex;
-      gap: 32px;
-      padding: 20px 0;
-    }
-
-    .stat { text-align: left; }
-
-    .stat-val {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--bright);
-      letter-spacing: -1px;
-    }
-
-    .stat-val span { color: var(--blue); }
-
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 640px) {
@@ -484,9 +462,9 @@
       I make things that work — from embedded systems to web backends.
     </p>
     <div class="hero-meta">
-      <span>📍 Minsk, Belarus</span>
-      <span>🎓 Class of 2026</span>
-      <span>🤖 Robofinist competitor</span>
+      <span>Minsk, Belarus</span>
+      <span>Class of 2026</span>
+      <span>Robofinist competitor</span>
     </div>
     <div class="hero-links">
       <a class="btn btn-primary" href="https://github.com/Mukller" target="_blank">
@@ -505,27 +483,6 @@
   </div>
 </div>
 
-<!-- STATS -->
-<section>
-  <div class="stat-row">
-    <div class="stat">
-      <div class="stat-val">27<span>+</span></div>
-      <div class="stat-label">GitHub projects</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">3</div>
-      <div class="stat-label">Robotics competitions</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">10<span>+</span></div>
-      <div class="stat-label">Telegram bots deployed</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">24<span>/7</span></div>
-      <div class="stat-label">Self-hosted server</div>
-    </div>
-  </div>
-</section>
 
 <!-- ABOUT -->
 <section id="about">
@@ -555,7 +512,6 @@
   <div class="section-title">Skills</div>
   <div class="skills-grid">
     <div class="skill-card">
-      <div class="skill-icon">🐍</div>
       <div class="skill-name">Python</div>
       <div class="tag-row">
         <span class="tag">asyncio</span>
@@ -566,7 +522,6 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">🔌</div>
       <div class="skill-name">Embedded</div>
       <div class="tag-row">
         <span class="tag green">ESP32</span>
@@ -576,7 +531,6 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">👁️</div>
       <div class="skill-name">Computer Vision</div>
       <div class="tag-row">
         <span class="tag orange">YOLO v8</span>
@@ -585,7 +539,6 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">🐧</div>
       <div class="skill-name">Linux &amp; DevOps</div>
       <div class="tag-row">
         <span class="tag yellow">Docker</span>
@@ -596,7 +549,6 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">🤖</div>
       <div class="skill-name">Telegram Bots</div>
       <div class="tag-row">
         <span class="tag">aiogram 3</span>
@@ -606,7 +558,6 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-icon">🌐</div>
       <div class="skill-name">Web</div>
       <div class="tag-row">
         <span class="tag gray">HTML/CSS/JS</span>
