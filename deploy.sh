@@ -15,7 +15,7 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-sudo cp /tmp/site-deploy/index.html "$SITE_DIR/"
+sudo cp /tmp/site-deploy/index.html /tmp/site-deploy/cv-ru.html /tmp/site-deploy/cv-en.html "$SITE_DIR/"
 sudo chown -R www-data:www-data "$SITE_DIR"
 sudo chmod -R 755 "$SITE_DIR"
 
