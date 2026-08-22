@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anton Petnitsky</title>
+  <title>Anton Petnitsky — Full-Stack Developer & Robotics Engineer</title>
+  <meta name="description" content="Anton Petnitsky — full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools, and 54+ open-source projects. Robofinist & FIRA competitor.">
+  <meta property="og:title" content="Anton Petnitsky — Full-Stack Developer & Robotics Engineer">
+  <meta property="og:description" content="Full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools, and 54+ open-source projects.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Anton Petnitsky — Full-Stack Developer & Robotics Engineer">
+  <meta name="twitter:description" content="Full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools.">
+  <link rel="canonical" href="https://antonpetnitsky.com">
+  <link rel="icon" href="https://github.com/Mukller.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -14,12 +29,17 @@
       --text:      #c9d1d9;
       --muted:     #8b949e;
       --bright:    #e6edf3;
-      --blue:      #58a6ff;
+      --accent:    #58a6ff;
+      --accent-light: #79c0ff;
       --green:     #3fb950;
+      --green-hover: #2ea043;
       --red:       #f85149;
       --yellow:    #d29922;
       --orange:    #ffa657;
     }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     html { scroll-behavior: smooth; }
 
@@ -32,8 +52,8 @@
       min-height: 100vh;
     }
 
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
+    a:hover { color: var(--accent-light); text-decoration: underline; }
     .project-card, .contact-card, .robotics-item { text-decoration: none; }
     .project-card:hover, .contact-card:hover { text-decoration: none; }
 
@@ -42,13 +62,15 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg);
+      background: linear-gradient(180deg, rgba(13, 17, 23, 0.95) 0%, rgba(13, 17, 23, 0.8) 100%);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 60px;
+      gap: 16px;
     }
 
     .logo {
@@ -56,15 +78,43 @@
       font-size: 16px;
       color: var(--bright);
       letter-spacing: -0.3px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    nav { display: flex; gap: 24px; }
+    nav {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex: 1;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
     nav a {
       color: var(--muted);
       font-size: 14px;
       transition: color .15s;
+      white-space: nowrap;
     }
     nav a:hover { color: var(--bright); text-decoration: none; }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: inherit;
+      transition: border-color .15s, color .15s;
+      flex-shrink: 0;
+    }
+    .lang-btn:hover { color: var(--bright); border-color: var(--accent); }
 
     /* ── HERO ────────────────────────────────────── */
     .hero {
@@ -84,16 +134,9 @@
       background: var(--bg-card);
       flex-shrink: 0;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .hero-avatar svg {
-      width: 72px;
-      height: 72px;
-      fill: var(--muted);
-    }
+    .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .hero-text h1 {
       font-size: 32px;
@@ -105,7 +148,7 @@
 
     .hero-tagline {
       font-size: 17px;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 12px;
       font-weight: 500;
     }
@@ -137,29 +180,37 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
-      border-radius: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
       font-size: 14px;
       font-weight: 500;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: border-color .15s, background .15s;
+      transition: all .2s ease;
       text-decoration: none;
     }
 
     .btn-primary {
-      background: var(--blue);
-      color: #0d1117;
-      border-color: var(--blue);
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
       font-weight: 600;
     }
-    .btn-primary:hover { background: #79c0ff; border-color: #79c0ff; text-decoration: none; }
+    .btn-primary:hover {
+      background: var(--green-hover);
+      border-color: var(--green-hover);
+      text-decoration: none;
+    }
 
     .btn-ghost {
       background: transparent;
       color: var(--text);
     }
-    .btn-ghost:hover { background: var(--bg-card); border-color: #58a6ff44; text-decoration: none; }
+    .btn-ghost:hover {
+      background: rgba(88, 166, 255, 0.1);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
 
     /* ── SECTION WRAPPER ─────────────────────────── */
     section {
@@ -189,8 +240,13 @@
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 20px;
+      transition: border-color .15s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(88, 166, 255, 0.5);
     }
 
     .card-title {
@@ -216,7 +272,7 @@
       padding: 16px;
     }
 
-.skill-name {
+    .skill-name {
       font-size: 13px;
       font-weight: 600;
       color: var(--bright);
@@ -231,14 +287,16 @@
       border-radius: 10px;
       font-size: 11px;
       background: rgba(88,166,255,.1);
-      color: var(--blue);
+      color: var(--accent);
       border: 1px solid rgba(88,166,255,.2);
     }
 
     .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+    .tag.blue { background: rgba(88,166,255,.1); color: var(--accent); border-color: rgba(88,166,255,.2); }
     .tag.orange { background: rgba(255,166,87,.1); color: var(--orange); border-color: rgba(255,166,87,.2); }
     .tag.yellow { background: rgba(210,153,34,.1); color: var(--yellow); border-color: rgba(210,153,34,.2); }
     .tag.gray { background: var(--border); color: var(--muted); border-color: transparent; }
+    .tag.red { background: rgba(248,81,73,.1); color: var(--red); border-color: rgba(248,81,73,.2); }
 
     /* ── PROJECTS ────────────────────────────────── */
     .projects-grid {
@@ -258,7 +316,7 @@
       transition: border-color .15s;
     }
 
-    .project-card:hover { border-color: #58a6ff44; }
+    .project-card:hover { border-color: rgba(88, 166, 255, .4); }
 
     .project-header {
       display: flex;
@@ -269,7 +327,7 @@
     .project-name {
       font-size: 14px;
       font-weight: 600;
-      color: var(--blue);
+      color: var(--accent);
     }
 
     .project-lang {
@@ -322,8 +380,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
     }
+    .robotics-num svg { display: block; }
 
     .robotics-title {
       font-size: 14px;
@@ -364,7 +424,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--blue);
+      background: var(--accent);
       border: 2px solid var(--bg);
     }
 
@@ -383,59 +443,275 @@
 
     .tl-desc { font-size: 13px; color: var(--muted); }
 
+    /* ── HIRE BADGE ──────────────────────────────── */
+    .hire-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--green);
+    }
+    .hire-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── EDUCATION ───────────────────────────────── */
+    .edu-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .edu-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .edu-period {
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 2px;
+      text-align: right;
+    }
+
+    .edu-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bright);
+      margin-bottom: 2px;
+    }
+
+    .edu-detail { font-size: 13px; color: var(--muted); }
+
+    /* ── STATS ROW ───────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -1px;
+    }
+
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── NOW ─────────────────────────────────────── */
+    .now-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .now-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .now-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .now-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .now-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bright);
+    }
+
+    .now-card p { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+
     /* ── CONTACT ─────────────────────────────────── */
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    @media (max-width: 640px) {
-      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
 
     .contact-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 20px;
-      text-align: center;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
       transition: border-color .15s;
     }
 
-    .contact-card:hover { border-color: #58a6ff44; text-decoration: none; }
+    .contact-card:hover { border-color: rgba(88, 166, 255, .4); text-decoration: none; }
 
-    .contact-icon { font-size: 28px; margin-bottom: 8px; }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.04);
+      border-radius: 8px;
+    }
+
+    .contact-text { min-width: 0; }
 
     .contact-label {
       font-size: 13px;
       font-weight: 600;
       color: var(--bright);
       display: block;
-      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .contact-value { font-size: 12px; color: var(--muted); }
+    .contact-value {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
 
     /* ── FOOTER ──────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 24px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
+      padding: 40px 24px 32px;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all .2s ease;
+    }
+    .footer-social-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(88,166,255,.08);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .footer-divider {
+      width: 100%;
+      max-width: 200px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-copy strong {
+      color: var(--bright);
+      font-weight: 600;
+    }
+
+    .footer-license {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-license a { color: var(--muted); }
+    .footer-license a:hover { color: var(--accent); }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-badge:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 640px) {
-      .hero { flex-direction: column; gap: 24px; margin: 40px auto 40px; }
+      .hero { flex-direction: column; gap: 20px; margin: 40px auto 36px; }
+      .hero-avatar { width: 80px; height: 80px; }
+      .hero-text h1 { font-size: 26px; }
+      .hero-tagline { font-size: 15px; }
       .about-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
+      .now-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
-      .stat-row { gap: 20px; }
+      .edu-item { grid-template-columns: 1fr; gap: 2px; }
+      .edu-period { text-align: left; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
       nav { gap: 14px; }
+      header { padding: 0 16px; }
+      section { margin-bottom: 48px; }
+      .footer-inner { align-items: center; }
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-links { gap: 8px; }
+      .btn { padding: 6px 12px; font-size: 13px; }
     }
   </style>
 </head>
@@ -445,51 +721,51 @@
 <header>
   <span class="logo">Anton Petnitsky</span>
   <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#robotics">Robotics</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="#skills" data-en="Skills" data-ru="Навыки">Skills</a>
+    <a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="#robotics" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="#achievements" data-en="Awards" data-ru="Достижения">Awards</a>
+    <a href="#now" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a>
   </nav>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
 </header>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-avatar">
-    <img src="https://github.com/Mukller.png" alt="Anton Petnitsky" style="width:100%;height:100%;object-fit:cover;">
+    <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
   </div>
   <div class="hero-text">
     <h1>Anton Petnitsky</h1>
-    <div class="hero-tagline">Software Developer &amp; Robotics Engineer</div>
-    <p class="hero-desc">
+    <div class="hero-tagline" data-en="Software Developer &amp; Robotics Engineer" data-ru="Разработчик ПО и инженер-робототехник">Software Developer &amp; Robotics Engineer</div>
+    <p class="hero-desc" data-en="Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus. I make things that work — from embedded systems to web backends." data-ru="Создаю Telegram-боты, автономных роботов и AI-инструменты из Минска, Беларусь. Делаю вещи, которые работают — от встраиваемых систем до веб-бэкендов.">
       Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus.
       I make things that work — from embedded systems to web backends.
     </p>
     <div class="hero-meta">
-      <span>Minsk, Belarus</span>
-      <span>Class of 2026</span>
-      <span>Robofinist competitor</span>
+      <span data-en="Minsk, Belarus · Remote only" data-ru="Минск, Беларусь · только удалённо">Minsk, Belarus · Remote only</span>
+      <span data-en="Class of 2026" data-ru="Выпуск 2026">Class of 2026</span>
+      <span data-en="Robofinist competitor" data-ru="Участник Робофиниста">Robofinist competitor</span>
+      <span class="hire-badge" data-en="Available for hire" data-ru="Открыт для предложений">Available for hire</span>
     </div>
     <div class="hero-links">
       <a class="btn btn-primary" href="https://github.com/Mukller" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
-      <a class="btn btn-ghost" href="https://t.me/anton_petnitsky" target="_blank">
+      <a class="btn btn-ghost" href="https://t.me/chotokek" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
         Telegram
       </a>
-      <a class="btn btn-ghost" href="mailto:anton.petnitsky@gmail.com">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        Email
+      <a class="btn btn-ghost cv-btn" href="/cv-en.html" target="_blank" data-en="CV (EN)" data-ru="CV (EN)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        CV (EN)
       </a>
-      <a class="btn btn-ghost" href="https://www.tiktok.com/@anton_petnitsky" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-        TikTok
-      </a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/anton-petnitsky" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
+      <a class="btn btn-ghost cv-btn" href="/cv-ru.html" target="_blank" data-en="CV (RU)" data-ru="Резюме (RU)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        CV (RU)
       </a>
     </div>
   </div>
@@ -498,30 +774,34 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-title">About</div>
+  <div class="section-title" data-en="About" data-ru="Обо мне">About</div>
   <div class="about-grid">
     <div class="card">
-      <div class="card-title">Who I am</div>
-      <p>I'm a self-taught developer from Minsk, Belarus. I build practical tools — Telegram bots, automation scripts, embedded systems, and web services. I prefer shipping working code over perfect architecture.</p>
+      <div class="card-title" data-en="Who I am" data-ru="Кто я">Who I am</div>
+      <p data-en="Self-taught developer from Minsk, Belarus. I build practical tools — Telegram bots, automation scripts, embedded systems, and web services. I prefer shipping working code over perfect architecture." data-ru="Самоучка из Минска, Беларусь. Создаю практичные инструменты — Telegram-боты, скрипты автоматизации, встраиваемые системы и веб-сервисы. Предпочитаю выпускать рабочий код, а не идеальную архитектуру.">Self-taught developer from Minsk, Belarus. I build practical tools — Telegram bots, automation scripts, embedded systems, and web services. I prefer shipping working code over perfect architecture.</p>
     </div>
     <div class="card">
-      <div class="card-title">Infrastructure</div>
-      <p>I run my own home server (Linux, Docker, nginx, PostgreSQL) and a VPS. Most of my projects run 24/7 in production. I manage everything from SSH.</p>
+      <div class="card-title" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
+      <p data-en="I run my own home server (Linux, Docker, nginx, PostgreSQL) and a VPS. Most of my projects run 24/7 in production. I manage everything from SSH." data-ru="Управляю домашним сервером (Linux, Docker, nginx, PostgreSQL) и VPS. Большинство проектов работают в продакшне 24/7. Управляю всем через SSH.">I run my own home server (Linux, Docker, nginx, PostgreSQL) and a VPS. Most of my projects run 24/7 in production. I manage everything from SSH.</p>
     </div>
     <div class="card">
-      <div class="card-title">Robotics</div>
-      <p>I compete at Robofinist and FIRA with self-built robots: an Arkanoid-playing robot (ESP32 + OpenCV + BLDC), a self-balancing robot (ESP32 + TMC2209 + MPU6050), and an autonomous RC car.</p>
+      <div class="card-title" data-en="Robotics" data-ru="Робототехника">Robotics</div>
+      <p data-en="I compete at Robofinist and FIRA with self-built robots: an Arkanoid-playing robot (ESP32 + OpenCV + BLDC), a self-balancing robot (ESP32 + TMC2209 + MPU6050), and an autonomous RC car." data-ru="Участвую в Робофинисте и FIRA с самодельными роботами: робот для Арканоида (ESP32 + OpenCV + BLDC), самобалансирующий робот (ESP32 + TMC2209 + MPU6050) и автономная RC-машина.">I compete at Robofinist and FIRA with self-built robots: an Arkanoid-playing robot (ESP32 + OpenCV + BLDC), a self-balancing robot (ESP32 + TMC2209 + MPU6050), and an autonomous RC car.</p>
     </div>
     <div class="card">
-      <div class="card-title">AI &amp; Automation</div>
-      <p>I use LLMs as tools — building AI-powered bots, automating repetitive workflows, and exploring local models via Ollama. My main pet project is an AI persona system that mimics human conversation style.</p>
+      <div class="card-title" data-en="AI &amp; Automation" data-ru="AI и автоматизация">AI &amp; Automation</div>
+      <p data-en="I use LLMs as tools — building AI-powered bots, automating repetitive workflows, and exploring local models via Ollama. My main pet project is an AI persona system that mimics human conversation style." data-ru="Использую LLM как инструменты — строю AI-ботов, автоматизирую рутинные задачи, изучаю локальные модели через Ollama. Главный пет-проект — система AI-персоны, имитирующей стиль общения человека.">I use LLMs as tools — building AI-powered bots, automating repetitive workflows, and exploring local models via Ollama. My main pet project is an AI persona system that mimics human conversation style.</p>
+    </div>
+    <div class="card">
+      <div class="card-title" data-en="How I Work" data-ru="Как я работаю">How I Work</div>
+      <p data-en="I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it." data-ru="Напрямую общаюсь с клиентами и командой, особенно на долгих удалённых проектах — открыто говорю о сроках, объёме задач и возникающих проблемах. Быстро разбираюсь в новых инструментах и областях, когда этого требует проект.">I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it.</p>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-title">Skills</div>
+  <div class="section-title" data-en="Skills" data-ru="Навыки">Skills</div>
   <div class="skills-grid">
     <div class="skill-card">
       <div class="skill-name">Python</div>
@@ -534,7 +814,7 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-name">Embedded</div>
+      <div class="skill-name" data-en="Embedded" data-ru="Embedded">Embedded</div>
       <div class="tag-row">
         <span class="tag green">ESP32</span>
         <span class="tag green">Arduino</span>
@@ -570,7 +850,7 @@
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-name">Web</div>
+      <div class="skill-name">Web &amp; Mobile</div>
       <div class="tag-row">
         <span class="tag gray">HTML/CSS/JS</span>
         <span class="tag gray">Three.js</span>
@@ -583,7 +863,7 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-title">Open Source Projects</div>
+  <div class="section-title" data-en="Open Source Projects" data-ru="Open Source проекты">Open Source Projects</div>
   <div class="projects-grid">
 
     <a class="project-card" href="https://github.com/Mukller/fira-autonomous-rc-car" target="_blank">
@@ -591,7 +871,7 @@
         <div class="project-name">fira-autonomous-rc-car</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Autonomous RC car for FIRA competition. Computer vision-based lane following and obstacle avoidance.</div>
+      <div class="project-desc" data-en="Autonomous RC car for FIRA competition. Computer vision-based lane following and obstacle avoidance." data-ru="Автономная RC-машина для соревнований FIRA. Следование по полосе и объезд препятствий через компьютерное зрение.">Autonomous RC car for FIRA competition. Computer vision-based lane following and obstacle avoidance.</div>
       <div class="project-footer">
         <span class="tag orange">Robotics</span>
         <span class="tag">FIRA</span>
@@ -604,7 +884,7 @@
         <div class="project-name">Balance_robot</div>
         <div class="project-lang"><span class="lang-dot" style="background:#00979D"></span>C++</div>
       </div>
-      <div class="project-desc">Self-balancing robot built for Robofinist 2026. ESP32 + MPU6050 + TMC2209 stepper drivers + PID control.</div>
+      <div class="project-desc" data-en="Self-balancing robot built for Robofinist 2026. ESP32 + MPU6050 + TMC2209 stepper drivers + PID control." data-ru="Самобалансирующий робот для Робофиниста 2026. ESP32 + MPU6050 + TMC2209 + ПИД-регулятор.">Self-balancing robot built for Robofinist 2026. ESP32 + MPU6050 + TMC2209 stepper drivers + PID control.</div>
       <div class="project-footer">
         <span class="tag orange">Robotics</span>
         <span class="tag green">ESP32</span>
@@ -617,7 +897,7 @@
         <div class="project-name">3d-printer-control</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">OctoPrint integration with Telegram bot for remote control of Ender 5 S1. Real-time status, job tracking.</div>
+      <div class="project-desc" data-en="OctoPrint integration with Telegram bot for remote control of Ender 5 S1. Real-time status, job tracking." data-ru="Интеграция OctoPrint с Telegram-ботом для удалённого управления Ender 5 S1. Статус в реальном времени.">OctoPrint integration with Telegram bot for remote control of Ender 5 S1. Real-time status, job tracking.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">OctoPrint</span>
@@ -630,7 +910,7 @@
         <div class="project-name">claude-auto-continue</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Screenshot-based automation that detects and clicks "Continue" / "Try again" in Claude, keeping long sessions alive.</div>
+      <div class="project-desc" data-en="Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive." data-ru="Автоматизация на основе скриншотов — находит и нажимает Continue / Try again в Claude, поддерживая долгие сессии.">Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive.</div>
       <div class="project-footer">
         <span class="tag">Automation</span>
         <span class="tag">AI</span>
@@ -642,7 +922,7 @@
         <div class="project-name">tt-saver</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Telegram bot @anton_petnitsky_ttsaver_bot — download TikTok videos without watermark. Running 24/7 in production.</div>
+      <div class="project-desc" data-en="Telegram bot — download TikTok videos without watermark. Running 24/7 in production." data-ru="Telegram-бот — скачивание TikTok видео без водяного знака. Работает 24/7 в продакшне.">Telegram bot — download TikTok videos without watermark. Running 24/7 in production.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag green">Live</span>
@@ -654,7 +934,7 @@
         <div class="project-name">chess</div>
         <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
       </div>
-      <div class="project-desc">Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included.</div>
+      <div class="project-desc" data-en="Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included." data-ru="Telegram шахматный бот с подсказками ходов и игрой против AI. Веб-фронтенд в комплекте.">Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">AI</span>
@@ -667,7 +947,7 @@
         <div class="project-name">tg-voice-transcriber</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Telegram bot that transcribes voice messages to text using speech recognition.</div>
+      <div class="project-desc" data-en="Telegram bot that transcribes voice messages to text using speech recognition." data-ru="Telegram-бот, преобразующий голосовые сообщения в текст с помощью распознавания речи.">Telegram bot that transcribes voice messages to text using speech recognition.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">Speech AI</span>
@@ -679,7 +959,7 @@
         <div class="project-name">Anonka</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Anonymous message bot — users send messages anonymously, admins reply in a forum thread.</div>
+      <div class="project-desc" data-en="Anonymous message bot — users send messages anonymously, admins reply in a forum thread." data-ru="Бот анонимных сообщений — пользователи пишут анонимно, админы отвечают в ветке форума.">Anonymous message bot — users send messages anonymously, admins reply in a forum thread.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">Community</span>
@@ -691,7 +971,7 @@
         <div class="project-name">hoster-ddns</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram, monitors uptime.</div>
+      <div class="project-desc" data-en="Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram, monitors uptime." data-ru="Автоматическое обновление DDNS на hoster.by. Получает WAN IP с роутера Keenetic, обрабатывает SMS 2FA через Telegram.">Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram, monitors uptime.</div>
       <div class="project-footer">
         <span class="tag yellow">Automation</span>
         <span class="tag">Playwright</span>
@@ -704,7 +984,7 @@
         <div class="project-name">telegram-mentioner-bot</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Mentions all members in a Telegram group with a single command. Useful for announcements and event calls.</div>
+      <div class="project-desc" data-en="Mentions all members in a Telegram group with a single command. Useful for announcements and event calls." data-ru="Упоминает всех участников группы одной командой. Полезно для объявлений и созывов.">Mentions all members in a Telegram group with a single command. Useful for announcements and event calls.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">Utility</span>
@@ -716,7 +996,7 @@
         <div class="project-name">MiniBoardGames</div>
         <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
       </div>
-      <div class="project-desc">Collection of mini board games playable in the browser. v3.0.0.</div>
+      <div class="project-desc" data-en="Collection of mini board games playable in the browser. v3.0.0." data-ru="Коллекция мини-настольных игр, работающих в браузере. v3.0.0.">Collection of mini board games playable in the browser. v3.0.0.</div>
       <div class="project-footer">
         <span class="tag">Web</span>
         <span class="tag">Games</span>
@@ -728,7 +1008,7 @@
         <div class="project-name">hercules_support_bot</div>
         <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
       </div>
-      <div class="project-desc">Telegram support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot.</div>
+      <div class="project-desc" data-en="Telegram support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot." data-ru="Telegram-бот поддержки для пользователей 3D-принтера Hercules G4 Duo. На основе ohld/telegram-support-bot.">Telegram support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot.</div>
       <div class="project-footer">
         <span class="tag">Telegram</span>
         <span class="tag">Support</span>
@@ -741,14 +1021,14 @@
 
 <!-- ROBOTICS -->
 <section id="robotics">
-  <div class="section-title">Robotics &amp; Competitions</div>
+  <div class="section-title" data-en="Robotics &amp; Competitions" data-ru="Робототехника и соревнования">Robotics &amp; Competitions</div>
   <div class="robotics-list">
 
     <div class="robotics-item">
-      <div class="robotics-num">🏁</div>
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="10" rx="2"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/><path d="M5 12H3M21 12h-2"/></svg></div>
       <div>
-        <div class="robotics-title">Arkanoid Robot "Robo Arkasha" — Robofinist 2026</div>
-        <div class="robotics-desc">Autonomous robot that plays Arkanoid in real-time. Computer vision tracks a red ball via OpenCV (HSV calibration). ESP32 receives commands over UDP from a PC and drives a BLDC motor (ESC) + L298M side motors. The entire chassis is 3D-printed from PETG.</div>
+        <div class="robotics-title" data-en='Arkanoid Robot "Robo Arkasha" — Robofinist 2026' data-ru='Робот-Арканоид "Робо Аркаша" — Робофинист 2026'>Arkanoid Robot "Robo Arkasha" — Robofinist 2026</div>
+        <div class="robotics-desc" data-en="Autonomous robot that plays Arkanoid in real-time. Computer vision tracks a red ball via OpenCV (HSV calibration). ESP32 receives commands over UDP from a PC and drives a BLDC motor (ESC) + L298M side motors. The entire chassis is 3D-printed from PETG." data-ru="Автономный робот, играющий в Арканоид в реальном времени. Компьютерное зрение отслеживает красный шар через OpenCV (HSV-калибровка). ESP32 получает команды по UDP с ПК и управляет BLDC-мотором (ESC) + боковыми моторами L298M. Весь корпус напечатан на 3D-принтере из PETG.">Autonomous robot that plays Arkanoid in real-time. Computer vision tracks a red ball via OpenCV (HSV calibration). ESP32 receives commands over UDP from a PC and drives a BLDC motor (ESC) + L298M side motors. The entire chassis is 3D-printed from PETG.</div>
         <div class="tag-row">
           <span class="tag green">ESP32</span>
           <span class="tag">OpenCV</span>
@@ -761,10 +1041,10 @@
     </div>
 
     <div class="robotics-item">
-      <div class="robotics-num">⚖️</div>
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 5l-7 3M12 5l7 3M12 5v17M8 22h8"/><path d="M5 8l-3 5c0 2 1.8 3.5 3 3.5S8 15 8 13L5 8zM19 8l-3 5c0 2 1.8 3.5 3 3.5s3-1.5 3-3.5l-3-5z"/></svg></div>
       <div>
-        <div class="robotics-title">Self-Balancing Robot — Robofinist 2026</div>
-        <div class="robotics-desc">Two-wheeled inverted pendulum robot. ESP32 + MPU6050 IMU + 2× TMC2209 stepper motor drivers with NEMA17 motors. PID control loop, tuned from scratch. Built with teammate Kostya, assembled and debugged over several months.</div>
+        <div class="robotics-title" data-en="Self-Balancing Robot — Robofinist 2026" data-ru="Самобалансирующий робот — Робофинист 2026">Self-Balancing Robot — Robofinist 2026</div>
+        <div class="robotics-desc" data-en="Two-wheeled inverted pendulum robot. ESP32 + MPU6050 IMU + 2× TMC2209 stepper motor drivers with NEMA17 motors. PID control loop, tuned from scratch. Built with teammate Kostya, assembled and debugged over several months." data-ru="Двухколёсный робот-инвертированный маятник. ESP32 + MPU6050 + 2× TMC2209 с моторами NEMA17. ПИД-регулятор настроен с нуля. Сделан с напарником Костей за несколько месяцев.">Two-wheeled inverted pendulum robot. ESP32 + MPU6050 IMU + 2× TMC2209 stepper motor drivers with NEMA17 motors. PID control loop, tuned from scratch. Built with teammate Kostya, assembled and debugged over several months.</div>
         <div class="tag-row">
           <span class="tag green">ESP32</span>
           <span class="tag green">TMC2209</span>
@@ -776,10 +1056,10 @@
     </div>
 
     <div class="robotics-item">
-      <div class="robotics-num">🚗</div>
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l1.5-4A2 2 0 0 1 7.4 7h9.2a2 2 0 0 1 1.9 1L20 12"/><rect x="3" y="12" width="18" height="5" rx="1.5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></div>
       <div>
-        <div class="robotics-title">Autonomous RC Car — FIRA Competition</div>
-        <div class="robotics-desc">RC car with autonomous navigation for FIRA competition. Computer vision-based control running on Linux. Developed in collaboration with team NDTP.</div>
+        <div class="robotics-title" data-en="Autonomous RC Car — FIRA Competition" data-ru="Автономная RC-машина — соревнования FIRA">Autonomous RC Car — FIRA Competition</div>
+        <div class="robotics-desc" data-en="RC car with autonomous navigation for FIRA competition. Computer vision-based control running on Linux. Developed in collaboration with team NDTP." data-ru="RC-машина с автономной навигацией для соревнований FIRA. Управление на основе компьютерного зрения, запускается на Linux. Разработана совместно с командой NDTP.">RC car with autonomous navigation for FIRA competition. Computer vision-based control running on Linux. Developed in collaboration with team NDTP.</div>
         <div class="tag-row">
           <span class="tag">FIRA</span>
           <span class="tag">Computer Vision</span>
@@ -789,113 +1069,299 @@
       </div>
     </div>
 
-    <div class="robotics-item">
-      <div class="robotics-num">🚁</div>
-      <div>
-        <div class="robotics-title">Companion Drone "DRON-COMPANION" — FIRA 2025</div>
-        <div class="robotics-desc">Drone (Clover 4) that follows a person at their right shoulder. YOLOv8 pose detection, HSV camera calibration, EKF2 stabilization, optical flow. ROS-based control. Built with team NDTP for FIRA 2025.</div>
-        <div class="tag-row">
-          <span class="tag">ROS</span>
-          <span class="tag orange">YOLOv8</span>
-          <span class="tag">Clover 4</span>
-          <span class="tag">EKF2</span>
-          <span class="tag">Optical Flow</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- TIMELINE -->
 <section>
-  <div class="section-title">Timeline</div>
+  <div class="section-title" data-en="Timeline" data-ru="Хронология">Timeline</div>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-date">2026 — present</div>
-      <div class="tl-title">Full-stack self-hosted infrastructure</div>
-      <div class="tl-desc">Home server with Docker, PostgreSQL, nginx, 10+ live bots. Safalife courier app (Flutter + FastAPI + OSRM) deployed to production in Uzbekistan.</div>
+      <div class="tl-title" data-en="Full-stack self-hosted infrastructure" data-ru="Полноценная self-hosted инфраструктура">Full-stack self-hosted infrastructure</div>
+      <div class="tl-desc" data-en="Home server with Docker, PostgreSQL, nginx, 10+ live bots. Safalife courier app (Flutter + FastAPI + OSRM) deployed to production in Uzbekistan." data-ru="Домашний сервер с Docker, PostgreSQL, nginx, 10+ работающих ботов. Приложение Safalife для курьеров (Flutter + FastAPI + OSRM) выпущено в продакшн в Узбекистане.">Home server with Docker, PostgreSQL, nginx, 10+ live bots. Safalife courier app (Flutter + FastAPI + OSRM) deployed to production in Uzbekistan.</div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2026 — Robofinist</div>
-      <div class="tl-title">Robotics competitions</div>
-      <div class="tl-desc">Participated in Robofinist 2026 with two robots: Arkanoid robot and self-balancing robot. Both built from scratch.</div>
+      <div class="tl-title" data-en="Robotics competitions" data-ru="Соревнования по робототехнике">Robotics competitions</div>
+      <div class="tl-desc" data-en="Participated in Robofinist 2026 with two robots: Arkanoid robot and self-balancing robot. Both built from scratch." data-ru="Участвовал в Робофинисте 2026 с двумя роботами: робот-Арканоид и самобалансирующий робот. Оба сделаны с нуля.">Participated in Robofinist 2026 with two robots: Arkanoid robot and self-balancing robot. Both built from scratch.</div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2025–2026</div>
-      <div class="tl-title">AI Persona Behavioral OS</div>
-      <div class="tl-desc">Main pet project: a system that makes a Telegram account respond using an AI that mirrors the user's style and personality.</div>
+      <div class="tl-title" data-en="AI Persona Behavioral OS" data-ru="AI Persona Behavioral OS">AI Persona Behavioral OS</div>
+      <div class="tl-desc" data-en="Main pet project: a system that makes a Telegram account respond using an AI that mirrors the user's style and personality." data-ru="Главный пет-проект: система, заставляющая Telegram-аккаунт отвечать с помощью AI, имитирующей стиль и личность пользователя.">Main pet project: a system that makes a Telegram account respond using an AI that mirrors the user's style and personality.</div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2025 — FIRA</div>
-      <div class="tl-title">FIRA drone &amp; RC car competitions</div>
-      <div class="tl-desc">Companion drone with YOLOv8 pose detection (team NDTP) and autonomous RC car (FIRA category).</div>
+      <div class="tl-title" data-en="FIRA autonomous RC car competition" data-ru="Соревнования FIRA: автономная RC-машина">FIRA autonomous RC car competition</div>
+      <div class="tl-desc" data-en="Autonomous RC car with computer vision-based lane following (FIRA category)." data-ru="Автономная RC-машина со следованием по полосе на компьютерном зрении (категория FIRA).">Autonomous RC car with computer vision-based lane following (FIRA category).</div>
     </div>
     <div class="tl-item">
       <div class="tl-date">2024–2025</div>
-      <div class="tl-title">First Telegram bots &amp; tools</div>
-      <div class="tl-desc">Started shipping real tools: TikTok saver, Minecraft server management, support bots. Everything deployed and running.</div>
+      <div class="tl-title" data-en="First Telegram bots &amp; tools" data-ru="Первые Telegram-боты и инструменты">First Telegram bots &amp; tools</div>
+      <div class="tl-desc" data-en="Started shipping real tools: TikTok saver, Minecraft server management, support bots. Everything deployed and running." data-ru="Начал выпускать реальные инструменты: TikTok-сейвер, управление Minecraft-сервером, боты поддержки. Всё задеплоено и работает.">Started shipping real tools: TikTok saver, Minecraft server management, support bots. Everything deployed and running.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-title" data-en="Education" data-ru="Образование">Education</div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-period">2026 — now</div>
+      <div>
+        <div class="edu-name" data-en="BNTU — Faculty of IT &amp; Robotics" data-ru="БНТУ — ФИТР">BNTU — Faculty of IT &amp; Robotics</div>
+        <div class="edu-detail" data-en="Robotic Systems · 1st-year student" data-ru="Робототехнические системы · 1 курс">Robotic Systems · 1st-year student</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-period">2015 — 2026</div>
+      <div>
+        <div class="edu-name" data-en="Gymnasium №39, Minsk" data-ru="Гимназия №39, Минск">Gymnasium №39, Minsk</div>
+        <div class="edu-detail" data-en="IT-specialized track · Programming school &amp; IT circle · Winner of robotics &amp; programming competitions" data-ru="IT-специализация · Школа программирования и IT-кружок · Победитель олимпиад по робототехнике и программированию">IT-specialized track · Programming school &amp; IT circle · Winner of robotics &amp; programming competitions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="section-title" data-en="By the numbers" data-ru="Цифры">By the numbers</div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">54</div>
+      <div class="stat-label" data-en="repositories" data-ru="репозиториев">repositories</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label" data-en="live deployments" data-ru="live-деплоев">live deployments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100+</div>
+      <div class="stat-label" data-en="active users" data-ru="активных юзеров">active users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-label" data-en="languages" data-ru="языков">languages</div>
+    </div>
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now">
+  <div class="section-title" data-en="Now" data-ru="Сейчас">Now</div>
+  <div class="now-grid">
+    <div class="now-card">
+      <div class="now-card-header">
+        <div class="now-dot"></div>
+        <div class="now-card-title" data-en="Building" data-ru="В разработке">Building</div>
+      </div>
+      <p data-en="Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software." data-ru="Онлайн 3D-слайсер с режимами для начинающих/продвинутых и паритетом с OrcaSlicer — нарезка STL прямо в браузере без установки ПО.">Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software.</p>
+      <div class="tag-row">
+        <span class="tag">Three.js</span>
+        <span class="tag">CuraEngine</span>
+        <span class="tag yellow">PostgreSQL</span>
+        <span class="tag">WIP</span>
+      </div>
+    </div>
+    <div class="now-card">
+      <div class="now-card-header">
+        <div class="now-dot"></div>
+        <div class="now-card-title" data-en="Running in production" data-ru="Работает в продакшне">Running in production</div>
+      </div>
+      <p data-en="Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan. 10+ Telegram bots live on home server." data-ru="Приложение Safalife для курьеров — Flutter + FastAPI + маршрутизация OSRM, развёрнуто для логистической компании в Узбекистане. 10+ Telegram-ботов работают на домашнем сервере.">Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan. 10+ Telegram bots live on home server.</p>
+      <div class="tag-row">
+        <span class="tag green">Live</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">OSRM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIONS & ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-title" data-en="Competitions &amp; Achievements" data-ru="Конкурсы и достижения">Competitions &amp; Achievements</div>
+  <div class="robotics-list">
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="Robofinist 2026" data-ru="Робофинист 2026">Robofinist 2026</div>
+        <div class="robotics-desc" data-en="Built and competed with two autonomous robots: Arkanoid-playing robot (computer vision + BLDC motor control) and self-balancing robot (ESP32 + IMU + PID tuning). Regional robotics competition." data-ru="Участвовал с двумя автономными роботами: робот для игры в Арканоид (компьютерное зрение + управление BLDC) и самобалансирующий робот (ESP32 + IMU + ПИД-регулятор). Региональный конкурс по робототехнике.">Built and competed with two autonomous robots: Arkanoid-playing robot (computer vision + BLDC motor control) and self-balancing robot (ESP32 + IMU + PID tuning).</div>
+        <div class="tag-row">
+          <span class="tag orange">Robotics</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag green">2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-2 6h-2z"/><circle cx="12" cy="15" r="6"/><path d="M9.8 15l1.6 1.6 2.8-2.8"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="FIRA International Robotics Competition 2025" data-ru="Международные соревнования FIRA 2025">FIRA International Robotics Competition 2025</div>
+        <div class="robotics-desc" data-en="Developed an autonomous RC car for lane-following tasks. International competition with participants from multiple countries." data-ru="Разработал автономную RC-машину для следования по полосе. Международное соревнование с участниками из разных стран.">Developed an autonomous RC car for lane-following tasks. International competition participation.</div>
+        <div class="tag-row">
+          <span class="tag">FIRA</span>
+          <span class="tag orange">ROS</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag blue">International</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-2 6h-2z"/><circle cx="12" cy="15" r="6"/><path d="M12 12.5v5"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="JuniorSkills Belarus — 1st Place, Line Following" data-ru="JuniorSkills Belarus — 1 место, «Следование по линии»">JuniorSkills Belarus — 1st Place, Line Following</div>
+        <div class="robotics-desc" data-en="Won 1st place in the &quot;Line Following&quot; robotics competency at JuniorSkills Belarus, competing as part of team CyberLab (Minsk). March 2023." data-ru="Занял 1 место в компетенции «Следование по линии» на JuniorSkills Belarus в составе команды ООО «КиберЛаб» (Минск). Март 2023.">Won 1st place in the "Line Following" robotics competency at JuniorSkills Belarus, competing as part of team CyberLab (Minsk). March 2023.</div>
+        <div class="tag-row">
+          <span class="tag green">1st place</span>
+          <span class="tag">JuniorSkills</span>
+          <span class="tag orange">Line Following</span>
+          <span class="tag yellow">2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="Educational Robotics Cup — &quot;Big Journey&quot; Senior Category" data-ru="Кубок по образовательной робототехнике — «Большое путешествие», старшая категория">Educational Robotics Cup — "Big Journey" Senior Category</div>
+        <div class="robotics-desc" data-en="Recurring podium finisher across multiple stages of the Minsk regional Robofinist cup (2022–2024) with robot &quot;Cyber Traveler,&quot; team CyberLab — 2nd and 3rd place finishes at season stages, the regional final, and the Mogilev region stage." data-ru="Регулярно поднимался на подиум на нескольких этапах Минской открытой лиги робототехники Robofinist (2022–2024) с роботом «Кибер путешественник», команда CyberLab — 2 и 3 места на этапах сезона, в финале и на выездном этапе Могилёвской области.">Recurring podium finisher across multiple stages of the Minsk regional Robofinist cup (2022–2024) with robot "Cyber Traveler," team CyberLab.</div>
+        <div class="tag-row">
+          <span class="tag green">2nd–3rd place</span>
+          <span class="tag orange">Robofinist</span>
+          <span class="tag">CyberLab</span>
+          <span class="tag yellow">2022–2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="Republican Robotics Tournament — National Level" data-ru="Республиканский турнир по робототехнике — национальный уровень">Republican Robotics Tournament — National Level</div>
+        <div class="robotics-desc" data-en="Competed at the national-level Republican Robotics Tournament in the Relay category, representing team CyberLab. 2024." data-ru="Участвовал в национальном Республиканском турнире по робототехнике в категории «Эстафета» в составе команды CyberLab. 2024.">Competed at the national-level Republican Robotics Tournament in the Relay category, representing team CyberLab. 2024.</div>
+        <div class="tag-row">
+          <span class="tag blue">National</span>
+          <span class="tag">Republican Tournament</span>
+          <span class="tag">CyberLab</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="Minsk Open Robot Tournament — X, XII &amp; XIII Editions" data-ru="Минский открытый роботурнир — X, XII и XIII">Minsk Open Robot Tournament — X, XII & XIII Editions</div>
+        <div class="robotics-desc" data-en="Multi-year competitor at the Minsk Open Robot Tournament: X edition (2023, Robofinist qualifier with international teams from Russia), XII edition (June 2025), and XIII edition (June 2026, Robofinist 2026 qualifying stage)." data-ru="Многолетний участник Минского открытого роботурнира: X турнир (2023, отборочный этап РобоФинист с международными командами из России), XII турнир (июнь 2025) и XIII турнир (июнь 2026, отборочный этап РобоФинист 2026).">Multi-year competitor at the Minsk Open Robot Tournament: X edition (2023, international field), XII edition (2025), and XIII edition (2026, Robofinist qualifier).</div>
+        <div class="tag-row">
+          <span class="tag">Robotics</span>
+          <span class="tag blue">Minsk</span>
+          <span class="tag yellow">2023–2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="robotics-item">
+      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/></svg></div>
+      <div>
+        <div class="robotics-title" data-en="XV Frunzensky District Championship" data-ru="XV Чемпионат Фрунзенского района">XV Frunzensky District Championship</div>
+        <div class="robotics-desc" data-en="Represented Gymnasium №39 in the first round of the XV regular Frunzensky district championship, Minsk, alongside classmates." data-ru="Представлял Гимназию №39 в первом туре XV регулярного чемпионата Фрунзенского района г. Минска вместе с одноклассниками.">Represented Gymnasium №39 in the first round of the XV regular Frunzensky district championship, Minsk.</div>
+        <div class="tag-row">
+          <span class="tag yellow">District Championship</span>
+          <span class="tag">Gymnasium №39</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-title">Contact</div>
+  <div class="section-title" data-en="Contact" data-ru="Контакты">Contact</div>
   <div class="contact-grid">
+
     <a class="contact-card" href="https://github.com/Mukller" target="_blank">
       <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
       </div>
-      <span class="contact-label">GitHub</span>
-      <span class="contact-value">Mukller</span>
+      <div class="contact-text">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">Mukller</span>
+      </div>
     </a>
 
-    <a class="contact-card" href="https://t.me/anton_petnitsky" target="_blank">
+    <a class="contact-card" href="https://t.me/chotokek" target="_blank">
       <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
       </div>
-      <span class="contact-label">Telegram</span>
-      <span class="contact-value">@anton_petnitsky</span>
+      <div class="contact-text">
+        <span class="contact-label">Telegram</span>
+        <span class="contact-value">@chotokek</span>
+      </div>
     </a>
 
-    <a class="contact-card" href="mailto:anton.petnitsky@gmail.com">
-      <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      </div>
-      <span class="contact-label">Email</span>
-      <span class="contact-value">anton.petnitsky@gmail.com</span>
-    </a>
 
-    <a class="contact-card" href="https://www.tiktok.com/@anton_petnitsky" target="_blank">
-      <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-      </div>
-      <span class="contact-label">TikTok</span>
-      <span class="contact-value">@anton_petnitsky</span>
-    </a>
 
-    <a class="contact-card" href="https://www.linkedin.com/in/anton-petnitsky" target="_blank">
-      <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </div>
-      <span class="contact-label">LinkedIn</span>
-      <span class="contact-value">Anton Petnitsky</span>
-    </a>
-
-    <a class="contact-card" href="https://github.com/Mukller/ai-persona-behavioral-os" target="_blank">
-      <div class="contact-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#c9d1d9"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-      </div>
-      <span class="contact-label">AI Persona OS</span>
-      <span class="contact-value">Main pet project</span>
-    </a>
   </div>
 </section>
 
 <footer>
-  <span>Anton Petnitsky · Minsk, Belarus · 2026</span>
+  <div class="footer-inner">
+    <div class="footer-social">
+      <a class="footer-social-icon" href="mailto:anton.petnitsky@gmail.com" aria-label="Email" title="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <a class="footer-social-icon" href="https://www.linkedin.com/in/anton-petnitsky" target="_blank" aria-label="LinkedIn" title="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a class="footer-social-icon" href="https://www.tiktok.com/@anton_petnitsky" target="_blank" aria-label="TikTok" title="TikTok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      </a>
+      <a class="footer-social-icon" href="https://www.instagram.com/anton_petnitsky" target="_blank" aria-label="Instagram" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.87 5.87 0 0 0-1.39-2.13A5.87 5.87 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">
+      <span data-en="&copy; 2026 &lt;strong&gt;Anton Petnitsky&lt;/strong&gt;. All rights reserved." data-ru="&copy; 2026 &lt;strong&gt;Антон Петницкий&lt;/strong&gt;. Все права защищены.">&copy; 2026 <strong>Anton Petnitsky</strong>. All rights reserved.</span>
+      <br>
+      <span data-en="Minsk, Belarus · Remote only" data-ru="Минск, Беларусь · Только удалённо">Minsk, Belarus · Remote only</span>
+    </div>
+    <div class="footer-license">
+      <a class="footer-badge" href="https://github.com/Mukller/antonpetnitsky.com" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Open Source
+      </a>
+      <a href="https://opensource.org/licenses/MIT" target="_blank" data-en="MIT License" data-ru="Лицензия MIT">MIT License</a>
+    </div>
+  </div>
 </footer>
 
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.startsWith('ru') ? 'ru' : 'en');
+
+  function applyLang(l) {
+    document.querySelectorAll('[data-' + l + ']').forEach(function(el) {
+      var val = el.getAttribute('data-' + l);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = l;
+    document.getElementById('langBtn').textContent = l === 'ru' ? 'EN' : 'RU';
+    lang = l;
+    localStorage.setItem('ap_lang', l);
+  }
+
+  function toggleLang() {
+    applyLang(lang === 'ru' ? 'en' : 'ru');
+  }
+
+  applyLang(lang);
+</script>
 </body>
 </html>
