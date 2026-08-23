@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Now — Anton Petnitsky</title>
+  <meta name="description" content="What Anton Petnitsky is building and running right now: an online 3D slicer, production courier app, 10+ live Telegram bots, self-hosted home server.">
+  <meta property="og:title" content="Now — Anton Petnitsky">
+  <meta property="og:description" content="What I'm building and running right now.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/now/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Now — Anton Petnitsky">
+  <meta name="twitter:description" content="What I'm building and running right now.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/now/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-card:   #161b22;
+      --border:    #21262d;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --bright:    #e6edf3;
+      --accent:    #58a6ff;
+      --accent-light: #79c0ff;
+      --green:     #3fb950;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(180deg, rgba(13,17,23,.95) 0%, rgba(13,17,23,.8) 100%);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+    .lang-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; white-space: nowrap; transition: border-color .15s, color .15s;
+    }
+    .lang-btn:hover { color: var(--bright); border-color: var(--accent); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 64px; }
+
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 560px; }
+
+    .now-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 14px;
+    }
+    .now-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .now-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      background: var(--green); animation: pulse 2s ease-in-out infinite;
+    }
+    .now-dot.blue { background: var(--accent); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+    .now-card-title { font-size: 14px; font-weight: 700; color: var(--bright); }
+    .now-card p { font-size: 14px; color: var(--text); margin-bottom: 10px; max-width: 640px; }
+    .now-card p + p { margin-top: -2px; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+    .tag.yellow { background: rgba(210,153,34,.1); color: #d29922; border-color: rgba(210,153,34,.2); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      max-width: 760px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/now/" class="active" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Now" data-ru="Сейчас">Now</h1>
+  <p class="page-sub" data-en="What I'm building and running at the moment. Updated as things ship." data-ru="Чем я занят прямо сейчас. Обновляю по мере релизов.">What I'm building and running at the moment. Updated as things ship.</p>
+
+  <div class="now-card">
+    <div class="now-card-header">
+      <div class="now-dot blue"></div>
+      <div class="now-card-title" data-en="Building" data-ru="В разработке">Building</div>
+    </div>
+    <p data-en="Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software." data-ru="Онлайн 3D-слайсер с режимами для начинающих и продвинутых, паритет с OrcaSlicer — нарезка STL прямо в браузере без установки ПО.">Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software.</p>
+    <div class="tag-row">
+      <span class="tag">Three.js</span>
+      <span class="tag">CuraEngine</span>
+      <span class="tag yellow">PostgreSQL</span>
+      <span class="tag yellow">WIP</span>
+    </div>
+  </div>
+
+  <div class="now-card">
+    <div class="now-card-header">
+      <div class="now-dot"></div>
+      <div class="now-card-title" data-en="Running in production" data-ru="Работает в продакшне">Running in production</div>
+    </div>
+    <p data-en="Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan." data-ru="Приложение Safalife для курьеров — Flutter + FastAPI + маршрутизация OSRM, развёрнуто для логистической компании в Узбекистане.">Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan.</p>
+    <p data-en="10+ Telegram bots on my home server: TikTok saver, voice transcriber, chess bot, support bots — all live 24/7." data-ru="10+ Telegram-ботов на домашнем сервере: TikTok-сейвер, транскрибатор голосовых, шахматный бот, боты поддержки — все живут 24/7.">10+ Telegram bots on my home server: TikTok saver, voice transcriber, chess bot, support bots — all live 24/7.</p>
+    <div class="tag-row">
+      <span class="tag green">Live</span>
+      <span class="tag">Flutter</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">OSRM</span>
+    </div>
+  </div>
+
+  <div class="now-card">
+    <div class="now-card-header">
+      <div class="now-dot"></div>
+      <div class="now-card-title" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
+    </div>
+    <p data-en="Home server (Linux, Docker, nginx, PostgreSQL) plus a VPS — everything managed over SSH, most services running around the clock. This site is served from it." data-ru="Домашний сервер (Linux, Docker, nginx, PostgreSQL) плюс VPS — всё управляeтся по SSH, большинство сервисов работают круглосуточно. Этот сайт живёт там же.">Home server (Linux, Docker, nginx, PostgreSQL) plus a VPS — everything managed over SSH, most services running around the clock. This site is served from it.</p>
+    <div class="tag-row">
+      <span class="tag">Linux</span>
+      <span class="tag">Docker</span>
+      <span class="tag">nginx</span>
+      <span class="tag yellow">PostgreSQL</span>
+    </div>
+  </div>
+
+  <div class="now-card">
+    <div class="now-card-header">
+      <div class="now-dot blue"></div>
+      <div class="now-card-title" data-en="Exploring" data-ru="Изучаю">Exploring</div>
+    </div>
+    <p data-en="LLMs as everyday tools: AI-powered bots, workflow automation, and local models via Ollama. Main pet project — an AI persona system that mirrors a person's conversational style." data-ru="LLM как повседневный инструмент: AI-боты, автоматизация рутины, локальные модели через Ollama. Главный пет-проект — система AI-персоны, повторяющая стиль общения человека.">LLMs as everyday tools: AI-powered bots, workflow automation, and local models via Ollama. Main pet project — an AI persona system that mirrors a person's conversational style.</p>
+    <div class="tag-row">
+      <span class="tag">Ollama</span>
+      <span class="tag">AI persona</span>
+      <span class="tag yellow">Pet project</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('langBtn').textContent = lang === 'ru' ? 'EN' : 'RU';
+    localStorage.setItem('ap_lang', lang);
+  }
+
+  function toggleLang() {
+    lang = lang === 'ru' ? 'en' : 'ru';
+    applyStatic();
+  }
+
+  applyStatic();
+</script>
+</body>
+</html>

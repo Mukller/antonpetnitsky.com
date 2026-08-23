@@ -19,10 +19,19 @@ Personal portfolio website of Anton Petnitsky: projects, skills, CV (RU/EN).
 ## Structure
 
 ```
-index.html        main portfolio page
-cv-ru.html        CV in Russian
-cv-en.html        CV in English
-deploy.sh         deploy to server (nginx)
+index.html          main portfolio page
+cv-ru.html          CV in Russian
+cv-en.html          CV in English
+404.html            custom 404 page
+50x.html            server error page (500/502/503/504)
+projects/           full projects catalog with filters
+robotics/           robots: specs, achievements, media slots
+now/                what I'm doing right now
+favicon.svg         favicon
+og.png              social preview image (Open Graph)
+sitemap.xml         sitemap
+robots.txt          crawling rules
+deploy.sh           deploy to server (nginx)
 ```
 
 ## Deploy
@@ -32,6 +41,9 @@ Static files are served by nginx on the home server:
 ```bash
 ./deploy.sh
 ```
+
+The script clones the repo, copies files to `/var/www/antonpetnitsky.com`
+and generates an nginx config with `error_page` for 404 and 5xx.
 
 ## License
 
