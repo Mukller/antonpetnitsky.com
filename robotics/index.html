@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotics — Anton Petnitsky</title>
+  <meta name="description" content="Anton Petnitsky's robots: Arkanoid-playing robot, self-balancing robot, autonomous RC car. Robofinist and FIRA competitor from Minsk.">
+  <meta property="og:title" content="Robotics — Anton Petnitsky">
+  <meta property="og:description" content="Self-built competitive robots: computer vision, BLDC control, PID balancing, autonomous driving.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/robotics/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Robotics — Anton Petnitsky">
+  <meta name="twitter:description" content="Self-built competitive robots: computer vision, BLDC control, PID balancing, autonomous driving.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/robotics/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-card:   #161b22;
+      --border:    #21262d;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --bright:    #e6edf3;
+      --accent:    #58a6ff;
+      --accent-light: #79c0ff;
+      --green:     #3fb950;
+      --orange:    #ffa657;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(180deg, rgba(13,17,23,.95) 0%, rgba(13,17,23,.8) 100%);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+    .lang-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; white-space: nowrap; transition: border-color .15s, color .15s;
+    }
+    .lang-btn:hover { color: var(--bright); border-color: var(--accent); }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 560px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .robot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .robot-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+    .robot-num {
+      width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.2);
+      display: flex; align-items: center; justify-content: center; color: var(--accent);
+    }
+    .robot-title { font-size: 16px; font-weight: 700; color: var(--bright); letter-spacing: -.2px; }
+    .robot-comp { font-size: 12px; color: var(--muted); }
+    .robot-desc { font-size: 14px; color: var(--text); margin-bottom: 14px; max-width: 640px; }
+
+    .specs {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+    .specs td { padding: 6px 10px; border: 1px solid var(--border); vertical-align: top; }
+    .specs td:first-child {
+      width: 170px; color: var(--muted); white-space: nowrap;
+      background: rgba(13,17,23,.5);
+    }
+    .specs td:last-child { color: var(--text); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+    .tag.orange { background: rgba(255,166,87,.1); color: var(--orange); border-color: rgba(255,166,87,.2); }
+    .tag.yellow { background: rgba(210,153,34,.1); color: #d29922; border-color: rgba(210,153,34,.2); }
+
+    .repo-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; margin-bottom: 4px;
+    }
+
+    /* media slots — uncomment and drop files in when photos/videos are ready
+    figure.robot-media { margin: 0 0 14px; }
+    figure.robot-media img, figure.robot-media video {
+      width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block;
+    }
+    figcaption { font-size: 12px; color: var(--muted); margin-top: 6px; text-align: center; }
+    */
+
+    .awards-list { display: flex; flex-direction: column; gap: 12px; }
+    .award-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .award-icon {
+      width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.2);
+      display: flex; align-items: center; justify-content: center; color: var(--green);
+    }
+    .award-title { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 2px; }
+    .award-desc { font-size: 13px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+      .specs td:first-child { width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" class="active" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Robotics &amp; Competitions" data-ru="Робототехника и соревнования">Robotics &amp; Competitions</h1>
+  <p class="page-sub" data-en="Robots I designed, printed, wired and debugged myself — then took to Robofinist and FIRA competitions." data-ru="Роботы, которые я сам спроектировал, напечатал, спаял и отладил — а потом вывел с ними на Робофинист и FIRA.">Robots I designed, printed, wired and debugged myself — then took to Robofinist and FIRA competitions.</p>
+
+  <!-- ARKANOID -->
+  <div class="robot-card">
+    <div class="robot-head">
+      <div class="robot-num"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="10" rx="2"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/><path d="M5 12H3M21 12h-2"/></svg></div>
+      <div>
+        <div class="robot-title" data-en='Arkanoid Robot "Robo Arkasha"' data-ru='Робот-Арканоид «Робо Аркаша»'>Arkanoid Robot "Robo Arkasha"</div>
+        <div class="robot-comp">Robofinist 2026</div>
+      </div>
+    </div>
+
+    <!-- MEDIA SLOT: раскомментировать, когда будут фото/видео
+    <figure class="robot-media">
+      <img src="media/arkanoid.jpg" alt="Arkanoid robot">
+      <figcaption>Робо Аркаша за игрой</figcaption>
+    </figure>
+    -->
+
+    <p class="robot-desc" data-en="Autonomous robot that plays Arkanoid in real time: a PC-side OpenCV tracker follows the red ball (HSV calibration), sends commands over UDP to the ESP32, which drives the paddle via a BLDC motor on an ESC plus L298M side motors. The whole chassis is 3D-printed from PETG." data-ru="Автономный робот, играющий в Арканоид в реальном времени: трекер на ПК через OpenCV следит за красным шаром (HSV-калибровка) и по UDP шлёт команды на ESP32, который управляет платформой через BLDC-мотор на ESC плюс боковые моторы L298M. Весь корпус напечатан на 3D-принтере из PETG.">Autonomous robot that plays Arkanoid in real time: a PC-side OpenCV tracker follows the red ball (HSV calibration), sends commands over UDP to the ESP32, which drives the paddle via a BLDC motor on an ESC plus L298M side motors. The whole chassis is 3D-printed from PETG.</p>
+
+    <table class="specs">
+      <tr><td data-en="Vision" data-ru="Зрение">Vision</td><td>OpenCV, HSV calibration, UDP stream → PC</td></tr>
+      <tr><td>MCU</td><td>ESP32 (Wi-Fi UDP client)</td></tr>
+      <tr><td data-en="Actuators" data-ru="Приводы">Actuators</td><td>BLDC + ESC, 2× L298M side motors</td></tr>
+      <tr><td data-en="Power" data-ru="Питание">Power</td><td>LiPo 3S</td></tr>
+      <tr><td>Chassis</td><td>PETG, 3D print</td></tr>
+    </table>
+
+    <div class="tag-row">
+      <span class="tag green">ESP32</span>
+      <span class="tag">OpenCV</span>
+      <span class="tag">UDP</span>
+      <span class="tag orange">BLDC + ESC</span>
+      <span class="tag">PETG chassis</span>
+      <span class="tag">LiPo 3S</span>
+    </div>
+  </div>
+
+  <!-- BALANCING -->
+  <div class="robot-card">
+    <div class="robot-head">
+      <div class="robot-num"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 5l-7 3M12 5l7 3M12 5v17M8 22h8"/><path d="M5 8l-3 5c0 2 1.8 3.5 3 3.5S8 15 8 13L5 8zM19 8l-3 5c0 2 1.8 3.5 3 3.5s3-1.5 3-3.5l-3-5z"/></svg></div>
+      <div>
+        <div class="robot-title" data-en="Self-Balancing Robot" data-ru="Самобалансирующий робот">Self-Balancing Robot</div>
+        <div class="robot-comp">Robofinist 2026 · <span data-en="with teammate Kostya" data-ru="с напарником Костей">with teammate Kostya</span></div>
+      </div>
+    </div>
+
+    <p class="robot-desc" data-en="Two-wheeled inverted pendulum. The ESP32 fuses MPU6050 IMU data and runs a PID loop I tuned from scratch, driving two NEMA17 steppers through TMC2209 drivers. Several months of assembly and debugging with my teammate Kostya." data-ru="Двухколёсный робот-инвертированный маятник. ESP32 собирает данные с MPU6050 и крутит ПИД-регулятор, настроенный мной с нуля, управляя двумя NEMA17 через драйверы TMC2209. Несколько месяцев сборки и отладки вместе с напарником Костей.">Two-wheeled inverted pendulum. The ESP32 fuses MPU6050 IMU data and runs a PID loop I tuned from scratch, driving two NEMA17 steppers through TMC2209 drivers. Several months of assembly and debugging with my teammate Kostya.</p>
+
+    <table class="specs">
+      <tr><td>IMU</td><td>MPU6050</td></tr>
+      <tr><td>MCU</td><td>ESP32</td></tr>
+      <tr><td data-en="Motors" data-ru="Моторы">Motors</td><td>2× NEMA17 + TMC2209 (stealthChop)</td></tr>
+      <tr><td>Control</td><td>PID, tuned from scratch</td></tr>
+      <tr><td>Code</td><td><a class="repo-link" href="https://github.com/Mukller/Balance_robot" target="_blank" rel="noopener">github.com/Mukller/Balance_robot</a></td></tr>
+    </table>
+
+    <div class="tag-row">
+      <span class="tag green">ESP32</span>
+      <span class="tag green">TMC2209</span>
+      <span class="tag">MPU6050</span>
+      <span class="tag">PID</span>
+      <span class="tag">NEMA17</span>
+    </div>
+  </div>
+
+  <!-- FIRA CAR -->
+  <div class="robot-card">
+    <div class="robot-head">
+      <div class="robot-num"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l1.5-4A2 2 0 0 1 7.4 7h9.2a2 2 0 0 1 1.9 1L20 12"/><rect x="3" y="12" width="18" height="5" rx="1.5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></div>
+      <div>
+        <div class="robot-title" data-en="Autonomous RC Car" data-ru="Автономная RC-машина">Autonomous RC Car</div>
+        <div class="robot-comp">FIRA · <span data-en="team NDTP" data-ru="команда NDTP">team NDTP</span></div>
+      </div>
+    </div>
+
+    <p class="robot-desc" data-en="RC car with autonomous lane following for the FIRA competition category. Computer-vision control running on Linux; developed together with team NDTP." data-ru="RC-машина с автономным следованием по полосе для категории FIRA. Управление на компьютерном зрении под Linux, разработана совместно с командой NDTP.">RC car with autonomous lane following for the FIRA competition category. Computer-vision control running on Linux; developed together with team NDTP.</p>
+
+    <table class="specs">
+      <tr><td>Vision</td><td data-en="Lane detection &amp; following" data-ru="Детект и удержание полосы">Lane detection &amp; following</td></tr>
+      <tr><td>Runtime</td><td>Linux</td></tr>
+      <tr><td>Competition</td><td>FIRA, <span data-en="lane-following category" data-ru="категория следования по линии">lane-following category</span></td></tr>
+      <tr><td>Code</td><td><a class="repo-link" href="https://github.com/Mukller/fira-autonomous-rc-car" target="_blank" rel="noopener">github.com/Mukller/fira-autonomous-rc-car</a></td></tr>
+    </table>
+
+    <div class="tag-row">
+      <span class="tag">FIRA</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Linux</span>
+      <span class="tag orange">Autonomous</span>
+    </div>
+  </div>
+
+  <!-- OMNI ASSISTANT -->
+  <div class="robot-card">
+    <div class="robot-head">
+      <div class="robot-num"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <div>
+        <div class="robot-title" data-en="Omni-Wheel Home Assistant" data-ru="Домашний ассистент на омниколёсах">Omni-Wheel Home Assistant</div>
+        <div class="robot-comp" data-en="work in progress" data-ru="в разработке">work in progress</div>
+      </div>
+    </div>
+
+    <p class="robot-desc" data-en="Home robot assistant on a three-wheel omnidirectional platform: ESP32 base, LDS-01 LiDAR for navigation." data-ru="Домашний робот-ассистент на трёхколёсной омниколёсной платформе: база на ESP32, навигация по лидару LDS-01.">Home robot assistant on a three-wheel omnidirectional platform: ESP32 base, LDS-01 LiDAR for navigation.</p>
+
+    <table class="specs">
+      <tr><td data-en="Platform" data-ru="Платформа">Platform</td><td data-en="3-wheel omni base" data-ru="3 омниколеса">3-wheel omni base</td></tr>
+      <tr><td>Sensors</td><td>LiDAR LDS-01</td></tr>
+      <tr><td>MCU</td><td>ESP32</td></tr>
+      <tr><td>Code</td><td><a class="repo-link" href="https://github.com/Mukller/omni-robot-assistant" target="_blank" rel="noopener">github.com/Mukller/omni-robot-assistant</a></td></tr>
+    </table>
+
+    <div class="tag-row">
+      <span class="tag green">ESP32</span>
+      <span class="tag">LiDAR LDS-01</span>
+      <span class="tag yellow">WIP</span>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <div class="section-title" data-en="Competitions &amp; Achievements" data-ru="Соревнования и достижения">Competitions &amp; Achievements</div>
+  <div class="awards-list">
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="award-title">Robofinist 2026</div>
+        <div class="award-desc" data-en="Two self-built autonomous robots: Arkanoid player (CV + BLDC) and self-balancing bot (PID tuning)." data-ru="Два самодельных автономных робота: игрок в Арканоид (зрение + BLDC) и самобалансирующийся (настройка ПИД).">Two self-built autonomous robots: Arkanoid player (CV + BLDC) and self-balancing bot (PID tuning).</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-2 6h-2z"/><circle cx="12" cy="15" r="6"/><path d="M9.8 15l1.6 1.6 2.8-2.8"/></svg></div>
+      <div>
+        <div class="award-title">FIRA International 2025</div>
+        <div class="award-desc" data-en="Autonomous RC car for lane following — international field, multiple countries." data-ru="Автономная RC-машина для следования по полосе — международный состав участников.">Autonomous RC car for lane following — international field, multiple countries.</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="award-title">JuniorSkills Belarus — 1st place, Line Following (2023)</div>
+        <div class="award-desc" data-en='1st place in "Line Following", team CyberLab (Minsk).' data-ru='1 место в компетенции «Следование по линии», команда CyberLab (Минск).'>1st place in "Line Following", team CyberLab (Minsk).</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div>
+        <div class="award-title" data-en='Educational Robotics Cup "Big Journey" (2022–2024)' data-ru='Кубок «Большое путешествие» (2022–2024)'>Educational Robotics Cup "Big Journey" (2022–2024)</div>
+        <div class="award-desc" data-en='Recurring podium finisher at Minsk regional Robofinist stages with robot "Cyber Traveler": 2nd–3rd places.' data-ru='Регулярный подиум на этапах Минской лиги Robofinist с роботом «Кибер путешественник»: 2–3 места.'>Recurring podium finisher at Minsk regional Robofinist stages with robot "Cyber Traveler": 2nd–3rd places.</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <div>
+        <div class="award-title">Minsk Open Robot Tournament — X, XII &amp; XIII</div>
+        <div class="award-desc" data-en="Multi-year competitor: X (2023), XII (2025), XIII (2026, Robofinist qualifier)." data-ru="Многолетний участник: X (2023), XII (2025), XIII (2026, отбор Робофиниста).">Multi-year competitor: X (2023), XII (2025), XIII (2026, Robofinist qualifier).</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/></svg></div>
+      <div>
+        <div class="award-title" data-en="Republican Tournament — Relay (2024) &amp; XV Frunzensky District Championship" data-ru='Республиканский турнир — «Эстафета» (2024) и XV чемпионат Фрунзенского района'>Republican Tournament — Relay (2024) &amp; XV Frunzensky District Championship</div>
+        <div class="award-desc" data-en="National-level Relay category with team CyberLab; represented Gymnasium №39 at the district championship." data-ru="Национальный уровень, категория «Эстафета», команда CyberLab; представлял Гимназию №39 на районном чемпионате.">National-level Relay category with team CyberLab; represented Gymnasium №39 at the district championship.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('langBtn').textContent = lang === 'ru' ? 'EN' : 'RU';
+    localStorage.setItem('ap_lang', lang);
+  }
+
+  function toggleLang() {
+    lang = lang === 'ru' ? 'en' : 'ru';
+    applyStatic();
+  }
+
+  applyStatic();
+</script>
+</body>
+</html>

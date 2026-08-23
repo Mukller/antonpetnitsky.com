@@ -1,6 +1,6 @@
 # Release Info
 
-## Current Version: v0.1.0
+## Current Version: v0.2.0
 
 **Release date:** 2026-08-23
 
