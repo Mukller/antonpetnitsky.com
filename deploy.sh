@@ -15,7 +15,7 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml robots.txt ap-favicon.svg og.png; do
+for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt ap-favicon.svg og.png; do
     if [ -f "/tmp/site-deploy/$f" ]; then
         sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
@@ -72,7 +72,8 @@ server {
 
     location = /healthz { proxy_pass http://127.0.0.1:8200; }
     location = /robots.txt { proxy_pass http://127.0.0.1:8200; }
-    location = /sitemap.xml { proxy_pass http://127.0.0.1:8200; }
+    # app's dynamic sitemap under a new name — /sitemap.xml is our static index
+    location = /sitemap-app.xml { proxy_pass http://127.0.0.1:8200/sitemap.xml; }
 
     location ~ ^/(login|register|logout|dashboard|settings|admin|forgot-password|reset-password|verify-email|favorites)(/|$) {
         proxy_pass http://127.0.0.1:8200;

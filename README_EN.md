@@ -29,7 +29,8 @@ robotics/           robots: specs, achievements, media slots
 now/                what I'm doing right now
 ap-favicon.svg     favicon (favicon.svg is taken by the catalog app)
 og.png              social preview image (Open Graph)
-sitemap.xml         sitemap
+sitemap.xml         sitemap index (portfolio + catalog app)
+sitemap-pages.xml   static portfolio pages sitemap
 robots.txt          crawling rules
 deploy.sh           deploy to server (nginx)
 ```
