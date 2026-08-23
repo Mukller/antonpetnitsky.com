@@ -22,7 +22,7 @@ for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-
 done
 
 # Copy page directories
-for d in projects robotics now; do
+for d in projects robotics now fonts; do
     if [ -d "/tmp/site-deploy/$d" ]; then
         sudo cp -r "/tmp/site-deploy/$d" "$SITE_DIR/"
     fi
