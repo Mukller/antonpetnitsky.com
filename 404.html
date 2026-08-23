@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Anton Petnitsky</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Page not found.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-card:   #161b22;
+      --border:    #21262d;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --bright:    #e6edf3;
+      --accent:    #58a6ff;
+      --accent-light: #79c0ff;
+      --green:     #3fb950;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
+
+    .error-wrap {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 96px;
+      font-weight: 800;
+      letter-spacing: -4px;
+      line-height: 1;
+      color: var(--bright);
+      user-select: none;
+    }
+
+    .error-code span { color: var(--accent); }
+
+    .error-icon {
+      margin: 24px auto 20px;
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .error-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--bright);
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+    }
+
+    .error-desc {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 400px;
+      margin: 0 auto 12px;
+    }
+
+    .error-path {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: bottom;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 28px;
+    }
+    .error-path b { color: var(--accent-light); font-weight: 500; }
+
+    .error-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .2s ease;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--green); color: #fff; border-color: var(--green); font-weight: 600; }
+    .btn-primary:hover { filter: brightness(.92); text-decoration: none; }
+    .btn-ghost { background: transparent; color: var(--text); }
+    .btn-ghost:hover { background: rgba(88, 166, 255, 0.1); border-color: var(--accent); color: var(--accent-light); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .error-code { font-size: 72px; letter-spacing: -3px; }
+    }
+  </style>
+</head>
+<body>
+<main class="error-wrap">
+  <div class="error-code">4<span>0</span>4</div>
+
+  <div class="error-icon">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="10" rx="2"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/><path d="M5 12H3M21 12h-2"/></svg>
+  </div>
+
+  <h1 class="error-title" data-en="The robot found nothing here" data-ru="Робот здесь ничего не нашёл">The robot found nothing here</h1>
+  <p class="error-desc" data-en="It searched every corner of the site — this page does not exist or has been moved." data-ru="Он обыскал весь сайт — такой страницы не существует или она переехала.">It searched every corner of the site — this page does not exist or has been moved.</p>
+  <div class="error-path"><b>GET</b> <span id="reqPath">/</span></div>
+
+  <div class="error-actions">
+    <a class="btn btn-primary" href="/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+      <span data-en="Back home" data-ru="На главную">Back home</span>
+    </a>
+    <a class="btn btn-ghost" href="https://t.me/chotokek" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
+      Telegram
+    </a>
+  </div>
+</main>
+
+<script>
+  (function () {
+    document.getElementById('reqPath').textContent =
+      location.pathname + location.search;
+
+    var l = localStorage.getItem('ap_lang') ||
+            (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+    document.querySelectorAll('[data-' + l + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + l);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = l;
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /50x.html
+
+Sitemap: https://antonpetnitsky.com/sitemap.xml
