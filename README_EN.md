@@ -27,7 +27,7 @@ cv-en.html          CV in English
 projects/           full projects catalog with filters
 robotics/           robots: specs, achievements, media slots
 now/                what I'm doing right now
-favicon.svg         favicon
+ap-favicon.svg     favicon (favicon.svg is taken by the catalog app)
 og.png              social preview image (Open Graph)
 sitemap.xml         sitemap
 robots.txt          crawling rules

@@ -15,7 +15,7 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml robots.txt favicon.svg og.png; do
+for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml robots.txt ap-favicon.svg og.png; do
     if [ -f "/tmp/site-deploy/$f" ]; then
         sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
