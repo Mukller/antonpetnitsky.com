@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Anton Petnitsky</title>
+  <meta name="description" content="Full catalog of Anton Petnitsky's open-source projects: Telegram bots, robotics, AI tools, dev tools, web apps and Minecraft plugins.">
+  <meta property="og:title" content="Projects — Anton Petnitsky">
+  <meta property="og:description" content="Telegram bots, robotics, AI tools, dev tools, web apps and Minecraft plugins.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/projects/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects — Anton Petnitsky">
+  <meta name="twitter:description" content="Telegram bots, robotics, AI tools, dev tools, web apps and Minecraft plugins.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/projects/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-card:   #161b22;
+      --border:    #21262d;
+      --text:      #c9d1d9;
+      --muted:     #8b949e;
+      --bright:    #e6edf3;
+      --accent:    #58a6ff;
+      --accent-light: #79c0ff;
+      --green:     #3fb950;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(180deg, rgba(13,17,23,.95) 0%, rgba(13,17,23,.8) 100%);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+    .lang-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; white-space: nowrap; transition: border-color .15s, color .15s;
+    }
+    .lang-btn:hover { color: var(--bright); border-color: var(--accent); }
+
+    main { max-width: 900px; margin: 0 auto; padding: 48px 24px 64px; }
+
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 28px; max-width: 560px; }
+
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .chip {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px;
+      cursor: pointer; transition: all .15s ease; font-family: inherit;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--bright); }
+    .chip.active { background: rgba(88,166,255,.12); border-color: var(--accent); color: var(--accent); }
+    .chip .cnt { opacity: .55; font-weight: 400; margin-left: 4px; }
+
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: border-color .15s;
+    }
+    .project-card:hover { border-color: rgba(88,166,255,.4); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .project-name { font-size: 14px; font-weight: 600; color: var(--accent); word-break: break-word; }
+    .project-lang { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .lang-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .project-desc { font-size: 13px; color: var(--muted); flex: 1; }
+
+    .empty-note {
+      grid-column: 1 / -1;
+      text-align: center; color: var(--muted);
+      padding: 40px 0; border: 1px dashed var(--border); border-radius: 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      max-width: 900px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" class="active" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Open Source Projects" data-ru="Open Source проекты">Open Source Projects</h1>
+  <p class="page-sub" data-en="Curated catalog of my repositories — bots that run 24/7 in production, robots I compete with, and the tools I build for myself." data-ru="Каталог моих репозиториев — боты, работающие в проде 24/7, роботы для соревнований и инструменты, которые делаю для себя.">Curated catalog of my repositories — bots that run 24/7 in production, robots I compete with, and the tools I build for myself.</p>
+
+  <div class="filter-row" id="filters"></div>
+  <div class="projects-grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="https://github.com/Mukller" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  var LANG_COLORS = {
+    'Python': '#3572A5', 'C++': '#f34b7d', 'Go': '#00ADD8', 'Rust': '#dea584',
+    'JavaScript': '#f1e05a', 'TypeScript': '#3178c6'
+  };
+
+  var CATEGORIES = ['all', 'telegram', 'robotics', 'ai', 'devtools', 'web', 'minecraft'];
+
+  var CAT_LABELS = {
+    all:       { en: 'All',          ru: 'Все' },
+    telegram:  { en: 'Telegram',     ru: 'Telegram' },
+    robotics:  { en: 'Robotics',     ru: 'Робототехника' },
+    ai:        { en: 'AI & Automation', ru: 'AI и автоматизация' },
+    devtools:  { en: 'Dev Tools',    ru: 'Инструменты' },
+    web:       { en: 'Web & Games',  ru: 'Веб и игры' },
+    minecraft: { en: 'Minecraft',    ru: 'Minecraft' }
+  };
+
+  var PROJECTS = [
+    // ── Telegram ──
+    { cat: 'telegram', name: 'tt-saver', url: 'https://github.com/Mukller/tt-saver', lang: 'Python',
+      en: 'Telegram bot — download TikTok videos without watermark. Running 24/7 in production.',
+      ru: 'Telegram-бот — скачивание TikTok видео без водяного знака. Работает 24/7 в продакшне.' },
+    { cat: 'telegram', name: 'tg-voice-transcriber', url: 'https://github.com/Mukller/tg-voice-transcriber', lang: 'Python',
+      en: 'Telegram bot that transcribes voice messages to text using speech recognition.',
+      ru: 'Telegram-бот, преобразующий голосовые сообщения в текст через распознавание речи.' },
+    { cat: 'telegram', name: 'Anonka', url: 'https://github.com/Mukller/Anonka', lang: 'Python',
+      en: 'Anonymous message bot — users send messages anonymously, admins reply in a forum thread.',
+      ru: 'Бот анонимных сообщений — пользователи пишут анонимно, админы отвечают в ветке форума.' },
+    { cat: 'telegram', name: 'countdown-bot', url: 'https://github.com/Mukller/countdown-bot', lang: 'Python',
+      en: 'Countdown timers to important events with notifications and yearly reminders.',
+      ru: 'Таймеры обратного отсчёта до важных событий с уведомлениями и годовыми напоминаниями.' },
+    { cat: 'telegram', name: 'tg-birthday-assistant', url: 'https://github.com/Mukller/tg-birthday-assistant', lang: 'TypeScript',
+      en: 'Birthday reminders via NestJS + Prisma + Redis + BullMQ + GramJS (MTProto). Sends congratulations on your behalf.',
+      ru: 'Напоминания о днях рождения на NestJS + Prisma + Redis + BullMQ + GramJS (MTProto). Поздравляет от вашего имени.' },
+    { cat: 'telegram', name: 'telegram-mentioner-bot', url: 'https://github.com/Mukller/telegram-mentioner-bot', lang: 'Python',
+      en: 'Mentions all members in a Telegram group with a single command.',
+      ru: 'Упоминает всех участников группы одной командой.' },
+    { cat: 'telegram', name: 'hercules_support_bot', url: 'https://github.com/Mukller/hercules_support_bot', lang: 'Python',
+      en: 'Support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot.',
+      ru: 'Бот поддержки для пользователей 3D-принтера Hercules G4 Duo. На основе ohld/telegram-support-bot.' },
+    { cat: 'telegram', name: 'chess', url: 'https://github.com/Mukller/chess', lang: 'JavaScript',
+      en: 'Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included.',
+      ru: 'Шахматный бот с подсказками ходов и игрой против AI. Веб-фронтенд в комплекте.' },
+
+    // ── Robotics ──
+    { cat: 'robotics', name: 'fira-autonomous-rc-car', url: 'https://github.com/Mukller/fira-autonomous-rc-car', lang: 'Python',
+      en: 'Autonomous RC car for FIRA competition. CV-based lane following and obstacle avoidance.',
+      ru: 'Автономная RC-машина для FIRA. Следование по полосе и объезд препятствий через компьютерное зрение.' },
+    { cat: 'robotics', name: 'Balance_robot', url: 'https://github.com/Mukller/Balance_robot', lang: 'C++',
+      en: 'Self-balancing robot for Robofinist 2026. ESP32 + MPU6050 + TMC2209 + PID control.',
+      ru: 'Самобалансирующий робот для Робофиниста 2026. ESP32 + MPU6050 + TMC2209 + ПИД-регулятор.' },
+    { cat: 'robotics', name: 'omni-robot-assistant', url: 'https://github.com/Mukller/omni-robot-assistant', lang: 'C++',
+      en: 'Home robot assistant on a 3-wheel omnidirectional platform — ESP32, LiDAR LDS-01.',
+      ru: 'Домашний робот-ассистент на трёхколёсной омниколёсной платформе — ESP32, лидар LDS-01.' },
+    { cat: 'robotics', name: 'klipper-dwin-bridge', url: 'https://github.com/Mukller/klipper-dwin-bridge', lang: '',
+      en: 'Klipper ↔ Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero 2 W: stock screen UI + Marlin-style live tuning.',
+      ru: 'Мост Klipper ↔ сенсорный экран Creality DWIN для Ender 5 S1 на Pi Zero 2 W: родной интерфейс + живая настройка как в Marlin.' },
+
+    // ── AI & Automation ──
+    { cat: 'ai', name: 'claude-auto-continue', url: 'https://github.com/Mukller/claude-auto-continue', lang: 'Python',
+      en: 'Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive.',
+      ru: 'Автоматизация на скриншотах — находит и нажимает Continue / Try again в Claude, поддерживая долгие сессии.' },
+    { cat: 'ai', name: 'claude-code-gateway', url: 'https://github.com/Mukller/claude-code-gateway', lang: 'Go',
+      en: 'Anthropic-compatible gateway for Claude Code: multi-provider (Anthropic/Bedrock/Vertex/OpenAI-compat), key rotation, fallback chains, cost tracking.',
+      ru: 'Anthropic-совместимый шлюз для Claude Code: несколько провайдеров (Anthropic/Bedrock/Vertex/OpenAI), ротация ключей, fallback-цепочки, учёт расходов.' },
+    { cat: 'ai', name: 'opencode-chrome', url: 'https://github.com/Mukller/opencode-chrome', lang: 'JavaScript',
+      en: 'Let your local opencode agent see and drive the browser: Chrome extension (chrome.debugger CDP) + local MCP bridge.',
+      ru: 'Пусть локальный агент opencode видит браузер и управляет им: расширение Chrome (chrome.debugger CDP) + локальный MCP-мост.' },
+    { cat: 'ai', name: 'hoster-ddns', url: 'https://github.com/Mukller/hoster-ddns', lang: 'Python',
+      en: 'Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram.',
+      ru: 'Автообновление DDNS на hoster.by. Берёт WAN IP с роутера Keenetic, проходит SMS-2FA через Telegram.' },
+
+    // ── Dev Tools ──
+    { cat: 'devtools', name: 'wsl-dashboard', url: 'https://github.com/Mukller/wsl-dashboard', lang: 'Rust',
+      en: 'Web dashboard for managing WSL distributions from the browser.',
+      ru: 'Веб-панель управления WSL-дистрибутивами из браузера.' },
+    { cat: 'devtools', name: 'sqlterm', url: 'https://github.com/Mukller/sqlterm', lang: 'Go',
+      en: 'TUI client for SQLite: browse and query databases in the terminal.',
+      ru: 'TUI-клиент для SQLite: просмотр и запросы к базам прямо в терминале.' },
+    { cat: 'devtools', name: 'jobqueue', url: 'https://github.com/Mukller/jobqueue', lang: 'Go',
+      en: 'Background job queue backed by SQLite, no external dependencies.',
+      ru: 'Очередь фоновых задач на SQLite без внешних зависимостей.' },
+    { cat: 'devtools', name: 'deadcode', url: 'https://github.com/Mukller/deadcode', lang: 'Python',
+      en: 'Find dead and unused code in Python projects.',
+      ru: 'Ищет мёртвый и неиспользуемый код в Python-проектах.' },
+    { cat: 'devtools', name: 'wschat', url: 'https://github.com/Mukller/wschat', lang: 'Rust',
+      en: 'Minimal WebSocket chat server written in Rust.',
+      ru: 'Минималистичный WebSocket-чат-сервер на Rust.' },
+
+    // ── Web & Games ──
+    { cat: 'web', name: 'MiniBoardGames', url: 'https://github.com/Mukller/MiniBoardGames-3.0.0', lang: 'JavaScript',
+      en: 'Collection of mini board games playable in the browser. v3.0.0.',
+      ru: 'Коллекция мини-настольных игр, работающих в браузере. v3.0.0.' },
+    { cat: 'web', name: 'awesome-cctv-cameras', url: 'https://github.com/Mukller/awesome-cctv-cameras', lang: 'JavaScript',
+      en: 'Open database of 2100+ CCTV/IP camera specs across 71 brands — searchable, filterable, CC0.',
+      ru: 'Открытая база характеристик 2100+ камер видеонаблюдения 71 бренда — поиск, фильтры, CC0.' },
+
+    // ── Minecraft ──
+    { cat: 'minecraft', name: 'DailyStreak', url: 'https://github.com/Mukller/DailyStreak', lang: '',
+      en: 'Minecraft plugin for tracking daily playtime streaks and player achievements with in-game dashboards.',
+      ru: 'Плагин Minecraft: ежедневные стрики, достижения игроков и внутриигровые дашборды.' },
+    { cat: 'minecraft', name: 'Hackedserver', url: 'https://github.com/Mukller/Hackedserver', lang: '',
+      en: 'Premium Minecraft plugin using packet-based analysis to detect hacked clients and unauthorized mods.',
+      ru: 'Плагин Minecraft: детект читерских клиентов и запрещённых модов через пакетный анализ.' },
+    { cat: 'minecraft', name: 'AdvancedSpyInventory', url: 'https://github.com/Mukller/AdvancedSpyInventory', lang: '',
+      en: 'PaperMC plugin for viewing player inventories in real-time. Logging, permissions, full Russian localization.',
+      ru: 'Плагин PaperMC для просмотра инвентарей игроков в реальном времени. Логи, права, полная русская локализация.' }
+  ];
+
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  var activeCat = 'all';
+
+  function esc(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderFilters() {
+    var row = document.getElementById('filters');
+    row.innerHTML = '';
+    CATEGORIES.forEach(function (cat) {
+      var n = cat === 'all' ? PROJECTS.length :
+              PROJECTS.filter(function (p) { return p.cat === cat; }).length;
+      var b = document.createElement('button');
+      b.className = 'chip' + (cat === activeCat ? ' active' : '');
+      b.innerHTML = esc(CAT_LABELS[cat][lang]) + '<span class="cnt">' + n + '</span>';
+      b.onclick = function () { activeCat = cat; render(); };
+      row.appendChild(b);
+    });
+  }
+
+  function renderGrid() {
+    var grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    var list = activeCat === 'all' ? PROJECTS :
+               PROJECTS.filter(function (p) { return p.cat === activeCat; });
+
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty-note"></div>';
+      return;
+    }
+
+    list.forEach(function (p) {
+      var card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = p.url;
+      card.target = '_blank';
+      card.rel = 'noopener';
+
+      var langHtml = p.lang
+        ? '<span class="lang-dot" style="background:' + LANG_COLORS[p.lang] + '"></span>' + p.lang
+        : '';
+
+      card.innerHTML =
+        '<div class="project-header">' +
+          '<span class="project-name">' + esc(p.name) + '</span>' +
+          '<span class="project-lang">' + langHtml + '</span>' +
+        '</div>' +
+        '<div class="project-desc">' + esc(p[lang]) + '</div>';
+
+      grid.appendChild(card);
+    });
+  }
+
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('langBtn').textContent = lang === 'ru' ? 'EN' : 'RU';
+  }
+
+  function render() {
+    applyStatic();
+    renderFilters();
+    renderGrid();
+    localStorage.setItem('ap_lang', lang);
+  }
+
+  function toggleLang() {
+    lang = lang === 'ru' ? 'en' : 'ru';
+    render();
+  }
+
+  render();
+</script>
+</body>
+</html>
