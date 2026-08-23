@@ -27,7 +27,7 @@ cv-en.html          CV на английском
 projects/           каталог всех проектов с фильтрами
 robotics/           роботы: спеки, достижения, слоты под медиа
 now/                чем занят прямо сейчас
-favicon.svg         фавикон
+ap-favicon.svg     фавикон (favicon.svg занят приложением-каталогом)
 og.png              превью для соцсетей (Open Graph)
 sitemap.xml         карта сайта
 robots.txt          правила индексации
