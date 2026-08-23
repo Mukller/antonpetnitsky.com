@@ -28,7 +28,7 @@ projects/           каталог всех проектов с фильтрам
 robotics/           роботы: спеки, достижения, слоты под медиа
 now/                чем занят прямо сейчас
 ap-favicon.svg     фавикон (favicon.svg занят приложением-каталогом)
-fonts/             self-hosted Inter Variable (latin + cyrillic), без Google Fonts
+assets/fonts/      self-hosted Inter Variable (latin + cyrillic), без Google Fonts
 og.png              превью для соцсетей (Open Graph)
 sitemap.xml         индекс карт сайта (портфолио + каталог)
 sitemap-pages.xml   карта статических страниц портфолио
