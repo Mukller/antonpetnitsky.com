@@ -20,6 +20,13 @@ for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml robots.t
         sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
 done
+
+# Copy page directories
+for d in projects robotics now; do
+    if [ -d "/tmp/site-deploy/$d" ]; then
+        sudo cp -r "/tmp/site-deploy/$d" "$SITE_DIR/"
+    fi
+done
 sudo chown -R www-data:www-data "$SITE_DIR"
 sudo chmod -R 755 "$SITE_DIR"
 
