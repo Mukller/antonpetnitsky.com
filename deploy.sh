@@ -15,7 +15,11 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-sudo cp /tmp/site-deploy/index.html /tmp/site-deploy/cv-ru.html /tmp/site-deploy/cv-en.html "$SITE_DIR/"
+for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml robots.txt favicon.svg og.png; do
+    if [ -f "/tmp/site-deploy/$f" ]; then
+        sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
+    fi
+done
 sudo chown -R www-data:www-data "$SITE_DIR"
 sudo chmod -R 755 "$SITE_DIR"
 
@@ -38,6 +42,9 @@ server {
 
     root /var/www/antonpetnitsky.com;
     index index.html;
+
+    error_page 404 /404.html;
+    error_page 500 502 503 504 /50x.html;
 
     location / {
         try_files $uri $uri/ =404;
