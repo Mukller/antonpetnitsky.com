@@ -127,6 +127,30 @@
       font-size: 13px; font-weight: 500; margin-bottom: 4px;
     }
 
+    .media-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px; margin-top: 14px;
+    }
+    .media-thumb {
+      display: block; border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border); position: relative;
+      transition: border-color .15s;
+    }
+    .media-thumb:hover { border-color: rgba(88,166,255,.5); text-decoration: none; }
+    .media-thumb img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+    .media-label {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 4px 8px; font-size: 11px; font-weight: 500; color: var(--bright);
+      background: linear-gradient(180deg, transparent, rgba(13,17,23,.9));
+    }
+    .media-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(13,17,23,.75); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); pointer-events: none;
+    }
+
     /* media slots — uncomment and drop files in when photos/videos are ready
     figure.robot-media { margin: 0 0 14px; }
     figure.robot-media img, figure.robot-media video {
@@ -306,6 +330,29 @@
       <span class="tag green">ESP32</span>
       <span class="tag">LiDAR LDS-01</span>
       <span class="tag yellow">WIP</span>
+    </div>
+
+    <div class="media-grid">
+      <a class="media-thumb" href="https://www.youtube.com/watch?v=WPB2B1DPf_s" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/WPB2B1DPf_s/mqdefault.jpg" alt="Assembly video" loading="lazy">
+        <span class="media-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="media-label" data-en="Assembly" data-ru="Сборка">Assembly</span>
+      </a>
+      <a class="media-thumb" href="https://www.youtube.com/watch?v=XOc5kCE3MC0" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/XOc5kCE3MC0/mqdefault.jpg" alt="Setup video" loading="lazy">
+        <span class="media-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="media-label" data-en="Setup" data-ru="Настройка">Setup</span>
+      </a>
+      <a class="media-thumb" href="https://www.youtube.com/watch?v=L_XbkA4pwRc" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/L_XbkA4pwRc/mqdefault.jpg" alt="Bring-up video" loading="lazy">
+        <span class="media-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="media-label">Bring-up</span>
+      </a>
+      <a class="media-thumb" href="https://www.youtube.com/watch?v=zizGI8MjANU" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/zizGI8MjANU/mqdefault.jpg" alt="ESP32 video" loading="lazy">
+        <span class="media-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="media-label">ESP32</span>
+      </a>
     </div>
   </div>
 
