@@ -53,6 +53,44 @@ server {
     error_page 404 /404.html;
     error_page 500 502 503 504 /50x.html;
 
+    # ── Research Catalog app (:8200) — do not remove ──
+    location ~ ^/(ru|en|uk|be|pl|cs|sk|bg)(/|$) {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location ~ ^/(styles\.css|app\.js|favicon\.svg)$ {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+    }
+
+    location /og/ { proxy_pass http://127.0.0.1:8200; proxy_set_header Host $host; }
+    location /fonts/ { proxy_pass http://127.0.0.1:8200; proxy_set_header Host $host; }
+
+    location = /healthz { proxy_pass http://127.0.0.1:8200; }
+    location = /robots.txt { proxy_pass http://127.0.0.1:8200; }
+    location = /sitemap.xml { proxy_pass http://127.0.0.1:8200; }
+
+    location ~ ^/(login|register|logout|dashboard|settings|admin|forgot-password|reset-password|verify-email|favorites)(/|$) {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Botka - Telegram Mini App (:8310)
+    location /botka/ {
+        proxy_pass http://127.0.0.1:8310;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        client_max_body_size 25m;
+    }
+
+    # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
     }
