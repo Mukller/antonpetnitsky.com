@@ -18,6 +18,9 @@
   <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
   <link rel="canonical" href="https://antonpetnitsky.com">
   <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <link rel="apple-touch-icon" href="/ap-favicon.png">
+  <meta name="theme-color" content="#0d1117">
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fonts.css">
@@ -717,9 +720,36 @@
       .hero-links { gap: 8px; }
       .btn { padding: 6px 12px; font-size: 13px; }
     }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--bg-card); color: var(--bright);
+      padding: 8px 16px; border-radius: 0 0 8px 0; border: 1px solid var(--border);
+    }
+    .skip-link:focus { left: 0; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Anton Petnitsky",
+    "url": "https://antonpetnitsky.com",
+    "email": "mailto:anton.petnitsky@gmail.com",
+    "jobTitle": "Full-Stack Developer & Robotics Engineer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Minsk", "addressCountry": "BY" },
+    "sameAs": [
+      "https://github.com/Mukller",
+      "https://t.me/chotokek",
+      "https://www.linkedin.com/in/anton-petnitsky",
+      "https://www.tiktok.com/@anton_petnitsky",
+      "https://www.instagram.com/anton_petnitsky"
+    ],
+    "knowsAbout": ["Python", "Telegram Bots", "Robotics", "ESP32", "Computer Vision", "Docker", "Linux"]
+  }
+  </script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
 
 <!-- HEADER -->
 <header>
@@ -737,7 +767,7 @@
 </header>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="main">
   <div class="hero-avatar">
     <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
   </div>

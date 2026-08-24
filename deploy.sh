@@ -15,7 +15,7 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt ap-favicon.svg og.png; do
+for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt ap-favicon.svg ap-favicon.png og.png; do
     if [ -f "/tmp/site-deploy/$f" ]; then
         sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
@@ -52,6 +52,19 @@ server {
 
     error_page 404 /404.html;
     error_page 500 502 503 504 /50x.html;
+
+    # compression for text assets (html is compressed by gzip on)
+    gzip on;
+    gzip_comp_level 5;
+    gzip_min_length 256;
+    gzip_vary on;
+    gzip_types text/css application/javascript application/json image/svg+xml application/xml text/plain;
+
+    # long cache for self-hosted assets (content-addressed)
+    location ^~ /assets/ {
+        add_header Cache-Control "public, max-age=2592000, immutable";
+        try_files $uri =404;
+    }
 
     # ── Research Catalog app (:8200) — do not remove ──
     location ~ ^/(ru|en|uk|be|pl|cs|sk|bg)(/|$) {
