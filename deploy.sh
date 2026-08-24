@@ -32,6 +32,10 @@ sudo chmod -R 755 "$SITE_DIR"
 
 # Write nginx config
 sudo tee "$NGINX_CONF" > /dev/null <<'EOF'
+# CANONICAL nginx config for antonpetnitsky.com
+# Source of truth: deploy.sh in Mukller/antonpetnitsky.com repo.
+# Do NOT hand-edit or redeploy stale copies — portfolio (root!), gzip,
+# /assets/ cache, sitemap-index and catalog proxy all live here.
 server {
     listen 80;
     server_name antonpetnitsky.com www.antonpetnitsky.com;
