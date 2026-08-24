@@ -1523,7 +1523,6 @@
     if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false;
-    var heroVisible = true, docVisible = true;
 
     function swapTitle(to) {
       if (busy || !tB || !tA) return;
@@ -1538,21 +1537,6 @@
         setTimeout(function () { busy = false; }, 260);
       }, 240);
     }
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) {
-        heroVisible = en[0].isIntersecting;
-      }).observe(frame);
-    }
-    document.addEventListener('visibilitychange', function () {
-      docVisible = document.visibilityState === 'visible';
-    });
-
-    setInterval(function () {
-      if (!heroVisible || !docVisible || busy) return;
-      li = (li + 1) % LINES.length;
-      swapTitle(LINES[li]);
-    }, 4200);
 
     window.heroSetLang = function (l) {
       li = l === 'ru' ? 1 : 0;
