@@ -18,6 +18,9 @@
   <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
   <link rel="canonical" href="https://antonpetnitsky.com/now/">
   <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <link rel="apple-touch-icon" href="/ap-favicon.png">
+  <meta name="theme-color" content="#0d1117">
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fonts.css">
@@ -116,9 +119,17 @@
       .page-title { font-size: 25px; }
       header { padding: 0 16px; }
     }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 200;
+      background: var(--bg-card); color: var(--bright);
+      padding: 8px 16px; border-radius: 0 0 8px 0; border: 1px solid var(--border);
+    }
+    .skip-link:focus { left: 0; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
 
 <header>
   <a class="logo" href="/">Anton Petnitsky</a>
@@ -132,7 +143,7 @@
   <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
 </header>
 
-<main>
+<main id="main">
   <h1 class="page-title" data-en="Now" data-ru="Сейчас">Now</h1>
   <p class="page-sub" data-en="What I'm building and running at the moment. Updated as things ship." data-ru="Чем я занят прямо сейчас. Обновляю по мере релизов.">What I'm building and running at the moment. Updated as things ship.</p>
 
