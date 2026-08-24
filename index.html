@@ -887,7 +887,7 @@
     <div class="hero-avatar">
       <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
     </div>
-    <h1 class="hero-title" data-en="Hi, I'm Anton" data-ru="Привет, я Антон">Hi, I'm Anton</h1>
+    <h1 class="hero-title" id="titleBase" aria-label="Anton Petnitsky">Hi, I'm Anton</h1>
     <div class="hero-tagline" data-en="Software Developer &amp; Robotics Engineer" data-ru="Разработчик ПО и инженер-робототехник">Software Developer &amp; Robotics Engineer</div>
     <p class="hero-desc" data-en="Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus. I make things that work — from embedded systems to web backends." data-ru="Создаю Telegram-боты, автономных роботов и AI-инструменты из Минска, Беларусь. Делаю вещи, которые работают — от встраиваемых систем до веб-бэкендов.">
       Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus.
@@ -1518,6 +1518,42 @@
     for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* title cycles between languages — clean crossfade, no garbage chars */
+    var tB = document.getElementById('titleBase');
+    var tA = document.getElementById('titleAlt');
+    var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
+    var li = 0, busy = false;
+    var heroVisible = true, docVisible = true;
+
+    function swapTitle(to) {
+      if (busy) return;
+      busy = true;
+      tB.style.opacity = 0;
+      tA.style.opacity = 0;
+      setTimeout(function () {
+        tB.textContent = to;
+        tA.textContent = to;
+        tB.style.opacity = 1;
+        tA.style.opacity = 1;
+        setTimeout(function () { busy = false; }, 220);
+      }, 190);
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        heroVisible = en[0].isIntersecting;
+      }).observe(frame);
+    }
+    document.addEventListener('visibilitychange', function () {
+      docVisible = document.visibilityState === 'visible';
+    });
+
+    setInterval(function () {
+      if (!heroVisible || !docVisible || busy) return;
+      li = (li + 1) % LINES.length;
+      swapTitle(LINES[li]);
+    }, 4200);
 
     var R = 0, target = 0, mx = -600, my = -600, running = false;
     function loop() {
