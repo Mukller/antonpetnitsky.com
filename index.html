@@ -88,6 +88,8 @@
 
     html { scroll-behavior: smooth; }
 
+    html, body { overflow-x: clip; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -1521,13 +1523,14 @@
 
     /* title cycles between languages — clean crossfade, no garbage chars */
     var tB = document.getElementById('titleBase');
-    var tA = document.getElementById('titleAlt');
+    var tA = alt.querySelector('.hero-title');
+    if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false;
     var heroVisible = true, docVisible = true;
 
     function swapTitle(to) {
-      if (busy) return;
+      if (busy || !tB || !tA) return;
       busy = true;
       tB.style.opacity = 0;
       tA.style.opacity = 0;
@@ -1555,7 +1558,12 @@
       swapTitle(LINES[li]);
     }, 4200);
 
-    var R = 0, target = 0, mx = -600, my = -600, running = false;
+    window.heroSetLang = function (l) {
+      li = l === 'ru' ? 1 : 0;
+      swapTitle(LINES[li]);
+    };
+
+    var R = 0, target = 0, mx = -600, my = -600, lastCX = null, lastCY = null, running = false;
     function loop() {
       R += (target - R) * 0.16;
       if (Math.abs(target - R) < 0.4) R = target;
@@ -1564,6 +1572,7 @@
     }
     function wake() { if (!running) { running = true; requestAnimationFrame(loop); } }
     function move(x, y) {
+      lastCX = x; lastCY = y;
       var b = frame.getBoundingClientRect();
       mx = x - b.left; my = y - b.top;
       target = 200;
@@ -1571,6 +1580,9 @@
     }
     frame.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
     frame.addEventListener('mouseleave', function () { target = 0; wake(); });
+    window.addEventListener('scroll', function () {
+      if (lastCX !== null && target > 0) move(lastCX, lastCY);
+    }, { passive: true });
     frame.addEventListener('touchmove', function (e) {
       var t = e.touches[0];
       if (t) move(t.clientX, t.clientY);
@@ -1591,6 +1603,7 @@
     document.getElementById('langBtn').textContent = l === 'ru' ? 'EN' : 'RU';
     lang = l;
     localStorage.setItem('ap_lang', l);
+    if (window.heroSetLang) window.heroSetLang(l);
   }
 
   function toggleLang() {
