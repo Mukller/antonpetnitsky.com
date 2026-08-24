@@ -230,6 +230,7 @@
       color: #fff;
       white-space: nowrap;
       margin: 0 0 20px;
+      transition: opacity .24s ease;
     }
 
     /* ── flashlight: inverted layer revealed by cursor (mimo-style) ── */
@@ -1534,8 +1535,8 @@
         tA.textContent = to;
         tB.style.opacity = 1;
         tA.style.opacity = 1;
-        setTimeout(function () { busy = false; }, 220);
-      }, 190);
+        setTimeout(function () { busy = false; }, 260);
+      }, 240);
     }
 
     if ('IntersectionObserver' in window) {
