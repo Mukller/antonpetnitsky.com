@@ -78,10 +78,17 @@ server {
     location ~ ^/(styles\.css|app\.js|favicon\.svg)$ {
         proxy_pass http://127.0.0.1:8200;
         proxy_set_header Host $host;
+        proxy_hide_header cache-control;
+        add_header cache-control "public, max-age=3600" always;
     }
 
     location /og/ { proxy_pass http://127.0.0.1:8200; proxy_set_header Host $host; }
-    location /fonts/ { proxy_pass http://127.0.0.1:8200; proxy_set_header Host $host; }
+    location /fonts/ {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+        proxy_hide_header cache-control;
+        add_header cache-control "public, max-age=604800" always;
+    }
 
     location = /healthz { proxy_pass http://127.0.0.1:8200; }
     location = /robots.txt { proxy_pass http://127.0.0.1:8200; }
