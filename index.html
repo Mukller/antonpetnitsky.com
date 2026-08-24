@@ -109,8 +109,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: linear-gradient(180deg, var(--header-a) 0%, var(--header-b) 100%);
-      backdrop-filter: blur(12px);
+      background: var(--bg);
+
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
       display: flex;
@@ -572,7 +572,7 @@
       height: 7px;
       border-radius: 50%;
       background: var(--green);
-      animation: pulse 2s ease-in-out infinite;
+
     }
 
     /* ── EDUCATION ───────────────────────────────── */
@@ -652,13 +652,8 @@
       height: 8px;
       border-radius: 50%;
       background: var(--green);
-      animation: pulse 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      flex-shrink: 0;
     }
 
     .now-card-title {
