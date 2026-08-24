@@ -59,18 +59,18 @@
     }
 
     :root[data-theme="light"] {
-      --bg:        #ffffff;
-      --bg-card:   #f6f8fa;
-      --border:    #d0d7de;
-      --text:      #424a53;
-      --muted:     #57606a;
+      --bg:        #edf0f3;
+      --bg-card:   #f7f9fa;
+      --border:    #d5dbe1;
+      --text:      #3d444d;
+      --muted:     #59646e;
       --bright:    #1f2328;
       --accent:    #0969da;
       --accent-light: #0550ae;
       --green:     #1a7f37;
       --green-hover: #187733;
-      --header-a:  rgba(255, 255, 255, 0.95);
-      --header-b:  rgba(255, 255, 255, 0.8);
+      --header-a:  rgba(237, 240, 243, 0.95);
+      --header-b:  rgba(237, 240, 243, 0.8);
       --wm:        rgba(31, 35, 40, .06);
       --accent-soft: rgba(9, 105, 218, .08);
       --flash-bg:    #0d1117;
@@ -1565,7 +1565,7 @@
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('ap_theme', t);
     var m = document.querySelector('meta[name="theme-color"]');
-    if (m) m.setAttribute('content', t === 'light' ? '#ffffff' : '#0d1117');
+    if (m) m.setAttribute('content', t === 'light' ? '#edf0f3' : '#0d1117');
   }
 
   function toggleTheme() {
