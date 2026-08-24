@@ -135,6 +135,10 @@
       overflow: hidden;
       border: 1px solid var(--border);
       border-radius: 4px;
+    }
+
+    .hero-layer {
+      position: relative;
       padding: 64px 24px 48px;
       text-align: center;
     }
@@ -174,30 +178,38 @@
 
     .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .hero-stage { position: relative; display: inline-block; margin-bottom: 20px; }
-
-    .hero-circle {
-      position: absolute;
-      width: clamp(190px, 24vw, 310px);
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      background: #e9eef5;
-      left: 50%;
-      top: 50%;
-      transform: translate(-118%, -50%);
-      pointer-events: none;
-    }
-
     .hero-title {
-      position: relative;
       font-size: clamp(34px, 8vw, 84px);
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.1;
       color: #fff;
-      mix-blend-mode: difference;
       white-space: nowrap;
-      margin: 0;
+      margin: 0 0 20px;
+    }
+
+    /* ── flashlight: inverted layer revealed by cursor (mimo-style) ── */
+    .hero-alt {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      background: #e9eef5;
+      pointer-events: none;
+      will-change: clip-path;
+      clip-path: circle(0px at -500px -500px);
+    }
+    .hero-alt .wm-row { color: rgba(13, 17, 23, .07); }
+    .hero-alt .hero-avatar { border-color: rgba(13, 17, 23, .15); background: #fff; }
+    .hero-alt .hero-title { color: #0d1117; }
+    .hero-alt .hero-tagline { color: #1f6feb; }
+    .hero-alt .hero-desc { color: #57606a; }
+    .hero-alt .hero-meta span { color: #57606a; }
+    .hero-alt .hire-badge { color: #1a7f37; }
+    .hero-alt .btn { border-color: rgba(13, 17, 23, .3); color: #0d1117; background: transparent; }
+    .hero-alt .btn-primary { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-alt { display: none; }
     }
 
     .hero-tagline {
@@ -818,7 +830,8 @@
 
 <!-- HERO -->
 <div class="hero" id="main">
-  <div class="hero-frame">
+  <div class="hero-frame" id="heroFrame">
+    <div class="hero-layer" id="heroBase">
     <div class="hero-wm" aria-hidden="true">
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
@@ -828,10 +841,7 @@
     <div class="hero-avatar">
       <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
     </div>
-    <div class="hero-stage">
-      <div class="hero-circle"></div>
-      <h1 class="hero-title" data-en="Hi, I'm Anton" data-ru="Привет, я Антон">Hi, I'm Anton</h1>
-    </div>
+    <h1 class="hero-title" id="titleBase" aria-label="Anton Petnitsky">HELLO, I'M ANTON</h1>
     <div class="hero-tagline" data-en="Software Developer &amp; Robotics Engineer" data-ru="Разработчик ПО и инженер-робототехник">Software Developer &amp; Robotics Engineer</div>
     <p class="hero-desc" data-en="Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus. I make things that work — from embedded systems to web backends." data-ru="Создаю Telegram-боты, автономных роботов и AI-инструменты из Минска, Беларусь. Делаю вещи, которые работают — от встраиваемых систем до веб-бэкендов.">
       Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus.
@@ -860,6 +870,33 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
         CV (RU)
       </a>
+    </div>
+
+    <div class="hero-layer hero-alt" id="heroAlt" aria-hidden="true">
+    <div class="hero-wm" aria-hidden="true">
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+    </div>
+    <div class="hero-avatar">
+      <img src="https://github.com/Mukller.png" alt="" loading="lazy">
+    </div>
+    <h1 class="hero-title" id="titleAlt">HELLO, I'M ANTON</h1>
+    <div class="hero-tagline" data-en="Software Developer &amp; Robotics Engineer" data-ru="Разработчик ПО и инженер-робототехник">Software Developer &amp; Robotics Engineer</div>
+    <p class="hero-desc" data-en="Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus." data-ru="Создаю Telegram-боты, автономных роботов и AI-инструменты из Минска, Беларусь.">Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus.</p>
+    <div class="hero-meta">
+      <span data-en="Minsk, Belarus · Remote only" data-ru="Минск, Беларусь · только удалённо">Minsk, Belarus · Remote only</span>
+      <span data-en="Class of 2026" data-ru="Выпуск 2026">Class of 2026</span>
+      <span data-en="Robofinist competitor" data-ru="Участник Робофиниста">Robofinist competitor</span>
+      <span class="hire-badge" data-en="Available for hire" data-ru="Открыт для предложений">Available for hire</span>
+    </div>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://github.com/Mukller" target="_blank" tabindex="-1">GitHub</a>
+      <a class="btn btn-ghost" href="https://t.me/chotokek" target="_blank" tabindex="-1">Telegram</a>
+      <a class="btn btn-ghost" href="/cv-en.html" target="_blank" tabindex="-1" data-en="CV (EN)" data-ru="CV (EN)">CV (EN)</a>
+      <a class="btn btn-ghost" href="/cv-ru.html" target="_blank" tabindex="-1" data-en="CV (RU)" data-ru="Резюме (RU)">CV (RU)</a>
+    </div>
     </div>
   </div>
 </div>
@@ -1444,6 +1481,65 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var frame = document.getElementById('heroFrame');
+    var alt = document.getElementById('heroAlt');
+    if (!frame || !alt) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var tB = document.getElementById('titleBase');
+    var tA = document.getElementById('titleAlt');
+    var LINES = ['HELLO, I\'M ANTON', 'ПРИВЕТ, Я АНТОН'];
+    var GLYPHS = 'ABCDEFGHKMNPRSTVXZАБВГДЕЖЗИКЛМНПРСТУФХЦЧШЯ*,.';
+    var li = 0, busy = false;
+
+    function setT(s) { tB.textContent = s; tA.textContent = s; }
+
+    function scramble(to) {
+      if (busy) return;
+      busy = true;
+      var from = tB.textContent;
+      var len = Math.max(from.length, to.length);
+      var step = 0, total = 26;
+      var iv = setInterval(function () {
+        step++;
+        var lock = Math.floor(len * step / total), out = '';
+        for (var i = 0; i < len; i++) {
+          if (i >= to.length) continue;
+          out += i < lock ? to[i] : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        }
+        setT(out);
+        if (step >= total) { clearInterval(iv); setT(to); busy = false; }
+      }, 32);
+    }
+
+    setInterval(function () { li = (li + 1) % LINES.length; scramble(LINES[li]); }, 3800);
+
+    var R = 0, target = 0, mx = -600, my = -600, running = false;
+    function loop() {
+      R += (target - R) * 0.16;
+      if (Math.abs(target - R) < 0.4) R = target;
+      alt.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + mx.toFixed(1) + 'px ' + my.toFixed(1) + 'px)';
+      if (R !== target) { requestAnimationFrame(loop); } else { running = false; }
+    }
+    function wake() { if (!running) { running = true; requestAnimationFrame(loop); } }
+    function move(x, y) {
+      var b = frame.getBoundingClientRect();
+      mx = x - b.left; my = y - b.top;
+      target = 200;
+      wake();
+    }
+    frame.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
+    frame.addEventListener('mouseleave', function () { target = 0; wake(); });
+    frame.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      if (t) move(t.clientX, t.clientY);
+    }, { passive: true });
+    frame.addEventListener('touchend', function () { target = 0; wake(); });
+  })();
+</script>
 
 <script>
   var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.startsWith('ru') ? 'ru' : 'en');
