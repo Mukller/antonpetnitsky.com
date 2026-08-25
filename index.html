@@ -1490,7 +1490,7 @@
     var tA = alt.querySelector('.hero-title');
     if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
-    var li = 0, busy = false;
+    var li = 0, busy = false, firstSet = true;
 
     function swapTitle(to) {
       if (busy || !tB || !tA) return;
@@ -1508,7 +1508,14 @@
 
     window.heroSetLang = function (l) {
       li = l === 'ru' ? 1 : 0;
-      swapTitle(LINES[li]);
+      var to = LINES[li];
+      if (firstSet) {
+        firstSet = false;
+        tB.textContent = to;
+        tA.textContent = to;
+        return;
+      }
+      swapTitle(to);
     };
 
     var R = 0, target = 0, mx = -600, my = -600, lastCX = null, lastCY = null, running = false;
