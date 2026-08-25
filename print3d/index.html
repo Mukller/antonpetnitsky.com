@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Printing — Anton Petnitsky</title>
+  <meta name="description" content="Anton Petnitsky's 3D printing setup: Ender 5 S1 running Klipper, custom DWIN touchscreen bridge, Telegram remote control, accelerometer-tuned input shaping.">
+  <meta property="og:title" content="3D Printing — Anton Petnitsky">
+  <meta property="og:description" content="Klipper, custom bridges, remote control — a printer treated as a machine to engineer, not a gadget.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/print3d/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3D Printing — Anton Petnitsky">
+  <meta name="twitter:description" content="A printer treated as a machine to engineer.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/print3d/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .use-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px; margin-bottom: 12px;
+    }
+    .use-name { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
+    .use-desc { font-size: 13px; color: var(--muted); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/print3d/" class="active" data-en="3D Print" data-ru="3D-печать">3D Print</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="3D Printing" data-ru="3D-печать">3D Printing</h1>
+  <p class="page-sub" data-en="A printer treated as a machine to engineer, not a gadget: custom firmware, a bridge for the stock touchscreen, remote control from Telegram." data-ru="Принтер как машина для инженеринга, а не гаджет: кастомная прошивка, мост для родного экрана, дистанционное управление из Telegram.">A printer treated as a machine to engineer, not a gadget: custom firmware, a bridge for the stock touchscreen, remote control from Telegram.</p>
+
+  <div class="section-title" data-en="The machine" data-ru="Машина">The machine</div>
+
+  <div class="use-card">
+    <div class="use-name">Ender 5 S1 + Klipper</div>
+    <div class="use-desc" data-en="Stock mainboard flashed to run Klipper. Faster, quieter and scriptable — macros, input shaping and web control instead of a knob and a menu." data-ru="Стоковая плата перепрошита под Klipper. Быстрее, тише и скриптуется — макросы, input shaping и веб-управление вместо ручки и меню.">Stock mainboard flashed to run Klipper. Faster, quieter and scriptable — macros, input shaping and web control instead of a knob and a menu.</div>
+    <div class="tag-row"><span class="tag green">Klipper</span><span class="tag">STM32</span><span class="tag">Katapult</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="Input shaping on a real accelerometer" data-ru="Input shaping на настоящем акселерометре">Input shaping on a real accelerometer</div>
+    <div class="use-desc" data-en="An ADXL345 on an RP2040 board measures resonance live; shaper profiles are tuned from real measurements, not presets." data-ru="ADXL345 на плате RP2040 замеряет резонансы вживую; профили шейперов настроены по реальным замерам, а не пресетам.">An ADXL345 on an RP2040 board measures resonance live; shaper profiles are tuned from real measurements, not presets.</div>
+    <div class="tag-row"><span class="tag">ADXL345</span><span class="tag">RP2040</span><span class="tag">input shaper</span></div>
+  </div>
+
+  <div class="section-title" data-en="Projects around it" data-ru="Проекты вокруг неё">Projects around it</div>
+
+  <div class="use-card">
+    <div class="use-name"><a href="https://github.com/Mukller/klipper-dwin-bridge" target="_blank" rel="noopener">klipper-dwin-bridge</a></div>
+    <div class="use-desc" data-en="The stock Creality DWIN touchscreen keeps working with Klipper: a Pi Zero 2 W bridges the two, keeping the factory UI and adding Marlin-style live tuning — steps/mm, PID, bed mesh, filament profiles." data-ru="Родной сенсорный экран Creality DWIN продолжает работать с Klipper: Pi Zero 2 W мостит их между собой, сохраняя заводской интерфейс и добавляя живую настройку в стиле Marlin — steps/mm, PID, сетка стола, профили пластика.">The stock Creality DWIN touchscreen keeps working with Klipper: a Pi Zero 2 W bridges the two, keeping the factory UI and adding Marlin-style live tuning — steps/mm, PID, bed mesh, filament profiles.</div>
+    <div class="tag-row"><span class="tag">Python</span><span class="tag">Pi Zero 2 W</span><span class="tag">DWIN</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name"><a href="https://github.com/Mukller/3d-printer-control" target="_blank" rel="noopener">3d-printer-control</a></div>
+    <div class="use-desc" data-en="Telegram bot for remote control: live status, job tracking — start a print from anywhere, get notified when it's done." data-ru="Telegram-бот для дистанционного управления: живой статус, трекинг заданий — запусти печать откуда угодно, получи уведомление о завершении.">Telegram bot for remote control: live status, job tracking — start a print from anywhere, get notified when it's done.</div>
+    <div class="tag-row"><span class="tag">Telegram</span><span class="tag">OctoPrint</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="Prints that matter" data-ru="Печати, которые имеют смысл">Prints that matter</div>
+    <div class="use-desc" data-en="The Arkanoid robot chassis on the robotics page is PETG off this bed — the printer exists to build other machines." data-ru="Корпус робота-Арканоида со страницы робототехники — PETG с этого стола. Принтер существует, чтобы строить другие машины.">The Arkanoid robot chassis on the robotics page is PETG off this bed — the printer exists to build other machines.</div>
+    <div class="tag-row"><span class="tag">PETG</span><span class="tag"><a href="/robotics/" style="color:inherit">/robotics/</a></span></div>
+  </div>
+
+  <div class="section-title" data-en="Next" data-ru="Дальше">Next</div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="Online 3D slicer (WIP)" data-ru="Онлайн 3D-слайсер (WIP)">Online 3D slicer (WIP)</div>
+    <div class="use-desc" data-en="Browser-based STL slicing with Three.js preview and CuraEngine under the hood — no installs. The current project; beginner and advanced modes planned." data-ru="Нарезка STL в браузере с превью на Three.js и CuraEngine под капотом — без установки ПО. Текущий проект; запланированы режимы для начинающих и продвинутых.">Browser-based STL slicing with Three.js preview and CuraEngine under the hood — no installs. The current project; beginner and advanced modes planned.</div>
+    <div class="tag-row"><span class="tag">Three.js</span><span class="tag">CuraEngine</span><span class="tag green">WIP</span></div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  }
+  applyStatic();
+</script>
+</body>
+</html>
