@@ -1,0 +1,12 @@
+/* light theme overrides — loaded on every page after page styles */
+:root[data-theme="light"] {
+  --bg: #edf0f3;
+  --bg-card: #f7f9fa;
+  --border: #d5dbe1;
+  --text: #3d444d;
+  --muted: #59646e;
+  --bright: #1f2328;
+  --accent: #0969da;
+  --accent-light: #0550ae;
+  --green: #1a7f37;
+}
