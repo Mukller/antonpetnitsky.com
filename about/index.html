@@ -56,7 +56,7 @@
     nav a.active { color: var(--accent); font-weight: 500; }
 
     main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
-    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
     .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
 
     .section-title {
@@ -76,7 +76,7 @@
       width: 8px; height: 8px; border-radius: 50%;
       background: var(--accent); border: 2px solid var(--bg);
     }
-    .tl-date { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+    .tl-date { font-size: 20px; font-weight: 800; color: var(--bright); letter-spacing: -.02em; margin-bottom: 4px; }
     .tl-title { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
     .tl-desc { font-size: 13px; color: var(--muted); }
 
@@ -91,7 +91,7 @@
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 8px; padding: 16px; text-align: center;
     }
-    .stat-num { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: -1px; }
+    .stat-num { font-size: clamp(38px, 5vw, 52px); font-weight: 700; color: var(--accent); letter-spacing: -1px; }
     .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
     .awards-list { display: flex; flex-direction: column; gap: 12px; }
@@ -168,6 +168,11 @@
     .theme-btn .icon-sun { display: none; }
     :root[data-theme="light"] .theme-btn .icon-sun { display: block; }
     :root[data-theme="light"] .theme-btn .icon-moon { display: none; }
+
+    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
+    .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
+    .footer-cols a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
