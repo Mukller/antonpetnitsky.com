@@ -134,6 +134,38 @@
     }
     .skip-link:focus { left: 0; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .nav-drop { position: relative; }
+    .nav-drop > a::after { content: ' \0be'; font-size: 10px; opacity: .6; }
+    .nav-menu {
+      display: none; position: absolute; top: 100%; left: -10px;
+      min-width: 170px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 8px; padding: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 101;
+    }
+    .nav-drop:hover .nav-menu, .nav-drop:focus-within .nav-menu { display: block; }
+    .nav-menu a { display: block; padding: 7px 10px; border-radius: 6px; font-size: 14px; color: var(--text); }
+    .nav-menu a:hover { background: var(--accent-soft); color: var(--bright); }
+    .nav-menu a.active { color: var(--accent); }
+    .burger {
+      display: none; background: transparent; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px; padding: 5px 8px; cursor: pointer;
+      font-family: inherit; flex-shrink: 0;
+    }
+    .mobile-menu { display: none; }
+    @media (max-width: 640px) {
+      header nav { display: none; }
+      .burger { display: flex; align-items: center; }
+      .mobile-menu { display: block; position: absolute; top: 60px; left: 0; right: 0;
+        background: var(--bg); border-bottom: 1px solid var(--border);
+        padding: 8px 16px 16px; z-index: 99; }
+      .mobile-menu[hidden] { display: none; }
+      .mm-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+        color: var(--muted); margin: 12px 0 4px; }
+      .mobile-menu a { display: block; padding: 8px 0; font-size: 15px; color: var(--text);
+        border-bottom: 1px solid var(--border); }
+      .mobile-menu a:last-child { border-bottom: none; }
+    }
   </style>
 </head>
 <body>
@@ -142,17 +174,44 @@
 <header>
   <a class="logo" href="/">Anton Petnitsky</a>
   <nav>
-    <a href="/projects/" class="active" data-en="Projects" data-ru="Проекты">Projects</a>
-    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
-    <a href="/print3d/" data-en="Print3d" data-ru="3D-печать">Print3d</a>
-    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
-    <a href="/minecraft/" data-en="Minecraft" data-ru="Minecraft">Minecraft</a>
-    <a href="/uses/" data-en="Uses" data-ru="Инструменты">Uses</a>
-    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
-    <a href="/about/" data-en="About" data-ru="Путь">About</a>
-    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+    <div class="nav-drop active">
+      <a href="/projects/">Projects</a>
+      <div class="nav-menu">
+        <a href="/projects/" class="active">Catalog</a>
+        <a href="/robotics/">Robotics</a>
+        <a href="/print3d/">3D Print</a>
+      </div>
+    </div>
+    <div class="nav-drop">
+      <a href="/homelab/">Infra</a>
+      <div class="nav-menu">
+        <a href="/homelab/">Homelab</a>
+        <a href="/minecraft/">Minecraft</a>
+        <a href="/uses/">Uses</a>
+      </div>
+    </div>
+    <a href="/now/">Now</a>
+    <a href="/about/">About</a>
+    <a href="/#contact">Contact</a>
   </nav>
   <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
+  <button class="burger" id="burgerBtn" aria-label="Menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <div class="mm-title">Projects</div>
+    <a href="/projects/">Catalog</a>
+    <a href="/robotics/">Robotics</a>
+    <a href="/print3d/">3D Print</a>
+    <div class="mm-title">Infra</div>
+    <a href="/homelab/">Homelab</a>
+    <a href="/minecraft/">Minecraft</a>
+    <a href="/uses/">Uses</a>
+    <div class="mm-title">Site</div>
+    <a href="/now/">Now</a>
+    <a href="/about/">About</a>
+    <a href="/#contact">Contact</a>
+  </div>
 </header>
 
 <main id="main">
@@ -177,72 +236,77 @@
     'JavaScript': '#f1e05a', 'TypeScript': '#3178c6'
   };
 
-  var CATEGORIES = ['all', 'telegram', 'robotics', 'ai', 'devtools', 'web', 'minecraft'];
+  var CATEGORIES = ['all', 'telegram', 'robotics', 'ai', 'devtools', 'term', 'minecraft'];
 
   var CAT_LABELS = {
     all:       { en: 'All',          ru: 'Все' },
     telegram:  { en: 'Telegram',     ru: 'Telegram' },
-    robotics:  { en: 'Robotics',     ru: 'Робототехника' },
-    ai:        { en: 'AI & Automation', ru: 'AI и автоматизация' },
+    robotics:  { en: 'Robotics & 3D', ru: 'Робототехника и 3D' },
+    ai:        { en: 'AI', ru: 'AI' },
     devtools:  { en: 'Dev Tools',    ru: 'Инструменты' },
-    web:       { en: 'Web & Games',  ru: 'Веб и игры' },
+    term:      { en: 'Terminal & Fun', ru: 'Терминал и эксперименты' },
     minecraft: { en: 'Minecraft',    ru: 'Minecraft' }
   };
 
   var PROJECTS = [
     // ── Telegram ──
     { cat: 'telegram', name: 'tt-saver', url: 'https://github.com/Mukller/tt-saver', lang: 'Python',
-      en: 'Telegram bot — download TikTok videos without watermark. Running 24/7 in production.',
-      ru: 'Telegram-бот — скачивание TikTok видео без водяного знака. Работает 24/7 в продакшне.' },
+      en: 'Telegram bot for downloading TikTok content: video, photo slideshows and audio tracks. Built on aiogram 3 and yt-dlp, running 24/7 in production.',
+      ru: 'Telegram-бот для скачивания TikTok: видео, фото-слайдшоу, аудиодорожка. На aiogram 3 и yt-dlp, работает 24/7 в продакшне.' },
     { cat: 'telegram', name: 'tg-voice-transcriber', url: 'https://github.com/Mukller/tg-voice-transcriber', lang: 'Python',
-      en: 'Telegram bot that transcribes voice messages to text using speech recognition.',
-      ru: 'Telegram-бот, преобразующий голосовые сообщения в текст через распознавание речи.' },
+      en: 'Transcribes voice messages and video notes to text via local faster-whisper — nothing leaves your server.',
+      ru: 'Транскрибирует голосовые и видеосообщения в текст через локальный faster-whisper — ничего не покидает ваш сервер.' },
+    { cat: 'telegram', name: 'chess', url: 'https://github.com/Mukller/chess', lang: 'Python',
+      en: 'Full-featured Telegram chess bot with Stockfish AI, ELO rating system and three modes: vs AI, hot-seat and online PvP.',
+      ru: 'Полноценный шахматный бот со Stockfish, системой ELO и тремя режимами: против AI, хот-сит и онлайн PvP.' },
     { cat: 'telegram', name: 'Anonka', url: 'https://github.com/Mukller/Anonka', lang: 'Python',
-      en: 'Anonymous message bot — users send messages anonymously, admins reply in a forum thread.',
-      ru: 'Бот анонимных сообщений — пользователи пишут анонимно, админы отвечают в ветке форума.' },
+      en: 'Anonymous Telegram bot: users send messages privately, admins reply through forum threads.',
+      ru: 'Анонимный Telegram-бот: пользователи пишут приватно, админы отвечают через ветки форума.' },
     { cat: 'telegram', name: 'countdown-bot', url: 'https://github.com/Mukller/countdown-bot', lang: 'Python',
       en: 'Countdown timers to important events with notifications and yearly reminders.',
       ru: 'Таймеры обратного отсчёта до важных событий с уведомлениями и годовыми напоминаниями.' },
     { cat: 'telegram', name: 'tg-birthday-assistant', url: 'https://github.com/Mukller/tg-birthday-assistant', lang: 'TypeScript',
       en: 'Birthday reminders via NestJS + Prisma + Redis + BullMQ + GramJS (MTProto). Sends congratulations on your behalf.',
       ru: 'Напоминания о днях рождения на NestJS + Prisma + Redis + BullMQ + GramJS (MTProto). Поздравляет от вашего имени.' },
-    { cat: 'telegram', name: 'telegram-mentioner-bot', url: 'https://github.com/Mukller/telegram-mentioner-bot', lang: 'Python',
-      en: 'Mentions all members in a Telegram group with a single command.',
-      ru: 'Упоминает всех участников группы одной командой.' },
     { cat: 'telegram', name: 'hercules_support_bot', url: 'https://github.com/Mukller/hercules_support_bot', lang: 'Python',
-      en: 'Support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot.',
-      ru: 'Бот поддержки для пользователей 3D-принтера Hercules G4 Duo. На основе ohld/telegram-support-bot.' },
-    { cat: 'telegram', name: 'chess', url: 'https://github.com/Mukller/chess', lang: 'JavaScript',
-      en: 'Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included.',
-      ru: 'Шахматный бот с подсказками ходов и игрой против AI. Веб-фронтенд в комплекте.' },
+      en: 'Support bot for Hercules G4 Duo 3D printer users.',
+      ru: 'Бот поддержки для пользователей 3D-принтера Hercules G4 Duo.' },
+    { cat: 'telegram', name: 'telegram-mentioner-bot', url: 'https://github.com/Mukller/telegram-mentioner-bot', lang: 'Python',
+      en: 'Mentions all group members with a single /all command.',
+      ru: 'Упоминает всех участников группы одной командой /all.' },
 
-    // ── Robotics ──
-    { cat: 'robotics', name: 'fira-autonomous-rc-car', url: 'https://github.com/Mukller/fira-autonomous-rc-car', lang: 'Python',
-      en: 'Autonomous RC car for FIRA competition. CV-based lane following and obstacle avoidance.',
-      ru: 'Автономная RC-машина для FIRA. Следование по полосе и объезд препятствий через компьютерное зрение.' },
+    // ── Robotics & 3D ──
+    { cat: 'robotics', name: 'fira-autonomous-rc-car', url: 'https://github.com/Fira-NDTP/fira-autonomous-rc-car', lang: 'Python',
+      en: 'Autonomous RC car for FIRA: lane following and sign recognition on ROS, YOLO sign classifier, team NDTP.',
+      ru: 'Автономная RC-машина для FIRA: следование по полосе и распознавание знаков на ROS, YOLO-классификатор, команда NDTP.' },
     { cat: 'robotics', name: 'Balance_robot', url: 'https://github.com/Mukller/Balance_robot', lang: 'C++',
-      en: 'Self-balancing robot for Robofinist 2026. ESP32 + MPU6050 + TMC2209 + PID control.',
-      ru: 'Самобалансирующий робот для Робофиниста 2026. ESP32 + MPU6050 + TMC2209 + ПИД-регулятор.' },
+      en: 'Self-balancing robot on ESP32 with line tracking, obstacle avoidance and web joystick control. Real-time PID, Wi-Fi enabled.',
+      ru: 'Самобалансирующий робот на ESP32 с удержанием линии, объездом препятствий и веб-джойстиком. ПИД в реальном времени, по Wi-Fi.' },
     { cat: 'robotics', name: 'omni-robot-assistant', url: 'https://github.com/Mukller/omni-robot-assistant', lang: 'C++',
       en: 'Home robot assistant on a 3-wheel omnidirectional platform — ESP32, LiDAR LDS-01.',
       ru: 'Домашний робот-ассистент на трёхколёсной омниколёсной платформе — ESP32, лидар LDS-01.' },
     { cat: 'robotics', name: 'klipper-dwin-bridge', url: 'https://github.com/Mukller/klipper-dwin-bridge', lang: '',
-      en: 'Klipper ↔ Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero 2 W: stock screen UI + Marlin-style live tuning.',
-      ru: 'Мост Klipper ↔ сенсорный экран Creality DWIN для Ender 5 S1 на Pi Zero 2 W: родной интерфейс + живая настройка как в Marlin.' },
+      en: 'Klipper ↔ Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero 2 W: stock screen UI + Marlin-style live tuning (steps/mm, PID, bed mesh, filament profiles).',
+      ru: 'Мост Klipper ↔ сенсорный экран Creality DWIN для Ender 5 S1 на Pi Zero 2 W: родной интерфейс + живая настройка как в Marlin (steps/mm, PID, сетка стола, профили пластика).' },
 
-    // ── AI & Automation ──
-    { cat: 'ai', name: 'claude-auto-continue', url: 'https://github.com/Mukller/claude-auto-continue', lang: 'Python',
-      en: 'Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive.',
-      ru: 'Автоматизация на скриншотах — находит и нажимает Continue / Try again в Claude, поддерживая долгие сессии.' },
+    // ── AI ──
     { cat: 'ai', name: 'claude-code-gateway', url: 'https://github.com/Mukller/claude-code-gateway', lang: 'Go',
-      en: 'Anthropic-compatible gateway for Claude Code: multi-provider (Anthropic/Bedrock/Vertex/OpenAI-compat), key rotation, fallback chains, cost tracking.',
-      ru: 'Anthropic-совместимый шлюз для Claude Code: несколько провайдеров (Anthropic/Bedrock/Vertex/OpenAI), ротация ключей, fallback-цепочки, учёт расходов.' },
+      en: 'Anthropic-compatible gateway for Claude Code: multi-provider (Anthropic/Bedrock/Vertex/OpenAI-compat), key rotation, fallback chains, cost tracking, dashboard.',
+      ru: 'Anthropic-совместимый шлюз для Claude Code: несколько провайдеров (Anthropic/Bedrock/Vertex/OpenAI), ротация ключей, fallback-цепочки, учёт расходов, дашборд.' },
+    { cat: 'ai', name: 'claude-auto-continue', url: 'https://github.com/Mukller/claude-auto-continue', lang: 'Python',
+      en: 'Auto-clicks Try again in Claude Desktop and presses Enter to continue stalled chats after usage limits — schedule-based, UI Automation.',
+      ru: 'Сам нажимает Try again в Claude Desktop и Enter для продолжения остановленных чатов после лимитов — по расписанию, через UI Automation.' },
     { cat: 'ai', name: 'opencode-chrome', url: 'https://github.com/Mukller/opencode-chrome', lang: 'JavaScript',
       en: 'Let your local opencode agent see and drive the browser: Chrome extension (chrome.debugger CDP) + local MCP bridge.',
       ru: 'Пусть локальный агент opencode видит браузер и управляет им: расширение Chrome (chrome.debugger CDP) + локальный MCP-мост.' },
+    { cat: 'ai', name: 'ai-system-prompts', url: 'https://github.com/Mukller/ai-system-prompts', lang: 'JavaScript',
+      en: 'Extracted system prompts from major AI models: Claude, ChatGPT, Gemini, Grok, Cursor, Copilot and more.',
+      ru: 'Извлечённые системные промпты крупных AI-моделей: Claude, ChatGPT, Gemini, Grok, Cursor, Copilot и другие.' },
+
+    // ── Automation ──
     { cat: 'ai', name: 'hoster-ddns', url: 'https://github.com/Mukller/hoster-ddns', lang: 'Python',
-      en: 'Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram.',
-      ru: 'Автообновление DDNS на hoster.by. Берёт WAN IP с роутера Keenetic, проходит SMS-2FA через Telegram.' },
+      en: 'DDNS updater for hoster.by with Telegram 2FA relay and Keenetic WAN IP detection.',
+      ru: 'Автообновление DDNS на hoster.by с релеем SMS-2FA через Telegram и определением WAN IP роутера Keenetic.' },
 
     // ── Dev Tools ──
     { cat: 'devtools', name: 'wsl-dashboard', url: 'https://github.com/Mukller/wsl-dashboard', lang: 'Rust',
@@ -254,31 +318,43 @@
     { cat: 'devtools', name: 'jobqueue', url: 'https://github.com/Mukller/jobqueue', lang: 'Go',
       en: 'Background job queue backed by SQLite, no external dependencies.',
       ru: 'Очередь фоновых задач на SQLite без внешних зависимостей.' },
+    { cat: 'devtools', name: 'glow', url: 'https://github.com/Mukller/glow', lang: 'Go',
+      en: 'Markdown renderer for the terminal with syntax highlighting and themes.',
+      ru: 'Рендер Markdown в терминале с подсветкой синтаксиса и темами.' },
+    { cat: 'devtools', name: 'abtop', url: 'https://github.com/Mukller/abtop', lang: 'Python',
+      en: 'Real-time system monitor for Apache and nginx in the terminal.',
+      ru: 'Монитор систем в реальном времени для Apache и nginx прямо в терминале.' },
     { cat: 'devtools', name: 'deadcode', url: 'https://github.com/Mukller/deadcode', lang: 'Python',
       en: 'Find dead and unused code in Python projects.',
       ru: 'Ищет мёртвый и неиспользуемый код в Python-проектах.' },
-    { cat: 'devtools', name: 'wschat', url: 'https://github.com/Mukller/wschat', lang: 'Rust',
-      en: 'Minimal WebSocket chat server written in Rust.',
-      ru: 'Минималистичный WebSocket-чат-сервер на Rust.' },
-
-    // ── Web & Games ──
-    { cat: 'web', name: 'MiniBoardGames', url: 'https://github.com/Mukller/MiniBoardGames-3.0.0', lang: 'JavaScript',
-      en: 'Collection of mini board games playable in the browser. v3.0.0.',
-      ru: 'Коллекция мини-настольных игр, работающих в браузере. v3.0.0.' },
-    { cat: 'web', name: 'awesome-cctv-cameras', url: 'https://github.com/Mukller/awesome-cctv-cameras', lang: 'JavaScript',
+    { cat: 'devtools', name: 'metasearch', url: 'https://github.com/Mukller/metasearch', lang: 'Python',
+      en: 'Search aggregator: one query, multiple search engines.',
+      ru: 'Агрегатор поиска: один запрос — несколько поисковиков.' },
+    { cat: 'devtools', name: 'awesome-cctv-cameras', url: 'https://github.com/Mukller/awesome-cctv-cameras', lang: 'JavaScript',
       en: 'Open database of 2100+ CCTV/IP camera specs across 71 brands — searchable, filterable, CC0.',
       ru: 'Открытая база характеристик 2100+ камер видеонаблюдения 71 бренда — поиск, фильтры, CC0.' },
 
+    // ── Terminal & experiments ──
+    { cat: 'term', name: 'wschat', url: 'https://github.com/Mukller/wschat', lang: 'Rust',
+      en: 'Minimal WebSocket chat server written in Rust.',
+      ru: 'Минималистичный WebSocket-чат-сервер на Rust.' },
+    { cat: 'term', name: 'artificial-life', url: 'https://github.com/Mukller/artificial-life', lang: 'Python',
+      en: 'Artificial life simulation: cellular automata and evolutionary algorithms in the terminal.',
+      ru: 'Симуляция искусственной жизни: клеточные автоматы и эволюционные алгоритмы в терминале.' },
+
     // ── Minecraft ──
     { cat: 'minecraft', name: 'DailyStreak', url: 'https://github.com/Mukller/DailyStreak', lang: '',
-      en: 'Minecraft plugin for tracking daily playtime streaks and player achievements with in-game dashboards.',
-      ru: 'Плагин Minecraft: ежедневные стрики, достижения игроков и внутриигровые дашборды.' },
+      en: 'Minecraft plugin for tracking daily streaks and player achievements — habit chains and in-game dashboards.',
+      ru: 'Плагин Minecraft: ежедневные стрики и достижения игроков — цепочки привычек и внутриигровые дашборды.' },
     { cat: 'minecraft', name: 'Hackedserver', url: 'https://github.com/Mukller/Hackedserver', lang: '',
-      en: 'Premium Minecraft plugin using packet-based analysis to detect hacked clients and unauthorized mods.',
-      ru: 'Плагин Minecraft: детект читерских клиентов и запрещённых модов через пакетный анализ.' },
+      en: 'Packet-based cheat detection: flags hacked clients and unauthorized mods the moment a player connects.',
+      ru: 'Детект читов на уровне пакетов: помечает читерские клиенты и запрещённые моды в момент подключения.' },
     { cat: 'minecraft', name: 'AdvancedSpyInventory', url: 'https://github.com/Mukller/AdvancedSpyInventory', lang: '',
-      en: 'PaperMC plugin for viewing player inventories in real-time. Logging, permissions, full Russian localization.',
-      ru: 'Плагин PaperMC для просмотра инвентарей игроков в реальном времени. Логи, права, полная русская локализация.' }
+      en: 'Real-time inventory viewer for admins with logging, permissions and full Russian localization.',
+      ru: 'Просмотр инвентарей игроков в реальном времени с логированием, правами и полной русской локализацией.' },
+    { cat: 'minecraft', name: 'MiniBoardGames', url: 'https://github.com/Mukller/MiniBoardGames-3.0.0', lang: '',
+      en: 'Minecraft plugin with 20+ server mini-games (2048, FlappyBird, Battleship, Checkers), multiplayer, rankings and rewards.',
+      ru: 'Плагин Minecraft с 20+ мини-играми на сервере (2048, FlappyBird, Морской бой, Шашки), мультиплеером, рейтингами и наградами.' }
   ];
 
   var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
@@ -357,6 +433,13 @@
   }
 
   render();
+</script>
+<script>
+  (function () {
+    var b = document.getElementById('burgerBtn');
+    var m = document.getElementById('mobileMenu');
+    if (b && m) b.addEventListener('click', function () { m.hidden = !m.hidden; });
+  })();
 </script>
 </body>
 </html>
