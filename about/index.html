@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My path — Anton Petnitsky</title>
+  <meta name="description" content="Anton Petnitsky's path: timeline, education, competitions and achievements — robotics since 2022, bots in production since 2024.">
+  <meta property="og:title" content="My path — Anton Petnitsky">
+  <meta property="og:description" content="Timeline, education, competitions and achievements.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/about/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My path — Anton Petnitsky">
+  <meta name="twitter:description" content="Timeline, education, competitions and achievements.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/about/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+      --red: #f85149; --yellow: #d29922; --orange: #ffa657;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 24px; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -20px; top: 6px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .tl-date { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+    .tl-title { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
+    .tl-desc { font-size: 13px; color: var(--muted); }
+
+    .edu-list { display: flex; flex-direction: column; gap: 14px; }
+    .edu-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start; }
+    .edu-period { font-size: 12px; color: var(--muted); padding-top: 2px; text-align: right; }
+    .edu-name { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 2px; }
+    .edu-detail { font-size: 13px; color: var(--muted); }
+
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; text-align: center;
+    }
+    .stat-num { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: -1px; }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .awards-list { display: flex; flex-direction: column; gap: 12px; }
+    .award-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px;
+      display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+    }
+    .award-icon {
+      width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.2);
+      display: flex; align-items: center; justify-content: center; color: var(--green);
+    }
+    .award-title { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 2px; }
+    .award-desc { font-size: 13px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+      .edu-item { grid-template-columns: 1fr; gap: 2px; }
+      .edu-period { text-align: left; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/about/" class="active" data-en="Path" data-ru="Путь">Path</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+    <a href="/minecraft/" data-en="Minecraft" data-ru="Minecraft">Minecraft</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="My path" data-ru="Мой путь">My path</h1>
+  <p class="page-sub" data-en="From school robotics clubs to production systems — the timeline, the competitions and the numbers." data-ru="От школьных кружков робототехники до продакшн-систем — таймлайн, соревнования и цифры.">From school robotics clubs to production systems — the timeline, the competitions and the numbers.</p>
+
+  <div class="section-title" data-en="Timeline" data-ru="Хронология">Timeline</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">2026 — present</div>
+      <div class="tl-title" data-en="Full-stack self-hosted infrastructure" data-ru="Полноценная self-hosted инфраструктура">Full-stack self-hosted infrastructure</div>
+      <div class="tl-desc" data-en="Home server with Docker, PostgreSQL, nginx, 10+ live bots. Safalife courier app (Flutter + FastAPI + OSRM) deployed to production in Uzbekistan." data-ru="Домашний сервер с Docker, PostgreSQL, nginx, 10+ работающих ботов. Приложение Safalife для курьеров (Flutter + FastAPI + OSRM) выпущено в продакшн в Узбекистане.">Home server with Docker, PostgreSQL, nginx, 10+ live bots. Safalife courier app (Flutter + FastAPI + OSRM) deployed to production in Uzbekistan.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2026 — Robofinist</div>
+      <div class="tl-title" data-en="Robotics competitions" data-ru="Соревнования по робототехнике">Robotics competitions</div>
+      <div class="tl-desc" data-en="Participated in Robofinist 2026 with two robots: Arkanoid robot and self-balancing robot. Both built from scratch." data-ru="Участвовал в Робофинисте 2026 с двумя роботами: робот-Арканоид и самобалансирующий робот. Оба сделаны с нуля.">Participated in Robofinist 2026 with two robots: Arkanoid robot and self-balancing robot. Both built from scratch.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2025–2026</div>
+      <div class="tl-title" data-en="AI Persona Behavioral OS" data-ru="AI Persona Behavioral OS">AI Persona Behavioral OS</div>
+      <div class="tl-desc" data-en="Main pet project: a system that makes a Telegram account respond using an AI that mirrors the user's style and personality." data-ru="Главный пет-проект: система, заставляющая Telegram-аккаунт отвечать с помощью AI, имитирующей стиль и личность пользователя.">Main pet project: a system that makes a Telegram account respond using an AI that mirrors the user's style and personality.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2025 — FIRA</div>
+      <div class="tl-title" data-en="FIRA autonomous RC car competition" data-ru="Соревнования FIRA: автономная RC-машина">FIRA autonomous RC car competition</div>
+      <div class="tl-desc" data-en="Autonomous RC car with computer vision-based lane following (FIRA category)." data-ru="Автономная RC-машина со следованием по полосе на компьютерном зрении (категория FIRA).">Autonomous RC car with computer vision-based lane following (FIRA category).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2024–2025</div>
+      <div class="tl-title" data-en="First Telegram bots &amp; tools" data-ru="Первые Telegram-боты и инструменты">First Telegram bots &amp; tools</div>
+      <div class="tl-desc" data-en="Started shipping real tools: TikTok saver, Minecraft server management, support bots. Everything deployed and running." data-ru="Начал выпускать реальные инструменты: TikTok-сейвер, управление Minecraft-сервером, боты поддержки. Всё задеплоено и работает.">Started shipping real tools: TikTok saver, Minecraft server management, support bots. Everything deployed and running.</div>
+    </div>
+  </div>
+
+  <div class="section-title" data-en="Education" data-ru="Образование">Education</div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-period">2026 — now</div>
+      <div>
+        <div class="edu-name" data-en="BNTU — Faculty of IT &amp; Robotics" data-ru="БНТУ — ФИТР">BNTU — Faculty of IT &amp; Robotics</div>
+        <div class="edu-detail" data-en="Robotic Systems · 1st-year student" data-ru="Робототехнические системы · 1 курс">Robotic Systems · 1st-year student</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-period">2015 — 2026</div>
+      <div>
+        <div class="edu-name" data-en="Gymnasium №39, Minsk" data-ru="Гимназия №39, Минск">Gymnasium №39, Minsk</div>
+        <div class="edu-detail" data-en="IT-specialized track · Programming school &amp; IT circle · Winner of robotics &amp; programming competitions" data-ru="IT-специализация · Школа программирования и IT-кружок · Победитель соревнований по робототехнике и программированию">IT-specialized track · Programming school &amp; IT circle · Winner of robotics &amp; programming competitions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" data-en="By the numbers" data-ru="В цифрах">By the numbers</div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">54</div>
+      <div class="stat-label" data-en="repositories" data-ru="репозиториев">repositories</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label" data-en="live deployments" data-ru="live-деплоев">live deployments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100+</div>
+      <div class="stat-label" data-en="active users" data-ru="активных юзеров">active users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-label" data-en="languages" data-ru="языков">languages</div>
+    </div>
+  </div>
+
+  <div class="section-title" data-en="Competitions &amp; Achievements" data-ru="Соревнования и достижения">Competitions &amp; Achievements</div>
+  <div class="awards-list">
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="award-title">Robofinist 2026</div>
+        <div class="award-desc" data-en="Built and competed with two autonomous robots: Arkanoid-playing robot (CV + BLDC) and self-balancing robot (ESP32 + IMU + PID tuning)." data-ru="Два самодельных автономных робота: игрок в Арканоид (зрение + BLDC) и самобалансирующийся (ESP32 + IMU + ПИД).">Two self-built autonomous robots: Arkanoid player (CV + BLDC) and self-balancing bot (PID tuning).</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l-2 6h-2z"/><circle cx="12" cy="15" r="6"/><path d="M9.8 15l1.6 1.6 2.8-2.8"/></svg></div>
+      <div>
+        <div class="award-title">FIRA International Robotics Competition 2025</div>
+        <div class="award-desc" data-en="Developed an autonomous RC car for lane-following tasks. International competition with participants from multiple countries." data-ru="Автономная RC-машина для следования по полосе. Международные соревнования с участниками из разных стран.">Autonomous RC car for lane-following tasks. International competition.</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v1a4 4 0 0 0 4 4M17 5h3v1a4 4 0 0 1-4 4"/><path d="M12 13v4M8 21h8"/></svg></div>
+      <div>
+        <div class="award-title" data-en="JuniorSkills Belarus — 1st Place, Line Following" data-ru="JuniorSkills Belarus — 1 место, «Следование по линии»">JuniorSkills Belarus — 1st Place, Line Following</div>
+        <div class="award-desc" data-en='Won 1st place in the "Line Following" robotics competency at JuniorSkills Belarus, competing as part of team CyberLab (Minsk). March 2023.' data-ru='1 место в компетенции «Следование по линии» на JuniorSkills Belarus в составе команды CyberLab (Минск). Март 2023.'>1st place in "Line Following", team CyberLab (Minsk). March 2023.</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div>
+        <div class="award-title" data-en="Educational Robotics Cup — &quot;Big Journey&quot; Senior Category" data-ru="Кубок по образовательной робототехнике — «Большое путешествие», старшая категория">Educational Robotics Cup — "Big Journey" Senior Category</div>
+        <div class="award-desc" data-en="Recurring podium finisher across multiple stages of the Minsk regional Robofinist cup (2022–2024) with robot &quot;Cyber Traveler,&quot; team CyberLab." data-ru="Регулярный подиум на этапах Минской открытой лиги робототехники Robofinist (2022–2024) с роботом «Кибер путешественник», команда CyberLab.">Recurring podium finisher at Minsk regional Robofinist stages with robot "Cyber Traveler," team CyberLab.</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <div>
+        <div class="award-title" data-en="Minsk Open Robot Tournament — X, XII &amp; XIII Editions" data-ru="Минский открытый роботурнир — X, XII и XIII">Minsk Open Robot Tournament — X, XII &amp; XIII Editions</div>
+        <div class="award-desc" data-en="Multi-year competitor at the Minsk Open Robot Tournament: X edition (2023, Robofinist qualifier with international teams from Russia), XII edition (June 2025), and XIII edition (June 2026, Robofinist 2026 qualifying stage)." data-ru="Многолетний участник Минского открытого роботурнира: X турнир (2023, отборочный этап РобоФинист с международными командами из России), XII турнир (июнь 2025) и XIII турнир (июнь 2026, отборочный этап РобоФинист 2026).">Multi-year competitor: X edition (2023), XII edition (2025), XIII edition (2026, Robofinist qualifier).</div>
+      </div>
+    </div>
+
+    <div class="award-item">
+      <div class="award-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/></svg></div>
+      <div>
+        <div class="award-title" data-en="XV Frunzensky District Championship" data-ru="XV Чемпионат Фрунзенского района">XV Frunzensky District Championship</div>
+        <div class="award-desc" data-en="Represented Gymnasium №39 in the first round of the XV regular Frunzensky district championship, Minsk, alongside classmates." data-ru="Представлял Гимназию №39 в первом туре XV регулярного чемпионата Фрунзенского района г. Минска вместе с одноклассниками.">Represented Gymnasium №39 in the first round of the XV regular Frunzensky district championship, Minsk.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  }
+  applyStatic();
+</script>
+</body>
+</html>
