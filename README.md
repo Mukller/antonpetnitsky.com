@@ -14,7 +14,7 @@
 
 Персональный сайт-портфолио Антона Петницкого: проекты, навыки, CV (RU/EN).
 
-🌐 **[antonpetnitsky.com](https://antonpetnitsky.com)**
+**[antonpetnitsky.com](https://antonpetnitsky.com)**
 
 ## Структура
 

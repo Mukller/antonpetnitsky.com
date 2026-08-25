@@ -14,7 +14,7 @@
 
 Personal portfolio website of Anton Petnitsky: projects, skills, CV (RU/EN).
 
-🌐 **[antonpetnitsky.com](https://antonpetnitsky.com)**
+**[antonpetnitsky.com](https://antonpetnitsky.com)**
 
 ## Structure
 
