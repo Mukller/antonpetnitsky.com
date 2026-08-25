@@ -210,8 +210,8 @@
     .wm-row:nth-child(4) { transform: translateX(-5%); }
 
     .hero-avatar {
-      width: 72px;
-      height: 72px;
+      width: 108px;
+      height: 108px;
       border-radius: 50%;
       border: 2px solid var(--border);
       background: var(--bg-card);
@@ -244,6 +244,7 @@
     }
     .hero-alt .wm-row { color: var(--flash-wm); }
     .hero-alt .hero-avatar { border-color: var(--flash-border); background: var(--flash-card); }
+    .hero-alt .hero-avatar img { filter: grayscale(1) invert(1); }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
     .hero-alt .hero-desc { color: var(--flash-muted); }
@@ -861,6 +862,21 @@
         border-bottom: 1px solid var(--border); }
       .mobile-menu a:last-child { border-bottom: none; }
     }
+
+    section.band {
+      max-width: none; margin: 0 0 64px; padding: 56px 0 48px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    section.band > * { max-width: 860px; margin-left: auto; margin-right: auto; }
+    section.band > .section-title { margin-top: 0; }
+    section.band > div[style] { padding: 0 24px; }
+
+    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
+    .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
+    .footer-cols a:hover { color: var(--accent); }
   </style>
   <script type="application/ld+json">
   {
@@ -1039,11 +1055,20 @@
       <div class="card-title" data-en="How I Work" data-ru="Как я работаю">How I Work</div>
       <p data-en="I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it." data-ru="Напрямую общаюсь с клиентами и командой, особенно на долгих удалённых проектах — открыто говорю о сроках, объёме задач и возникающих проблемах. Быстро разбираюсь в новых инструментах и областях, когда этого требует проект.">I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it.</p>
     </div>
+    <a class="card" href="/cv-en.html" style="color: var(--text); text-decoration: none; border-color: rgba(63,185,80,.35); display: flex; flex-direction: column; justify-content: center;">
+      <div class="card-title" style="color: var(--green);" data-en="Looking for work →" data-ru="Ищу работу →">Looking for work →</div>
+      <p data-en="Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly." data-ru="Открыт к удалённым ролям: Python-бэкенд, Telegram-боты, Flutter, инженер-робототехник. Забери CV или напиши напрямую.">Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly.</p>
+      <div class="tag-row">
+        <span class="tag green" data-en="CV (EN)" data-ru="CV (EN)">CV (EN)</span>
+        <span class="tag green" data-en="Резюме (RU)" data-ru="Резюме (RU)">Резюме (RU)</span>
+        <span class="tag">t.me/chotokek</span>
+      </div>
+    </a>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" class="band">
   <div class="section-title" data-en="Skills" data-ru="Навыки">Skills</div>
   <div class="skills-grid">
     <div class="skill-card">
@@ -1348,7 +1373,7 @@
 </section>
 
 <!-- NOW -->
-<section id="now">
+<section id="now" class="band">
   <div class="section-title" data-en="Now" data-ru="Сейчас">Now</div>
   <div class="now-grid">
     <div class="now-card">
