@@ -889,13 +889,15 @@
 <header>
   <span class="logo">Anton Petnitsky</span>
   <nav>
-    <a href="#about" data-en="About" data-ru="Обо мне">About</a>
-    <a href="#skills" data-en="Skills" data-ru="Навыки">Skills</a>
-    <a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a>
-    <a href="#robotics" data-en="Robotics" data-ru="Роботы">Robotics</a>
-    <a href="/about/" data-en="Path" data-ru="Путь">Path</a>
-    <a href="#now" data-en="Now" data-ru="Сейчас">Now</a>
-    <a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/print3d/" data-en="Print3d" data-ru="3D-печать">Print3d</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+    <a href="/minecraft/" data-en="Minecraft" data-ru="Minecraft">Minecraft</a>
+    <a href="/uses/" data-en="Uses" data-ru="Инструменты">Uses</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/about/" data-en="About" data-ru="Путь">About</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
   </nav>
   <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
   <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -1260,14 +1262,30 @@
   </div>
 </section>
 
-<!-- PATH-LINK -->
+<!-- EXPLORE -->
 <section>
-  <div class="section-title" data-en="More about me" data-ru="Больше обо мне">More about me</div>
-  <p style="color: var(--muted); font-size: 14px;" data-en="Timeline, education, competitions and the numbers behind them." data-ru="Хронология, образование, соревнования и цифры за ними.">Timeline, education, competitions and the numbers behind them.</p>
-  <div style="margin-top:16px;">
+  <div class="section-title" data-en="Explore" data-ru="Разделы сайта">Explore</div>
+  <div class="about-grid">
+    <a class="card" href="/homelab/" style="color: var(--text); text-decoration: none;">
+      <div class="card-title" data-en="Homelab →" data-ru="Домашний сервер →">Homelab →</div>
+      <p data-en="What runs on my home server around the clock — and what keeps it alive." data-ru="Что крутится на домашнем сервере круглосуточно — и что не даёт ему умереть.">What runs on my home server around the clock — and what keeps it alive.</p>
+    </a>
+    <a class="card" href="/minecraft/" style="color: var(--text); text-decoration: none;">
+      <div class="card-title" data-en="Minecraft network →" data-ru="Minecraft-сеть →">Minecraft network →</div>
+      <p data-en="Five servers behind one proxy, my own plugins, Telegram admin bot." data-ru="Пять серверов за одним прокси, мои плагины, Telegram-бот администратора.">Five servers behind one proxy, my own plugins, Telegram admin bot.</p>
+    </a>
+    <a class="card" href="/print3d/" style="color: var(--text); text-decoration: none;">
+      <div class="card-title" data-en="3D printing →" data-ru="3D-печать →">3D printing →</div>
+      <p data-en="Klipper, accelerometer-tuned input shaping, a bridge for the stock screen." data-ru="Klipper, input shaping по акселерометру, мост для родного экрана.">Klipper, accelerometer-tuned input shaping, a bridge for the stock screen.</p>
+    </a>
+    <a class="card" href="/uses/" style="color: var(--text); text-decoration: none;">
+      <div class="card-title" data-en="Uses →" data-ru="Инструменты →">Uses →</div>
+      <p data-en="Hardware and tools I actually use daily." data-ru="Железо и инструменты, которыми реально пользуюсь каждый день.">Hardware and tools I actually use daily.</p>
+    </a>
+  </div>
+  <div style="margin-top:16px; text-align:right;">
     <a href="/about/" data-en="My path, education &amp; awards →" data-ru="Мой путь, образование и награды →" style="font-size:14px;">My path, education &amp; awards →</a>
   </div>
-
 </section>
 
 <!-- NOW -->
