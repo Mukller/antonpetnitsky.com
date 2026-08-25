@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homelab — Anton Petnitsky</title>
+  <meta name="description" content="Anton Petnitsky's home server: Docker, nginx, PostgreSQL, 10+ Telegram bots, ML pipeline, Minecraft network — running 24/7 with watchdog and daily backups.">
+  <meta property="og:title" content="Homelab — Anton Petnitsky">
+  <meta property="og:description" content="Self-hosted infrastructure running 24/7: bots, apps, ML pipeline, game servers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/homelab/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Homelab — Anton Petnitsky">
+  <meta name="twitter:description" content="Self-hosted infrastructure running 24/7.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/homelab/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .svc-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px; margin-bottom: 12px;
+      display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+    }
+    .svc-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.2);
+      display: flex; align-items: center; justify-content: center; color: var(--accent);
+    }
+    .svc-name { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 2px; }
+    .svc-desc { font-size: 13px; color: var(--muted); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 14px; }
+    .spec-table td { padding: 6px 10px; border: 1px solid var(--border); }
+    .spec-table td:first-child { width: 170px; color: var(--muted); background: rgba(13,17,23,.5); }
+    .spec-table td:last-child { color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/homelab/" class="active" data-en="Homelab" data-ru="Сервер">Homelab</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Homelab" data-ru="Домашний сервер">Homelab</h1>
+  <p class="page-sub" data-en="A home server that runs my bots, apps and game servers 24/7 — deployed by hand, kept alive by a watchdog, backed up every night." data-ru="Домашний сервер, на котором 24/7 живут мои боты, приложения и игровые сервера — задеплоено руками, оживляется watchdog'ом, бэкапится каждую ночь.">A home server that runs my bots, apps and game servers 24/7 — deployed by hand, kept alive by a watchdog, backed up every night.</p>
+
+  <div class="section-title" data-en="Hardware" data-ru="Железо">Hardware</div>
+  <table class="spec-table">
+    <tr><td>Server</td><td>Intel Xeon E3 (Haswell), 32 GB RAM</td></tr>
+    <tr><td>OS</td><td>Linux</td></tr>
+    <tr><td>Runtime</td><td>Docker + compose, systemd timers</td></tr>
+    <tr><td data-en="Also" data-ru="Также">Also</td><td>VPS for public-facing services</td></tr>
+  </table>
+
+  <div class="section-title" data-en="What runs on it" data-ru="Что крутится">What runs on it</div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+    <div>
+      <div class="svc-name" data-en="10+ Telegram bots" data-ru="10+ Telegram-ботов">10+ Telegram bots</div>
+      <div class="svc-desc" data-en="TikTok saver, voice transcriber, chess bot, anonymous messages, countdowns, birthday reminders, support bots — some with thousands of messages per day." data-ru="TikTok-сейвер, транскрибатор голосовых, шахматный бот, анонимные сообщения, таймеры, напоминания о днях рождения, боты поддержки — некоторые обрабатывают тысячи сообщений в день.">TikTok saver, voice transcriber, chess bot, anonymous messages, countdowns, birthday reminders, support bots — some with thousands of messages per day.</div>
+      <div class="tag-row"><span class="tag green">Live</span><span class="tag">Python</span><span class="tag">aiogram 3</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+    <div>
+      <div class="svc-name" data-en="Web apps behind nginx" data-ru="Веб-приложения за nginx">Web apps behind nginx</div>
+      <div class="svc-desc" data-en="This site, a research catalog app and a Telegram Mini App — reverse-proxied by nginx with Let's Encrypt certificates, HTTP compression and cache headers." data-ru="Этот сайт, каталог научных работ и Telegram Mini App — реверс-прокси через nginx с сертификатами Let's Encrypt, HTTP-сжатием и кэш-заголовками.">This site, a research catalog app and a Telegram Mini App — reverse-proxied by nginx with Let's Encrypt certificates, HTTP compression and cache headers.</div>
+      <div class="tag-row"><span class="tag">nginx</span><span class="tag">Let's Encrypt</span><span class="tag">Docker</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+    <div>
+      <div class="svc-name">PostgreSQL</div>
+      <div class="svc-desc" data-en="Databases for the bots, the courier app backend and the archive pipeline — schema migrations managed per-project." data-ru="Базы для ботов, бэкенда курьерского приложения и архивного пайплайна — миграции схем управляются отдельно на каждый проект.">Databases for the bots, the courier app backend and the archive pipeline — schema migrations managed per-project.</div>
+      <div class="tag-row"><span class="tag">PostgreSQL</span><span class="tag">pgvector</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg></div>
+    <div>
+      <div class="svc-name" data-en="Voice-notes ML pipeline" data-ru="ML-пайплайн голосовых заметок">Voice-notes ML pipeline</div>
+      <div class="svc-desc" data-en="Watches a synced inbox, transcribes voice messages with Whisper, summarizes and tags them with an LLM, and files the result into my Obsidian vault. Self-heals on crash." data-ru="Следит за синхронизируемой папкой, транскрибирует голосовые через Whisper, саммаризирует и тегирует их LLM, раскладывает результат в мой Obsidian. Самовосстанавливается после падений.">Watches a synced inbox, transcribes voice messages with Whisper, summarizes and tags them with an LLM, and files the result into my Obsidian vault. Self-heals on crash.</div>
+      <div class="tag-row"><span class="tag">Whisper</span><span class="tag">LLM</span><span class="tag">Syncthing</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v2M18 18v2M6 10h4M6 14h2"/></svg></div>
+    <div>
+      <div class="svc-name">Minecraft network</div>
+      <div class="svc-desc" data-en="A proxy network of five servers (survival, anarchy, minigames, lobby, limbo) with custom plugins I wrote — details on the Minecraft page." data-ru="Сеть из пяти серверов за прокси (выживание, анархия, мини-игры, лобби, лимбо) с моими собственными плагинами — подробности на странице Minecraft.">A proxy network of five servers (survival, anarchy, minigames, lobby, limbo) with custom plugins I wrote — details on the Minecraft page.</div>
+      <div class="tag-row"><span class="tag">Paper</span><span class="tag">Velocity</span><span class="tag">Java</span><span class="tag"><a href="/minecraft/" style="color:inherit">/minecraft/</a></span></div>
+    </div>
+  </div>
+
+  <div class="section-title" data-en="Ops" data-ru="Эксплуатация">Ops</div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M12 8v4l2.5 2.5"/></svg></div>
+    <div>
+      <div class="svc-name">Watchdog</div>
+      <div class="svc-desc" data-en="A cron job every two minutes checks every service port and brings back whatever died — with Telegram alerts on failures and recoveries. Uptime is not my problem anymore." data-ru="Cron-задача каждые две минуты проверяет порт каждого сервиса и поднимает упавшее — с алертами в Telegram о падениях и восстановлениях. Аптайм больше не моя головная боль.">A cron job every two minutes checks every service port and brings back whatever died — with Telegram alerts on failures and recoveries. Uptime is not my problem anymore.</div>
+      <div class="tag-row"><span class="tag">cron</span><span class="tag">bash</span><span class="tag green">self-healing</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></div>
+    <div>
+      <div class="svc-name" data-en="Nightly backups" data-ru="Ночные бэкапы">Nightly backups</div>
+      <div class="svc-desc" data-en="Configs, plugin state and worlds packed on a schedule with retention — restored at least once for real, so the archives are proven, not theoretical." data-ru="Конфиги, состояние плагинов и миры пакуются по расписанию с ротацией — восстановление проверено хотя бы один раз по-настоящему, так что архивы проверенные, а не теоретические.">Configs, plugin state and worlds packed on a schedule with retention — restored at least once for real, so the archives are proven, not theoretical.</div>
+      <div class="tag-row"><span class="tag">tar</span><span class="tag">retention</span></div>
+    </div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+    <div>
+      <div class="svc-name" data-en="DDNS automation" data-ru="Автоматизация DDNS">DDNS automation</div>
+      <div class="svc-desc" data-en="A bot that keeps the domain pointed at my dynamic home IP: reads the WAN address from the router API and passes the provider's SMS two-factor check on its own." data-ru="Бот, который держит домен на моём динамическом домашнем IP: читает WAN-адрес из API роутера и сам проходит SMS-двухфакторку провайдера.">A bot that keeps the domain pointed at my dynamic home IP: reads the WAN address from the router API and passes the provider's SMS two-factor check on its own.</div>
+      <div class="tag-row"><span class="tag">Playwright</span><span class="tag">2FA</span></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  }
+  applyStatic();
+</script>
+</body>
+</html>
