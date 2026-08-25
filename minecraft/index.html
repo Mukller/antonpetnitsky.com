@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Network — Anton Petnitsky</title>
+  <meta name="description" content="A Minecraft server network built and run by Anton Petnitsky: Velocity proxy, five servers, custom plugins (DailyStreak, Hackedserver, AdvancedSpyInventory), Telegram admin bot, self-healing watchdog.">
+  <meta property="og:title" content="Minecraft Network — Anton Petnitsky">
+  <meta property="og:description" content="Velocity proxy, five servers, custom plugins, Telegram admin bot — a game network run like production.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/minecraft/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Minecraft Network — Anton Petnitsky">
+  <meta name="twitter:description" content="A game network run like production.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/minecraft/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .net-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px; margin-bottom: 12px;
+    }
+    .net-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+    .net-name { font-size: 15px; font-weight: 700; color: var(--bright); }
+    .net-kind { font-size: 12px; color: var(--accent); }
+    .net-desc { font-size: 13px; color: var(--muted); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+
+    .plugin-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px; margin-bottom: 12px;
+    }
+    .plugin-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .plugin-name a { color: var(--accent); }
+    .plugin-desc { font-size: 13px; color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+    <a href="/minecraft/" class="active" data-en="Minecraft" data-ru="Minecraft">Minecraft</a>
+    <a href="/now/" data-en="Now" data-ru="Сейчас">Now</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Minecraft Network" data-ru="Minecraft-сеть">Minecraft Network</h1>
+  <p class="page-sub" data-en="A public server network run like production: proxy routing, five backend servers, my own plugins, a Telegram admin bot and a watchdog that heals everything." data-ru="Публичная сеть серверов, управляемая как продакшн: прокси-роутинг, пять бэкендов, мои собственные плагины, Telegram-бот администратора и watchdog, который лечит всё сам.">A public server network run like production: proxy routing, five backend servers, my own plugins, a Telegram admin bot and a watchdog that heals everything.</p>
+
+  <div class="section-title" data-en="The network" data-ru="Сеть">The network</div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name">Velocity proxy</span><span class="net-kind" data-en="single entry point" data-ru="единая точка входа">single entry point</span></div>
+    <div class="net-desc" data-en="Players connect to one address; the proxy routes them to the right backend. Bedrock (mobile/console) players join through Geyser translation." data-ru="Игроки подключаются к одному адресу; прокси маршрутизирует их на нужный бэкенд. Игроки с Bedrock (телефоны/консоли) заходят через трансляцию Geyser.">Players connect to one address; the proxy routes them to the right backend. Bedrock (mobile/console) players join through Geyser translation.</div>
+    <div class="tag-row"><span class="tag">Velocity</span><span class="tag">Geyser</span><span class="tag green">Java + Bedrock</span></div>
+  </div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name" data-en="Survival" data-ru="Выживание">Survival</span><span class="net-kind">Paper 1.21</span></div>
+    <div class="net-desc" data-en="The main world: claims, homes, economy, custom gifts. Tuned with Aikar-style flags and optimization configs." data-ru="Основной мир: приваты, дома, экономика, кастомные подарки. Настроен флагами памяти в стиле Aikar и конфигами оптимизации.">The main world: claims, homes, economy, custom gifts. Tuned with Aikar-style flags and optimization configs.</div>
+    <div class="tag-row"><span class="tag">Paper</span><span class="tag">GriefPrevention</span><span class="tag">EssentialsX</span></div>
+  </div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name" data-en="Anarchy" data-ru="Анархия">Anarchy</span><span class="net-kind" data-en="no rules" data-ru="без правил">no rules</span></div>
+    <div class="net-desc" data-en="Jobs, crates, duels, skyblock, auctions, custom enchantments — plus scripted boss fights announced in advance and seasonal world resets." data-ru="Джобы, кейсы, дуэли, скайблок, аукционы, кастомные чары — плюс скриптованные бои с боссами с анонсами и сезонные сбросы мира.">Jobs, crates, duels, skyblock, auctions, custom enchantments — plus scripted boss fights announced in advance and seasonal world resets.</div>
+    <div class="tag-row"><span class="tag">Jobs</span><span class="tag">CrazyCrates</span><span class="tag">IridiumSkyblock</span><span class="tag">MythicMobs</span></div>
+  </div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name" data-en="Minigames" data-ru="Мини-игры">Minigames</span><span class="net-kind">BedWars</span></div>
+    <div class="net-desc" data-en="BedWars arena and a lobby hub. The arenas were generated programmatically with a world library, not built by hand." data-ru="Арена BedWars и лобби-хаб. Арены сгенерированы программно библиотекой миров, а не построены руками.">BedWars arena and a lobby hub. The arenas were generated programmatically with a world library, not built by hand.</div>
+    <div class="tag-row"><span class="tag">NewBedwars</span><span class="tag">anvil-parser</span></div>
+  </div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name">Lobby + Limbo</span><span class="net-kind" data-en="auth & fallback" data-ru="авторизация и фолбэк">auth &amp; fallback</span></div>
+    <div class="net-desc" data-en="Authorization hub with menus, and a lightweight limbo that catches players when a backend restarts." data-ru="Хаб авторизации с меню и лёгкое лимбо, которое ловит игроков на время рестарта бэкендов.">Authorization hub with menus, and a lightweight limbo that catches players when a backend restarts.</div>
+    <div class="tag-row"><span class="tag">AuthMe</span><span class="tag">DeluxeMenus</span><span class="tag">PicoLimbo</span></div>
+  </div>
+
+  <div class="section-title" data-en="Plugins I wrote" data-ru="Мои плагины">Plugins I wrote</div>
+
+  <div class="plugin-card">
+    <div class="plugin-name"><a href="https://github.com/Mukller/DailyStreak" target="_blank" rel="noopener">DailyStreak</a></div>
+    <div class="plugin-desc" data-en="Daily playtime streaks with in-game dashboards — habit chains and player statistics, styled after modern app streak mechanics." data-ru="Ежедневные стрики по времени игры с внутриигровыми дашбордами — цепочки привычек и статистика игроков в стиле современных приложений.">Daily playtime streaks with in-game dashboards — habit chains and player statistics, styled after modern app streak mechanics.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-name"><a href="https://github.com/Mukller/Hackedserver" target="_blank" rel="noopener">Hackedserver</a></div>
+    <div class="plugin-desc" data-en="Packet-based cheat detection: analyzes connections to flag hacked clients and unauthorized mods the moment a player joins." data-ru="Детект читов на уровне пакетов: анализирует соединения и помечает читерские клиенты и запрещённые моды в момент подключения игрока.">Packet-based cheat detection: analyzes connections to flag hacked clients and unauthorized mods the moment a player joins.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-name"><a href="https://github.com/Mukller/AdvancedSpyInventory" target="_blank" rel="noopener">AdvancedSpyInventory</a></div>
+    <div class="plugin-desc" data-en="Real-time inventory viewer for admins with logging and permissions — full Russian localization." data-ru="Просмотр инвентарей игроков в реальном времени для админов с логированием и правами — полная русская локализация.">Real-time inventory viewer for admins with logging and permissions — full Russian localization.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-name"><a href="https://github.com/ImFriendlyy/kGiftMechanic" target="_blank" rel="noopener">kGiftMechanic</a> <span class="net-kind" data-en="patched fork" data-ru="исправленный форк">patched fork</span></div>
+    <div class="plugin-desc" data-en="In-game gift mechanic. The original didn't compile on modern JDKs — I fixed the build and run the patched version." data-ru="Игровая механика подарков. Оригинал не собирался на современных JDK — я починил сборку и гоняю исправленную версию.">In-game gift mechanic. The original didn't compile on modern JDKs — I fixed the build and run the patched version.</div>
+  </div>
+
+  <div class="section-title" data-en="Operations" data-ru="Эксплуатация">Operations</div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name" data-en="Telegram admin bot" data-ru="Telegram-бот администратора">Telegram admin bot</span></div>
+    <div class="net-desc" data-en="Link players to Telegram accounts (only while they're online — anti-hijack), reset passwords with an auto-kick, list who's online. Server alerts land in an admin chat." data-ru="Привязка игроков к Telegram-аккаунтам (только когда игрок онлайн — защита от угона), сброс пароля с автокиком, список онлайна. Алерты сервера падают в админский чат.">Link players to Telegram accounts (only while they're online — anti-hijack), reset passwords with an auto-kick, list who's online. Server alerts land in an admin chat.</div>
+    <div class="tag-row"><span class="tag green">Live</span><span class="tag">aiogram</span></div>
+  </div>
+
+  <div class="net-card">
+    <div class="net-head"><span class="net-name">Watchdog + seasons + backups</span></div>
+    <div class="net-desc" data-en="A two-minute watchdog restarts anything that dies. Season system snapshots and swaps worlds between seasons. Nightly backups with tested restores. Boss spawns and rank promotions are cron-driven with announcements." data-ru="Watchdog каждые две минуты перезапускает упавшее. Система сезонов снимает и подменяет миры между сезонами. Ночные бэкапы с проверенным восстановлением. Спавн боссов и повышение рангов — по крону с анонсами.">A two-minute watchdog restarts anything that dies. Season system snapshots and swaps worlds between seasons. Nightly backups with tested restores. Boss spawns and rank promotions are cron-driven with announcements.</div>
+    <div class="tag-row"><span class="tag">cron</span><span class="tag">bash</span><span class="tag green">tested restores</span></div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  }
+  applyStatic();
+</script>
+</body>
+</html>
