@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uses — Anton Petnitsky</title>
+  <meta name="description" content="Hardware and tools Anton Petnitsky uses daily: home server, dev PC, Ender 5 S1 with Klipper, ESP32/STM32 boards, Python, Flutter, Docker.">
+  <meta property="og:title" content="Uses — Anton Petnitsky">
+  <meta property="og:description" content="Hardware and tools I use daily.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://antonpetnitsky.com/uses/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Uses — Anton Petnitsky">
+  <meta name="twitter:description" content="Hardware and tools I use daily.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/uses/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+    nav a.active { color: var(--accent); font-weight: 500; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
+    .page-title { font-size: 30px; font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted);
+      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    .use-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 18px; margin-bottom: 12px;
+    }
+    .use-name { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
+    .use-desc { font-size: 13px; color: var(--muted); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .page-title { font-size: 25px; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/#about" data-en="About" data-ru="Обо мне">About</a>
+    <a href="/projects/" data-en="Projects" data-ru="Проекты">Projects</a>
+    <a href="/robotics/" data-en="Robotics" data-ru="Роботы">Robotics</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+    <a href="/uses/" class="active" data-en="Uses" data-ru="Инструменты">Uses</a>
+    <a href="/#contact" data-en="Contact" data-ru="Контакты">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title" data-en="Uses" data-ru="Инструменты">Uses</h1>
+  <p class="page-sub" data-en="Hardware and tools I actually use every day — no affiliate links, just what survived." data-ru="Железо и инструменты, которыми реально пользуюсь каждый день — без партнёрских ссылок, только то, что выжило.">Hardware and tools I actually use every day — no affiliate links, just what survived.</p>
+
+  <div class="section-title" data-en="Hardware" data-ru="Железо">Hardware</div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="Dev PC" data-ru="Рабочий ПК">Dev PC</div>
+    <div class="use-desc" data-en="Windows machine for development, agents and design. Everything server-side is tested against Linux containers, so deploys don't surprise me." data-ru="Windows-машина для разработки, агентов и дизайна. Всё серверное тестируется против Linux-контейнеров, поэтому деплои не сюрпризят.">Windows machine for development, agents and design. Everything server-side is tested against Linux containers, so deploys don't surprise me.</div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="Home server" data-ru="Домашний сервер">Home server</div>
+    <div class="use-desc" data-en="A used Xeon workstation repurposed as a 24/7 node: Docker, databases, bots, game servers. Costs pennies, does everything." data-ru="Б/у Xeon-станция, переделанная в 24/7-ноду: Docker, базы, боты, игровые сервера. Копейки стоит, делает всё.">A used Xeon workstation repurposed as a 24/7 node: Docker, databases, bots, game servers. Costs pennies, does everything.</div>
+    <div class="tag-row"><span class="tag"><a href="/homelab/" style="color:inherit">/homelab/</a></span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name">Ender 5 S1 + Klipper</div>
+    <div class="use-desc" data-en="FDM printer running Klipper firmware instead of stock. Input shaping tuned with an accelerometer — the robot chassis on the robotics page came off this bed." data-ru="FDM-принтер на прошивке Klipper вместо стока. Input shaping настроен по акселерометру — корпус робота со страницы робототехники напечатан на этом столе.">FDM printer running Klipper firmware instead of stock. Input shaping tuned with an accelerometer — the robot chassis on the robotics page came off this bed.</div>
+    <div class="tag-row"><span class="tag"><a href="/print3d/" style="color:inherit">/print3d/</a></span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name">ESP32 · STM32 · RP2040</div>
+    <div class="use-desc" data-en="The zoo inside my robots: ESP32 for Wi-Fi and motor control, STM32 as printer/main boards, RP2040 as a USB accelerometer for vibration tuning." data-ru="Зверинец внутри моих роботов: ESP32 для Wi-Fi и управления моторами, STM32 как платы принтера/основные, RP2040 как USB-акселерометр для настройки вибраций.">The zoo inside my robots: ESP32 for Wi-Fi and motor control, STM32 as printer/main boards, RP2040 as a USB accelerometer for vibration tuning.</div>
+  </div>
+
+  <div class="section-title" data-en="Development" data-ru="Разработка">Development</div>
+
+  <div class="use-card">
+    <div class="use-name">Python</div>
+    <div class="use-desc" data-en="My main language: aiogram 3 for bots, FastAPI for backends, Playwright for automation that has to survive real websites." data-ru="Основной язык: aiogram 3 для ботов, FastAPI для бэкендов, Playwright для автоматизации, которая выживает на реальных сайтах.">My main language: aiogram 3 for bots, FastAPI for backends, Playwright for automation that has to survive real websites.</div>
+    <div class="tag-row"><span class="tag">aiogram 3</span><span class="tag">FastAPI</span><span class="tag">Playwright</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name">Flutter · Java · JS</div>
+    <div class="use-desc" data-en="Flutter for the courier app in production, Java for Minecraft plugins, JavaScript/Three.js for browser 3D experiments." data-ru="Flutter для курьерского приложения в проде, Java для Minecraft-плагинов, JavaScript/Three.js для браузерных 3D-экспериментов.">Flutter for the courier app in production, Java for Minecraft plugins, JavaScript/Three.js for browser 3D experiments.</div>
+    <div class="tag-row"><span class="tag">Flutter</span><span class="tag">Java</span><span class="tag">Three.js</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name">Docker · nginx · PostgreSQL</div>
+    <div class="use-desc" data-en="The trio behind everything I deploy. Compose files per project, nginx as the front door, Postgres with per-project migrations." data-ru="Тройка, за которой стоит всё, что я деплою. Compose-файлы на проект, nginx как входная дверь, Postgres с миграциями на каждый проект.">The trio behind everything I deploy. Compose files per project, nginx as the front door, Postgres with per-project migrations.</div>
+    <div class="tag-row"><span class="tag">Docker</span><span class="tag">nginx</span><span class="tag">PostgreSQL</span></div>
+  </div>
+
+  <div class="use-card">
+    <div class="use-name" data-en="AI agents & local models" data-ru="AI-агенты и локальные модели">AI agents &amp; local models</div>
+    <div class="use-desc" data-en="Coding agents are part of my daily workflow — reviews, refactors, boilerplate. Local models via Ollama for anything that shouldn't leave the network." data-ru="Кодинг-агенты — часть ежедневного процесса: ревью, рефакторинг, бойлерплейт. Локальные модели через Ollama для всего, что не должно покидать сеть.">Coding agents are part of my daily workflow — reviews, refactors, boilerplate. Local models via Ollama for anything that shouldn't leave the network.</div>
+    <div class="tag-row"><span class="tag">Ollama</span><span class="tag">Claude</span><span class="tag">opencode</span></div>
+  </div>
+
+  <div class="section-title" data-en="Robotics bench" data-ru="Робототехника">Robotics bench</div>
+
+  <div class="use-card">
+    <div class="use-name">OpenCV · YOLO · PID</div>
+    <div class="use-desc" data-en="OpenCV with HSV calibration for ball and line tracking, YOLO for sign classification, PID loops for balancing — all tuned against real hardware, not simulations." data-ru="OpenCV с HSV-калибровкой для трекинга мяча и линий, YOLO для классификации знаков, ПИД-петли для балансировки — всё настроено на реальном железе, а не в симуляции.">OpenCV with HSV calibration for ball and line tracking, YOLO for sign classification, PID loops for balancing — all tuned against real hardware, not simulations.</div>
+    <div class="tag-row"><span class="tag"><a href="/robotics/" style="color:inherit">/robotics/</a></span></div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
+  </div>
+</footer>
+
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  function applyStatic() {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  }
+  applyStatic();
+</script>
+</body>
+</html>
