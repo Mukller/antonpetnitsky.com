@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case: Safalife courier app — Anton Petnitsky</title>
+  <meta name="description" content="Case study: a courier delivery app (Flutter + FastAPI + OSRM) designed, built and deployed to production for a logistics company in Uzbekistan.">
+  <meta property="og:title" content="Case: Safalife courier app — Anton Petnitsky">
+  <meta property="og:description" content="Flutter + FastAPI + OSRM courier app, in production for a logistics company in Uzbekistan.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://antonpetnitsky.com/safalife/">
+  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Case: Safalife courier app">
+  <meta name="twitter:description" content="Flutter + FastAPI + OSRM, in production.">
+  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <link rel="canonical" href="https://antonpetnitsky.com/safalife/">
+  <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
+      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
+      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
+    }
+
+    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent-light); text-decoration: none; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 16px;
+    }
+    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
+    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    nav::-webkit-scrollbar { display: none; }
+    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    nav a:hover { color: var(--bright); text-decoration: none; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 64px; }
+    .kicker { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 10px; }
+    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 12px; line-height: 1.15; }
+    .page-sub { color: var(--muted); margin-bottom: 32px; font-size: 16px; }
+
+    .case-section { margin-bottom: 36px; }
+    .case-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); margin-bottom: 10px;
+    }
+    .case-section p { font-size: 15px; color: var(--text); margin-bottom: 10px; }
+    .case-section p:last-child { margin-bottom: 0; }
+    .case-section strong { color: var(--bright); }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .stack-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px;
+    }
+    .stack-name { font-size: 13px; font-weight: 600; color: var(--bright); margin-bottom: 2px; }
+    .stack-role { font-size: 12px; color: var(--muted); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
+      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
+    }
+    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
+
+    .quote {
+      border-left: 2px solid var(--green); padding: 4px 0 4px 16px;
+      color: var(--text); font-size: 15px; margin: 16px 0;
+    }
+    .quote-author { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    .cta-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 22px; margin-top: 40px; text-align: center;
+    }
+    .cta-box .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 8px; font-size: 15px; font-weight: 600;
+      background: var(--green); color: #fff; margin: 0 6px;
+    }
+    .cta-box .btn:hover { filter: brightness(.92); }
+    .cta-box .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); font-weight: 500; }
+    .cta-box .btn.ghost:hover { border-color: var(--accent); color: var(--accent-light); filter: none; }
+    .cta-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      max-width: 760px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-copy strong { color: var(--bright); font-weight: 600; }
+    .footer-links { display: flex; gap: 16px; font-size: 13px; }
+
+    @media (max-width: 640px) {
+      main { padding-top: 32px; }
+      .stack-grid { grid-template-columns: 1fr; }
+      header { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">Anton Petnitsky</a>
+  <nav>
+    <a href="/projects/">Projects</a>
+    <a href="/robotics/">Robotics</a>
+    <a href="/print3d/">3D Print</a>
+    <a href="/homelab/">Homelab</a>
+    <a href="/minecraft/">Minecraft</a>
+    <a href="/uses/">Uses</a>
+    <a href="/now/">Now</a>
+    <a href="/about/">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="kicker" data-en="Case study · in production" data-ru="Кейс · работает в продакшне">Case study · in production</div>
+  <h1 class="page-title" data-en="Safalife — courier delivery app" data-ru="Safalife — приложение для курьерской доставки">Safalife — courier delivery app</h1>
+  <p class="page-sub" data-en="Designed, built and deployed to production for a logistics company in Uzbekistan. Flutter app, FastAPI backend, OSRM routing." data-ru="Спроектировал, разработал и вывел в продакшн для логистической компании в Узбекистане. Flutter-приложение, бэкенд на FastAPI, маршрутизация OSRM.">Designed, built and deployed to production for a logistics company in Uzbekistan. Flutter app, FastAPI backend, OSRM routing.</p>
+
+  <div class="case-section">
+    <div class="case-label" data-en="The task" data-ru="Задача">The task</div>
+    <p data-en="A logistics company needed courier delivery automation: order assignment, routing that actually works on local roads, and a mobile app couriers would use without training." data-ru="Логистической компании нужна была автоматизация курьерской доставки: назначение заказов, маршрутизация, которая реально работает на местных дорогах, и мобильное приложение, которым курьеры смогут пользоваться без обучения.">A logistics company needed courier delivery automation: order assignment, routing that actually works on local roads, and a mobile app couriers would use without training.</p>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label" data-en="What I built" data-ru="Что сделано">What I built</div>
+    <p><strong data-en="Courier mobile app (Flutter)." data-ru="Мобильное приложение курьера (Flutter).">Courier mobile app (Flutter).</strong> <span data-en="Order flow, navigation, delivery status — one screen per action, zero training needed." data-ru="Поток заказов, навигация, статусы доставки — один экран на действие, обучение не требуется.">Order flow, navigation, delivery status — one screen per action, zero training needed.</span></p>
+    <p><strong data-en="Backend (FastAPI + PostgreSQL)." data-ru="Бэкенд (FastAPI + PostgreSQL).">Backend (FastAPI + PostgreSQL).</strong> <span data-en="Order lifecycle, courier accounts, health endpoints and bot-driven monitoring." data-ru="Жизненный цикл заказов, аккаунты курьеров, health-эндпоинты и мониторинг через бота.">Order lifecycle, courier accounts, health endpoints and bot-driven monitoring.</span></p>
+    <p><strong data-en="Routing (OSRM)." data-ru="Маршрутизация (OSRM).">Routing (OSRM).</strong> <span data-en="Self-hosted Open Source Routing Machine — real road routing without per-request API fees." data-ru="Собственный Open Source Routing Machine — маршрутизация по реальным дорогам без оплаты за каждый запрос.">Self-hosted Open Source Routing Machine — real road routing without per-request API fees.</span></p>
+    <p><strong data-en="Release pipeline." data-ru="Релизный пайплайн.">Release pipeline.</strong> <span data-en="Signed APK/AAB builds shipped automatically on tag — updates go out without manual assembly." data-ru="Подписанные APK/AAB собираются автоматически по тегу — обновления выходят без ручной сборки.">Signed APK/AAB builds shipped automatically on tag — updates go out without manual assembly.</span></p>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label" data-en="Stack" data-ru="Стек">Stack</div>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-name">Flutter</div><div class="stack-role">mobile app</div></div>
+      <div class="stack-card"><div class="stack-name">FastAPI</div><div class="stack-role">backend</div></div>
+      <div class="stack-card"><div class="stack-name">PostgreSQL</div><div class="stack-role">database</div></div>
+      <div class="stack-card"><div class="stack-name">OSRM</div><div class="stack-role">routing</div></div>
+      <div class="stack-card"><div class="stack-name">Docker</div><div class="stack-role">deployment</div></div>
+      <div class="stack-card"><div class="stack-name">Telegram</div><div class="stack-role">monitoring</div></div>
+    </div>
+  </div>
+
+  <div class="case-section">
+    <div class="case-label" data-en="Status" data-ru="Статус">Status</div>
+    <p data-en="In production since 2026. The backend, database and release pipeline run on my infrastructure with watchdog self-healing and nightly backups — the same setup described on the homelab page." data-ru="В продакшне с 2026 года. Бэкенд, база и релизный пайплайн работают на моей инфраструктуре с watchdog-самолечением и ночными бэкапами — тот же сетап, что описан на странице сервера.">In production since 2026. The backend, database and release pipeline run on my infrastructure with watchdog self-healing and nightly backups — the same setup described on the homelab page.</p>
+    <div class="tag-row">
+      <span class="tag green">Live</span>
+      <span class="tag">Flutter</span>
+      <span class="tag">FastAPI</span>
+      <span class="tag">OSRM</span>
+      <span class="tag">Uzbekistan</span>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <a class="btn" href="https://t.me/chotokek" target="_blank" rel="noopener" data-en="Discuss a project" data-ru="Обсудить проект">Discuss a project</a>
+    <a class="btn ghost" href="/cv-en.html" data-en="CV" data-ru="Резюме">CV</a>
+    <div class="cta-note" data-en="Usually reply within a day." data-ru="Обычно отвечаю в течение дня.">Usually reply within a day.</div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
+  <div class="footer-links">
+    <a href="/">antonpetnitsky.com</a>
+    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+<script>
+  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
+  (function () {
+    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('ap_lang', lang);
+  })();
+</script>
+</body>
+</html>
