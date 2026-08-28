@@ -1,5 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en
+
+/* Spacing utilities */
+.space-xs { gap: var(--space-xs); }
+.space-sm { gap: var(--space-sm); }
+.space-md { gap: var(--space-md); }
+.space-lg { gap: var(--space-lg); }
+.space-xl { gap: var(--space-xl); }
+.space-2xl { gap: var(--space-2xl); }
+.space-3xl { gap: var(--space-3xl); }
+
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+.px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+.px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
+.px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+.px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl); }
+
+.py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+.py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+.py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+
+.m-auto { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mx-sm { margin-left: var(--space-sm); margin-right: var(--space-sm); }
+.mx-md { margin-left: var(--space-md); margin-right: var(--space-md); }
+.mx-lg { margin-left: var(--space-lg); margin-right: var(--space-lg); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +78,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* Base colors */
       --bg:        #0d1117;
       --bg-card:   #161b22;
       --border:    #21262d;
@@ -56,6 +104,58 @@
       --flash-border: rgba(13, 17, 23, .3);
       --flash-card:  #ffffff;
       --flash-wm:    rgba(13, 17, 23, .07);
+
+      /* Spacing system */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --space-4xl: 96px;
+
+      /* Border radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      /* Border width */
+      --border-width: 1px;
+
+      /* Layout */
+      --header-height: 60px;
+      --container-max: 860px;
+      --container-padding: 24px;
+
+      /* Light theme overrides */
+      --header-a:  rgba(255, 255, 255, 0.95);
+      --header-b:  rgba(255, 255, 255, 0.8);
+      --wm:        rgba(31, 35, 40, .06);
+      --accent-soft: rgba(9, 105, 218, .08);
+      --flash-bg:    #0d1117;
+      --flash-text:  #f0f6fc;
+      --flash-muted: #8b949e;
+      --flash-accent:#58a6ff;
+      --flash-green: #3fb950;
+      --flash-border: rgba(240, 246, 252, .3);
+      --flash-card:  #161b22;
+      --flash-wm:    rgba(230, 237, 243, .07);
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 56px;
+        --container-padding: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --container-padding: 12px;
+      }
     }
 
     :root[data-theme="light"] {
@@ -83,20 +183,52 @@
       --flash-wm:    rgba(230, 237, 243, .07);
     }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+/* Utility classes for spacing */
+    .space-xs { gap: var(--space-xs); }
+    .space-sm { gap: var(--space-sm); }
+    .space-md { gap: var(--space-md); }
+    .space-lg { gap: var(--space-lg); }
+    .space-xl { gap: var(--space-xl); }
+    .space-2xl { gap: var(--space-2xl); }
+    .space-3xl { gap: var(--space-3xl); }
 
-    html { scroll-behavior: smooth; }
+    .p-xs { padding: var(--space-xs); }
+    .p-sm { padding: var(--space-sm); }
+    .p-md { padding: var(--space-md); }
+    .p-lg { padding: var(--space-lg); }
+    .p-xl { padding: var(--space-xl); }
 
-    html, body { overflow-x: clip; }
+    .px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+    .px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
+    .px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+    .px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl); }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
+    .py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+    .py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+    .py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+    .py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+
+    .m-auto { margin: auto; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mx-sm { margin-left: var(--space-sm); margin-right: var(--space-sm); }
+    .mx-md { margin-left: var(--space-md); margin-right: var(--space-md); }
+    .mx-lg { margin-left: var(--space-lg); margin-right: var(--space-lg); }
+
+    .mt-sm { margin-top: var(--space-sm); }
+    .mt-md { margin-top: var(--space-md); }
+    .mt-lg { margin-top: var(--space-lg); }
+    .mt-xl { margin-top: var(--space-xl); }
+
+    .mb-sm { margin-bottom: var(--space-sm); }
+    .mb-md { margin-bottom: var(--space-md); }
+    .mb-lg { margin-bottom: var(--space-lg); }
+    .mb-xl { margin-bottom: var(--space-xl); }
+
+    .gap-xs { gap: var(--space-xs); }
+    .gap-sm { gap: var(--space-sm); }
+    .gap-md { gap: var(--space-md); }
+    .gap-lg { gap: var(--space-lg); }
+    .gap-xl { gap: var(--space-xl); }
     }
 
     a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
@@ -209,16 +341,7 @@
     .wm-row:nth-child(3) { transform: translateX(8%); }
     .wm-row:nth-child(4) { transform: translateX(-5%); }
 
-    .hero-avatar {
-      width: 108px;
-      height: 108px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--bg-card);
-      margin: 0 auto 32px;
-      position: relative;
-      overflow: hidden;
-    }
+    .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
 
     .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -243,8 +366,7 @@
       clip-path: circle(0px at -500px -500px);
     }
     .hero-alt .wm-row { color: var(--flash-wm); }
-    .hero-alt .hero-avatar { border-color: var(--flash-border); background: var(--flash-card); }
-    .hero-alt .hero-avatar img { filter: grayscale(1) invert(1); }
+    .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
     .hero-alt .hero-desc { color: var(--flash-muted); }
@@ -931,7 +1053,7 @@
   </script>
 </head>
 <body>
-<a class="skip-link" href="#main" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
+<a class="skip-link" href="#main" data-en="Skip to content" data-ru="Перейти к содержанию">Skip to content</a>
 
 <!-- HEADER -->
 <header>
@@ -1056,6 +1178,7 @@
       <div class="card-title" data-en="How I Work" data-ru="Как я работаю">How I Work</div>
       <p data-en="I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it." data-ru="Напрямую общаюсь с клиентами и командой, особенно на долгих удалённых проектах — открыто говорю о сроках, объёме задач и возникающих проблемах. Быстро разбираюсь в новых инструментах и областях, когда этого требует проект.">I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it.</p>
     </div>
+        </div>
     <a class="card" href="/cv-en.html" style="color: var(--text); text-decoration: none; border-color: rgba(63,185,80,.35); display: flex; flex-direction: column; justify-content: center;">
       <div class="card-title" style="color: var(--green);" data-en="Looking for work →" data-ru="Ищу работу →">Looking for work →</div>
       <p data-en="Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly." data-ru="Открыт к удалённым ролям: Python-бэкенд, Telegram-боты, Flutter, инженер-робототехник. Забери CV или напиши напрямую.">Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly.</p>
