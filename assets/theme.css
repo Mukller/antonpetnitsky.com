@@ -1,7 +1,8 @@
-/* light theme overrides — loaded on every page after page styles */
+/* Light theme overrides — loaded on every page after page styles */
 :root[data-theme="light"] {
   --bg: #edf0f3;
   --bg-card: #f7f9fa;
+  --band-bg: #e4e8ec;
   --border: #d5dbe1;
   --text: #3d444d;
   --muted: #59646e;
@@ -9,4 +10,22 @@
   --accent: #0969da;
   --accent-light: #0550ae;
   --green: #1a7f37;
+  --green-hover: #187733;
+  --red: #cf222e;
+  --yellow: #9a6700;
+  --orange: #bc4c00;
+  --header-a: rgba(237, 240, 243, 0.95);
+  --header-b: rgba(237, 240, 243, 0.8);
+  --wm: rgba(31, 35, 40, .06);
+  --accent-soft: rgba(9, 105, 218, .08);
+  --flash-bg: #0d1117;
+  --flash-text: #f0f6fc;
+  --flash-muted: #8b949e;
+  --flash-accent: #58a6ff;
+  --flash-green: #3fb950;
+  --flash-border: rgba(240, 246, 252, .3);
+  --flash-card: #161b22;
+  --flash-wm: rgba(230, 237, 243, .07);
+  --header-a: rgba(237, 240, 243, 0.95);
+  --header-b: rgba(237, 240, 243, 0.8);
 }
