@@ -4,330 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Now — Anton Petnitsky</title>
-  <meta name="description" content="What Anton Petnitsky is building and running right now: an online 3D slicer, production courier app, 10+ live Telegram bots, self-hosted home server.">
+  <meta name="description" content="What Anton Petnitsky is working on right now, in real time. Updated weekly.">
   <meta property="og:title" content="Now — Anton Petnitsky">
-  <meta property="og:description" content="What I'm building and running right now.">
+  <meta property="og:description" content="What I'm working on, August 2026.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://antonpetnitsky.com/now/">
-  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Now — Anton Petnitsky">
-  <meta name="twitter:description" content="What I'm building and running right now.">
-  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
   <link rel="canonical" href="https://antonpetnitsky.com/now/">
   <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
-  <link rel="apple-touch-icon" href="/ap-favicon.png">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#0C0C0D">
   <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('ap_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));</script>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fonts.css">
-  <link rel="stylesheet" href="/assets/theme.css">
-  <style>
-    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #0d1117;
-      --bg-card:   #161b22;
-      --border:    #21262d;
-      --text:      #c9d1d9;
-      --muted:     #8b949e;
-      --bright:    #e6edf3;
-      --accent:    #58a6ff;
-      --accent-light: #79c0ff;
-      --green:     #3fb950;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a { color: var(--accent); text-decoration: none; transition: color .15s; }
-    a:hover { color: var(--accent-light); text-decoration: none; }
-
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg);
-
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 60px; gap: 16px;
-    }
-    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
-    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
-    nav::-webkit-scrollbar { display: none; }
-    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
-    nav a:hover { color: var(--bright); text-decoration: none; }
-    nav a.active { color: var(--accent); font-weight: 500; }
-    .lang-btn {
-      background: transparent; border: 1px solid var(--border); color: var(--muted);
-      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
-      cursor: pointer; white-space: nowrap; transition: border-color .15s, color .15s;
-    }
-    .lang-btn:hover { color: var(--bright); border-color: var(--accent); }
-
-    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 64px; }
-
-    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
-    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 560px; }
-
-    .now-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 22px;
-      margin-bottom: 14px;
-    }
-    .now-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .now-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-      background: var(--green); animation: pulse 2s ease-in-out infinite;
-    }
-    .now-dot.blue { background: var(--accent); }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
-    .now-card-title { font-size: 14px; font-weight: 700; color: var(--bright); }
-    .now-card p { font-size: 14px; color: var(--text); margin-bottom: 10px; max-width: 640px; }
-    .now-card p + p { margin-top: -2px; }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; }
-    .tag {
-      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
-      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
-    }
-    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
-    .tag.yellow { background: rgba(210,153,34,.1); color: #d29922; border-color: rgba(210,153,34,.2); }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      max-width: 760px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-copy { font-size: 13px; color: var(--muted); }
-    .footer-copy strong { color: var(--bright); font-weight: 600; }
-    .footer-links { display: flex; gap: 16px; font-size: 13px; }
-
-    
-
-@media (max-width: 640px) {
-      main { padding-top: 32px; }
-      .page-title { font-size: 25px; }
-      header { padding: 0 16px; }
-    }
-    .skip-link {
-      position: absolute; left: -9999px; top: 0; z-index: 200;
-      background: var(--bg-card); color: var(--bright);
-      padding: 8px 16px; border-radius: 0 0 8px 0; border: 1px solid var(--border);
-    }
-    .skip-link:focus { left: 0; }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-    .nav-drop { position: relative; }
-    .nav-drop > a::after { content: ' \0be'; font-size: 10px; opacity: .6; }
-    .nav-drop.active > a { color: var(--accent); font-weight: 500; }
-    .nav-menu {
-      display: none; position: absolute; top: 100%; left: -10px;
-      min-width: 170px; background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: 8px; padding: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 101;
-    }
-    .nav-drop:hover .nav-menu, .nav-drop:focus-within .nav-menu { display: block; }
-    .nav-menu a { display: block; padding: 7px 10px; border-radius: 6px; font-size: 14px; color: var(--text); }
-    .nav-menu a:hover { background: var(--accent-soft); color: var(--bright); }
-    .nav-menu a.active { color: var(--accent); }
-    .burger {
-      display: none; background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 6px; padding: 5px 8px; cursor: pointer;
-      font-family: inherit; flex-shrink: 0;
-    }
-    .mobile-menu { display: none; }
-    
-
-@media (max-width: 640px) {
-      header nav { display: none; }
-      .burger { display: flex; align-items: center; }
-      .mobile-menu { display: block; position: absolute; top: 60px; left: 0; right: 0;
-        background: var(--bg); border-bottom: 1px solid var(--border);
-        padding: 8px 16px 16px; z-index: 99; }
-      .mobile-menu[hidden] { display: none; }
-      .mm-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
-        color: var(--muted); margin: 12px 0 4px; }
-      .mobile-menu a { display: block; padding: 8px 0; font-size: 15px; color: var(--text);
-        border-bottom: 1px solid var(--border); }
-      .mobile-menu a:last-child { border-bottom: none; }
-    }
-
-    .theme-btn, .theme-btn {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 6px; padding: 5px 7px; cursor: pointer;
-      font-family: inherit; flex-shrink: 0; display: flex; align-items: center;
-    }
-    .theme-btn:hover { color: var(--bright); border-color: var(--accent); }
-    .theme-btn .icon-sun { display: none; }
-    :root[data-theme="light"] .theme-btn .icon-sun { display: block; }
-    :root[data-theme="light"] .theme-btn .icon-moon { display: none; }
-
-    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
-    .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-    .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
-    .footer-cols a:hover { color: var(--accent); }
-  </style>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-<a class="skip-link" href="#main" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header>
-  <a class="logo" href="/">Anton Petnitsky</a>
-  <nav>
-    <div class="nav-drop">
-      <a href="/projects/">Projects</a>
-      <div class="nav-menu">
-        <a href="/projects/">Catalog</a>
-        <a href="/robotics/">Robotics</a>
-        <a href="/print3d/">3D Print</a>
-      </div>
-    </div>
-    <div class="nav-drop">
-      <a href="/homelab/">Infra</a>
-      <div class="nav-menu">
-        <a href="/homelab/">Homelab</a>
-        <a href="/minecraft/">Minecraft</a>
-        <a href="/uses/">Uses</a>
-      </div>
-    </div>
-    <a href="/now/" class="active">Now</a>
-    <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </nav>
-  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
-  <button class="burger" id="burgerBtn" aria-label="Menu">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-  </button>
-  <div class="mobile-menu" id="mobileMenu" hidden>
-    <div class="mm-title">Projects</div>
-    <a href="/projects/">Catalog</a>
-    <a href="/robotics/">Robotics</a>
-    <a href="/print3d/">3D Print</a>
-    <div class="mm-title">Infra</div>
-    <a href="/homelab/">Homelab</a>
-    <a href="/minecraft/">Minecraft</a>
-    <a href="/uses/">Uses</a>
-    <div class="mm-title">Site</div>
-    <a href="/now/">Now</a>
-    <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </div>
-  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-    <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-  </button>
-</header>
+<header class="top" data-page="/now/"></header>
 
 <main id="main">
-  <h1 class="page-title" data-en="Now" data-ru="Сейчас">Now</h1>
-  <p class="page-sub" data-en="What I'm building and running at the moment. Updated as things ship." data-ru="Чем я занят прямо сейчас. Обновляю по мере релизов.">What I'm building and running at the moment. Updated as things ship.</p>
 
-  <div class="now-card">
-    <div class="now-card-header">
-      <div class="now-dot blue"></div>
-      <div class="now-card-title" data-en="Building" data-ru="В разработке">Building</div>
-    </div>
-    <p data-en="Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software." data-ru="Онлайн 3D-слайсер с режимами для начинающих и продвинутых, паритет с OrcaSlicer — нарезка STL прямо в браузере без установки ПО.">Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software.</p>
-    <div class="tag-row">
-      <span class="tag">Three.js</span>
-      <span class="tag">CuraEngine</span>
-      <span class="tag yellow">PostgreSQL</span>
-      <span class="tag yellow">WIP</span>
-    </div>
-  </div>
+<section class="sub-hero">
+  <p class="breadcrumb"><a href="/">Index</a><span>/</span>Now</p>
+  <h1>Now<span class="accent">.</span></h1>
+  <p class="lede">What I'm working on this week, this month, this season. Updated when something actually changes — not on a schedule.</p>
+</section>
 
-  <div class="now-card">
-    <div class="now-card-header">
-      <div class="now-dot"></div>
-      <div class="now-card-title" data-en="Running in production" data-ru="Работает в продакшне">Running in production</div>
-    </div>
-    <p data-en="Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan." data-ru="Приложение Safalife для курьеров — Flutter + FastAPI + маршрутизация OSRM, развёрнуто для логистической компании в Узбекистане.">Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan.</p>
-    <p data-en="10+ Telegram bots on my home server: TikTok saver, voice transcriber, chess bot, support bots — all live 24/7." data-ru="10+ Telegram-ботов на домашнем сервере: TikTok-сейвер, транскрибатор голосовых, шахматный бот, боты поддержки — все живут 24/7.">10+ Telegram bots on my home server: TikTok saver, voice transcriber, chess bot, support bots — all live 24/7.</p>
-    <div class="tag-row">
-      <span class="tag green">Live</span>
-      <span class="tag">Flutter</span>
-      <span class="tag">FastAPI</span>
-      <span class="tag">OSRM</span>
-    </div>
-  </div>
+<section class="page">
+  <span class="marker">This week</span>
+  <div class="row"><div class="lbl">Site v3</div><div class="val"><p>Replacing the v2 design on this site. Killing the broken CSS, keeping the минимализм, adding a now-strip to the homepage so /now isn't a 3-click journey. <a href="https://github.com/Mukller/antonpetnitsky.com" rel="noopener">Source on GitHub</a>.</p></div></div>
+  <div class="row"><div class="lbl">AI persona</div><div class="val"><p>Teaching <a href="https://github.com/Mukller/ai-persona-behavioral-os" rel="noopener">the bot</a> to sound more like me and less like a customer-service agent. Voice profile, dream consolidation, real conversation history with 5 friends. Three months in.</p></div></div>
+  <div class="row"><div class="lbl">CV</div><div class="val"><p>Both versions (EN, RU) are <a href="/cv-en.html">here</a> and <a href="/cv-ru.html">here</a>. Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering.</p></div></div>
+</section>
 
-  <div class="now-card">
-    <div class="now-card-header">
-      <div class="now-dot"></div>
-      <div class="now-card-title" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
-    </div>
-    <p data-en="Home server (Linux, Docker, nginx, PostgreSQL) plus a VPS — everything managed over SSH, most services running around the clock. This site is served from it." data-ru="Домашний сервер (Linux, Docker, nginx, PostgreSQL) плюс VPS — всё управляется по SSH, большинство сервисов работают круглосуточно. Этот сайт живёт там же.">Home server (Linux, Docker, nginx, PostgreSQL) plus a VPS — everything managed over SSH, most services running around the clock. This site is served from it.</p>
-    <div class="tag-row">
-      <span class="tag">Linux</span>
-      <span class="tag">Docker</span>
-      <span class="tag">nginx</span>
-      <span class="tag yellow">PostgreSQL</span>
-    </div>
-  </div>
+<section class="page">
+  <span class="marker">This month</span>
+  <div class="row"><div class="lbl">FIRA prep</div><div class="val"><p>Two weeks until the FIRA autonomous car round. YOLO + HSV lane detection v3 is in — currently tuning the state machine for the colour-gate obstacles.</p></div></div>
+  <div class="row"><div class="lbl">Safalife</div><div class="val"><p>Daily ops. Watching the watchdog. Shipping small UX fixes to the courier app based on feedback. The OSRM server still hasn't died once — surprising.</p></div></div>
+  <div class="row"><div class="lbl">Minecraft server</div><div class="val"><p>Adding a third minigame, prepping for the autumn tournament. Velocity + 5 backends, all on the home server, all green.</p></div></div>
+</section>
 
-  <div class="now-card">
-    <div class="now-card-header">
-      <div class="now-dot blue"></div>
-      <div class="now-card-title" data-en="Exploring" data-ru="Изучаю">Exploring</div>
-    </div>
-    <p data-en="LLMs as everyday tools: AI-powered bots, workflow automation, and local models via Ollama. Main pet project — an AI persona system that mirrors a person's conversational style." data-ru="LLM как повседневный инструмент: AI-боты, автоматизация рутины, локальные модели через Ollama. Главный пет-проект — система AI-персоны, повторяющая стиль общения человека.">LLMs as everyday tools: AI-powered bots, workflow automation, and local models via Ollama. Main pet project — an AI persona system that mirrors a person's conversational style.</p>
-    <div class="tag-row">
-      <span class="tag">Ollama</span>
-      <span class="tag">AI persona</span>
-      <span class="tag yellow">Pet project</span>
-    </div>
-  </div>
+<section class="page">
+  <span class="marker">This season</span>
+  <div class="row"><div class="lbl">Robofinist final</div><div class="val"><p>Autumn. The Balance_robot's PID is the limit, not the hardware. Working on a more aggressive control loop and a proper IMU calibration routine.</p></div></div>
+  <div class="row"><div class="lbl">Lyceum</div><div class="val"><p>Class of 2026. Final year. Thesis on PID + Kalman fusion for self-balancing robots — actually writing it this time, not "planning to".</p></div></div>
+  <div class="row"><div class="lbl">Next hardware</div><div class="val"><p>Planning a 4-wheel omnidirectional robot for FIRA 2027. ROS2 or roll-our-own? TBD.</p></div></div>
+</section>
+
+<section class="page">
+  <span class="marker">Not now</span>
+  <div class="row"><div class="lbl">3D printing</div><div class="val"><p>Ender 5 S1 is on a shelf. Will return to it after the FIRA round.</p></div></div>
+  <div class="row"><div class="lbl">Minecraft plugins</div><div class="val"><p>Server is stable. Not adding new plugins until the tournament is over.</p></div></div>
+  <div class="row"><div class="lbl">Telegram bots</div><div class="val"><p>Anything new is on hold. The streak bot and Safalife bots are stable enough.</p></div></div>
+</section>
+
 </main>
 
 <footer>
-  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
-  <div class="footer-links">
-    <a href="/">antonpetnitsky.com</a>
-    <a href="/projects/" data-en="All projects" data-ru="Все проекты">All projects</a>
-  </div>
+  <span>© 2026 Anton Petnitsky · Minsk, BY</span>
+  <span><a href="https://github.com/Mukller/antonpetnitsky.com" rel="noopener">v3 · source</a></span>
 </footer>
 
-<script>
-  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
-
-  function applyStatic() {
-    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
-      var val = el.getAttribute('data-' + lang);
-      if (val) el.innerHTML = val;
-    });
-    document.documentElement.lang = lang;
-    document.getElementById('langBtn').textContent = lang === 'ru' ? 'EN' : 'RU';
-    localStorage.setItem('ap_lang', lang);
-  }
-
-  function toggleLang() {
-    lang = lang === 'ru' ? 'en' : 'ru';
-    applyStatic();
-  }
-
-  applyStatic();
-</script>
-<script>
-  (function () {
-    var b = document.getElementById('burgerBtn');
-    var m = document.getElementById('mobileMenu');
-    if (b && m) b.addEventListener('click', function () { m.hidden = !m.hidden; });
-  })();
-</script>
-  <script src="/assets/site.js"></script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

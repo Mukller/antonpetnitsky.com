@@ -1,1045 +1,39 @@
 ﻿<!DOCTYPE html>
-<html lang="en
-
-/* Spacing utilities */
-.space-xs { gap: var(--space-xs); }
-.space-sm { gap: var(--space-sm); }
-.space-md { gap: var(--space-md); }
-.space-lg { gap: var(--space-lg); }
-.space-xl { gap: var(--space-xl); }
-.space-2xl { gap: var(--space-2xl); }
-.space-3xl { gap: var(--space-3xl); }
-
-.p-xs { padding: var(--space-xs); }
-.p-sm { padding: var(--space-sm); }
-.p-md { padding: var(--space-md); }
-.p-lg { padding: var(--space-lg); }
-.p-xl { padding: var(--space-xl); }
-
-.px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
-.px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
-.px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
-.px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl); }
-
-.py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
-.py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
-.py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
-.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
-
-.m-auto { margin: auto; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.mx-sm { margin-left: var(--space-sm); margin-right: var(--space-sm); }
-.mx-md { margin-left: var(--space-md); margin-right: var(--space-md); }
-.mx-lg { margin-left: var(--space-lg); margin-right: var(--space-lg); }
-
-.mt-sm { margin-top: var(--space-sm); }
-.mt-md { margin-top: var(--space-md); }
-.mt-lg { margin-top: var(--space-lg); }
-.mt-xl { margin-top: var(--space-xl); }
-
-.mb-sm { margin-bottom: var(--space-sm); }
-.mb-md { margin-bottom: var(--space-md); }
-.mb-lg { margin-bottom: var(--space-lg); }
-.mb-xl { margin-bottom: var(--space-xl); }
-
-.gap-xs { gap: var(--space-xs); }
-.gap-sm { gap: var(--space-sm); }
-.gap-md { gap: var(--space-md); }
-.gap-lg { gap: var(--space-lg); }
-.gap-xl { gap: var(--space-xl); }">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anton Petnitsky — Full-Stack Developer & Robotics Engineer</title>
-  <meta name="description" content="Anton Petnitsky — full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools, and 54+ open-source projects. Robofinist & FIRA competitor.">
-  <meta property="og:title" content="Anton Petnitsky — Full-Stack Developer & Robotics Engineer">
-  <meta property="og:description" content="Full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools, and 54+ open-source projects.">
+  <title>Anton Petnitsky — Software Developer & Robotics Engineer</title>
+  <meta name="description" content="Anton Petnitsky — full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools. 25+ open-source projects.">
+  <meta property="og:title" content="Anton Petnitsky — Software Developer & Robotics Engineer">
+  <meta property="og:description" content="Full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://antonpetnitsky.com">
   <meta property="og:image" content="https://antonpetnitsky.com/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Anton Petnitsky — Full-Stack Developer & Robotics Engineer">
-  <meta name="twitter:description" content="Full-stack developer and robotics engineer from Minsk, Belarus. Telegram bots, autonomous robots, AI tools.">
+  <meta name="twitter:title" content="Anton Petnitsky — Software Developer & Robotics Engineer">
+  <meta name="twitter:description" content="Full-stack developer and robotics engineer from Minsk, Belarus.">
   <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
   <link rel="canonical" href="https://antonpetnitsky.com">
   <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
-  <link rel="apple-touch-icon" href="/ap-favicon.png">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#0C0C0D">
   <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('ap_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));</script>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fonts.css">
-  <style>
-    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      /* Base colors */
-      --bg:        #0d1117;
-      --bg-card:   #161b22;
-      --border:    #21262d;
-      --text:      #c9d1d9;
-      --muted:     #8b949e;
-      --bright:    #e6edf3;
-      --accent:    #58a6ff;
-      --accent-light: #79c0ff;
-      --green:     #3fb950;
-      --green-hover: #2ea043;
-      --red:       #f85149;
-      --yellow:    #d29922;
-      --orange:    #ffa657;
-      --header-a:  rgba(13, 17, 23, 0.95);
-      --header-b:  rgba(13, 17, 23, 0.8);
-      --wm:        rgba(230, 237, 243, .05);
-      --accent-soft: rgba(88, 166, 255, .1);
-      --flash-bg:    #e9eef5;
-      --flash-text:  #0d1117;
-      --flash-muted: #57606a;
-      --flash-accent:#1f6feb;
-      --flash-green: #1a7f37;
-      --flash-border: rgba(13, 17, 23, .3);
-      --flash-card:  #ffffff;
-      --flash-wm:    rgba(13, 17, 23, .07);
-
-      /* Spacing system */
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 24px;
-      --space-xl: 32px;
-      --space-2xl: 48px;
-      --space-3xl: 64px;
-      --space-4xl: 96px;
-
-      /* Border radius */
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --radius-xl: 16px;
-      --radius-full: 9999px;
-
-      /* Border width */
-      --border-width: 1px;
-
-      /* Layout */
-      --header-height: 60px;
-      --container-max: 860px;
-      --container-padding: 24px;
-
-      /* Light theme overrides */
-      --header-a:  rgba(255, 255, 255, 0.95);
-      --header-b:  rgba(255, 255, 255, 0.8);
-      --wm:        rgba(31, 35, 40, .06);
-      --accent-soft: rgba(9, 105, 218, .08);
-      --flash-bg:    #0d1117;
-      --flash-text:  #f0f6fc;
-      --flash-muted: #8b949e;
-      --flash-accent:#58a6ff;
-      --flash-green: #3fb950;
-      --flash-border: rgba(240, 246, 252, .3);
-      --flash-card:  #161b22;
-      --flash-wm:    rgba(230, 237, 243, .07);
-    }
-
-    @media (max-width: 640px) {
-      :root {
-        --header-height: 56px;
-        --container-padding: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      :root {
-        --container-padding: 12px;
-      }
-    }
-
-    :root[data-theme="light"] {
-      --bg:        #edf0f3;
-      --bg-card:   #f7f9fa;
-      --border:    #d5dbe1;
-      --text:      #3d444d;
-      --muted:     #59646e;
-      --bright:    #1f2328;
-      --accent:    #0969da;
-      --accent-light: #0550ae;
-      --green:     #1a7f37;
-      --green-hover: #187733;
-      --header-a:  rgba(237, 240, 243, 0.95);
-      --header-b:  rgba(237, 240, 243, 0.8);
-      --wm:        rgba(31, 35, 40, .06);
-      --accent-soft: rgba(9, 105, 218, .08);
-      --flash-bg:    #0d1117;
-      --flash-text:  #f0f6fc;
-      --flash-muted: #8b949e;
-      --flash-accent:#58a6ff;
-      --flash-green: #3fb950;
-      --flash-border: rgba(240, 246, 252, .3);
-      --flash-card:  #161b22;
-      --flash-wm:    rgba(230, 237, 243, .07);
-    }
-
-/* Utility classes for spacing */
-    .space-xs { gap: var(--space-xs); }
-    .space-sm { gap: var(--space-sm); }
-    .space-md { gap: var(--space-md); }
-    .space-lg { gap: var(--space-lg); }
-    .space-xl { gap: var(--space-xl); }
-    .space-2xl { gap: var(--space-2xl); }
-    .space-3xl { gap: var(--space-3xl); }
-
-    .p-xs { padding: var(--space-xs); }
-    .p-sm { padding: var(--space-sm); }
-    .p-md { padding: var(--space-md); }
-    .p-lg { padding: var(--space-lg); }
-    .p-xl { padding: var(--space-xl); }
-
-    .px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
-    .px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
-    .px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
-    .px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl); }
-
-    .py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
-    .py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
-    .py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
-    .py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
-
-    .m-auto { margin: auto; }
-    .mx-auto { margin-left: auto; margin-right: auto; }
-    .mx-sm { margin-left: var(--space-sm); margin-right: var(--space-sm); }
-    .mx-md { margin-left: var(--space-md); margin-right: var(--space-md); }
-    .mx-lg { margin-left: var(--space-lg); margin-right: var(--space-lg); }
-
-    .mt-sm { margin-top: var(--space-sm); }
-    .mt-md { margin-top: var(--space-md); }
-    .mt-lg { margin-top: var(--space-lg); }
-    .mt-xl { margin-top: var(--space-xl); }
-
-    .mb-sm { margin-bottom: var(--space-sm); }
-    .mb-md { margin-bottom: var(--space-md); }
-    .mb-lg { margin-bottom: var(--space-lg); }
-    .mb-xl { margin-bottom: var(--space-xl); }
-
-    .gap-xs { gap: var(--space-xs); }
-    .gap-sm { gap: var(--space-sm); }
-    .gap-md { gap: var(--space-md); }
-    .gap-lg { gap: var(--space-lg); }
-    .gap-xl { gap: var(--space-xl); }
-    }
-
-    a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
-    a:hover { color: var(--accent-light); text-decoration: underline; }
-    .project-card, .contact-card, .robotics-item { text-decoration: none; }
-    .project-card:hover, .contact-card:hover { text-decoration: none; }
-
-    /* ── HEADER ──────────────────────────────────── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      gap: 16px;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--bright);
-      letter-spacing: -0.3px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      flex: 1;
-    }
-    nav::-webkit-scrollbar { display: none; }
-
-    nav a {
-      color: var(--muted);
-      font-size: 14px;
-      transition: color .15s;
-      white-space: nowrap;
-    }
-    nav a:hover { color: var(--bright); text-decoration: none; }
-
-    .lang-btn, .theme-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: inherit;
-      transition: border-color .15s, color .15s;
-      flex-shrink: 0;
-    }
-    .lang-btn:hover, .theme-btn:hover { color: var(--bright); border-color: var(--accent); }
-    .theme-btn { display: flex; align-items: center; justify-content: center; padding: 4px 6px; }
-    .theme-btn .icon-sun { display: none; }
-    :root[data-theme="light"] .theme-btn .icon-sun { display: block; }
-    :root[data-theme="light"] .theme-btn .icon-moon { display: none; }
-
-    /* ── HERO ────────────────────────────────────── */
-    .hero {
-      max-width: 1040px;
-      margin: 32px auto 64px;
-      padding: 0 24px;
-    }
-
-    .hero-frame {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-
-    .hero-layer {
-      position: relative;
-      padding: 64px 24px 48px;
-      text-align: center;
-    }
-
-    .hero-wm {
-      position: absolute;
-      inset: -12% -6%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .wm-row {
-      font-size: clamp(64px, 9vw, 112px);
-      font-weight: 800;
-      letter-spacing: .28em;
-      white-space: nowrap;
-      line-height: 1;
-      color: var(--wm);
-    }
-    .wm-row:nth-child(2) { transform: translateX(-12%); }
-    .wm-row:nth-child(3) { transform: translateX(8%); }
-    .wm-row:nth-child(4) { transform: translateX(-5%); }
-
-    .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
-
-    .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .hero-title {
-      font-size: clamp(34px, 8vw, 84px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--bright);
-      white-space: nowrap;
-      margin: 0 0 20px;
-    }
-
-    /* ── flashlight: inverted layer revealed by cursor (mimo-style) ── */
-    .hero-alt {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      background: var(--flash-bg);
-      pointer-events: none;
-      will-change: clip-path;
-      clip-path: circle(0px at -500px -500px);
-    }
-    .hero-alt .wm-row { color: var(--flash-wm); }
-    .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
-    .hero-alt .hero-title { color: var(--flash-text); }
-    .hero-alt .hero-tagline { color: var(--flash-accent); }
-    .hero-alt .hero-desc { color: var(--flash-muted); }
-    .hero-alt .hero-meta span { color: var(--flash-muted); }
-    .hero-alt .hire-badge { color: var(--flash-green); }
-    .hero-alt .btn { border-color: var(--flash-border); color: var(--flash-text); background: transparent; }
-    .hero-alt .btn-primary { background: var(--flash-green); border-color: var(--flash-green); color: #fff; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-alt { display: none; }
-    }
-
-    .hero-tagline {
-      font-size: 17px;
-      color: var(--accent);
-      margin-bottom: 12px;
-      font-weight: 500;
-      position: relative;
-    }
-
-    .hero-desc {
-      color: var(--muted);
-      margin: 0 auto 20px;
-      max-width: 560px;
-      position: relative;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .hero-meta span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .hero-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; position: relative; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all .2s ease;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--green);
-      color: #fff;
-      border-color: var(--green);
-      font-weight: 600;
-    }
-    .btn-primary:hover {
-      background: var(--green-hover);
-      border-color: var(--green-hover);
-      text-decoration: none;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-    }
-    .btn-ghost:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      text-decoration: none;
-    }
-
-    /* ── SECTION WRAPPER ─────────────────────────── */
-    section {
-      max-width: 860px;
-      margin: 0 auto 64px;
-      padding: 0 24px;
-    }
-
-    .section-title {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* ── ABOUT ───────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
-      transition: border-color .15s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(88, 166, 255, 0.5);
-    }
-
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--bright);
-      margin-bottom: 10px;
-    }
-
-    .card p { font-size: 14px; color: var(--muted); }
-
-    /* ── SKILLS ──────────────────────────────────── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .skill-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-    }
-
-    .skill-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--bright);
-      margin-bottom: 6px;
-    }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; }
-
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 11px;
-      background: rgba(88,166,255,.1);
-      color: var(--accent);
-      border: 1px solid rgba(88,166,255,.2);
-    }
-
-    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
-    .tag.blue { background: rgba(88,166,255,.1); color: var(--accent); border-color: rgba(88,166,255,.2); }
-    .tag.orange { background: rgba(255,166,87,.1); color: var(--orange); border-color: rgba(255,166,87,.2); }
-    .tag.yellow { background: rgba(210,153,34,.1); color: var(--yellow); border-color: rgba(210,153,34,.2); }
-    .tag.gray { background: var(--border); color: var(--muted); border-color: transparent; }
-    .tag.red { background: rgba(248,81,73,.1); color: var(--red); border-color: rgba(248,81,73,.2); }
-
-    /* ── PROJECTS ────────────────────────────────── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: border-color .15s;
-    }
-
-    .project-card:hover { border-color: rgba(88, 166, 255, .4); }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .project-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .project-lang {
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .lang-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .project-desc {
-      font-size: 13px;
-      color: var(--muted);
-      flex: 1;
-    }
-
-    .project-footer {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    /* ── ROBOTICS ────────────────────────────────── */
-    .robotics-list { display: flex; flex-direction: column; gap: 12px; }
-
-    .robotics-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .robotics-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(88,166,255,.1);
-      border: 1px solid rgba(88,166,255,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-    .robotics-num svg { display: block; }
-
-    .robotics-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--bright);
-      margin-bottom: 4px;
-    }
-
-    .robotics-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    /* ── TIMELINE ────────────────────────────────── */
-    .timeline { position: relative; padding-left: 24px; }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 6px;
-      bottom: 6px;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .tl-item {
-      position: relative;
-      margin-bottom: 24px;
-    }
-
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: -20px;
-      top: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--bg);
-    }
-
-    .tl-date {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .tl-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--bright);
-      margin-bottom: 4px;
-    }
-
-    .tl-desc { font-size: 13px; color: var(--muted); }
-
-    /* ── HIRE BADGE ──────────────────────────────── */
-    .hire-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--green);
-    }
-    .hire-badge::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-
-    }
-
-    /* ── EDUCATION ───────────────────────────────── */
-    .edu-list { display: flex; flex-direction: column; gap: 14px; }
-
-    .edu-item {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .edu-period {
-      font-size: 12px;
-      color: var(--muted);
-      padding-top: 2px;
-      text-align: right;
-    }
-
-    .edu-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--bright);
-      margin-bottom: 2px;
-    }
-
-    .edu-detail { font-size: 13px; color: var(--muted); }
-
-    /* ── STATS ROW ───────────────────────────────── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 0;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -1px;
-    }
-
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    /* ── NOW ─────────────────────────────────────── */
-    .now-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .now-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .now-card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .now-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-
-      flex-shrink: 0;
-    }
-
-    .now-card-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--bright);
-    }
-
-    .now-card p { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
-
-    /* ── CONTACT ─────────────────────────────────── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      transition: border-color .15s;
-    }
-
-    .contact-card:hover { border-color: rgba(88, 166, 255, .4); text-decoration: none; }
-
-    .contact-icon {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,.04);
-      border-radius: 8px;
-    }
-
-    .contact-text { min-width: 0; }
-
-    .contact-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--bright);
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .contact-value {
-      font-size: 12px;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-    }
-
-    /* ── FOOTER ──────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 24px 32px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 16px;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 10px;
-    }
-
-    .footer-social-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all .2s ease;
-    }
-    .footer-social-icon:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(88,166,255,.08);
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
-
-    .footer-divider {
-      width: 100%;
-      max-width: 200px;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .footer-copy {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .footer-copy strong {
-      color: var(--bright);
-      font-weight: 600;
-    }
-
-    .footer-license {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-license a { color: var(--muted); }
-    .footer-license a:hover { color: var(--accent); }
-
-    .footer-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      font-size: 11px;
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .footer-badge:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-    /* ── RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 640px) {
-      .hero { margin: 20px auto 48px; padding: 0 12px; }
-      .hero-frame { padding: 48px 14px 36px; }
-      .hero-tagline { font-size: 15px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .now-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .edu-item { grid-template-columns: 1fr; gap: 2px; }
-      .edu-period { text-align: left; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      nav { gap: 14px; }
-      header { padding: 0 16px; }
-      section { margin-bottom: 48px; }
-      .footer-inner { align-items: center; }
-    }
-
-    @media (max-width: 480px) {
-      .skills-grid { grid-template-columns: 1fr; }
-      .hero-links { gap: 8px; }
-      .btn { padding: 6px 12px; font-size: 13px; }
-    }
-    .skip-link {
-      position: absolute; left: -9999px; top: 0; z-index: 200;
-      background: var(--bg-card); color: var(--bright);
-      padding: 8px 16px; border-radius: 0 0 8px 0; border: 1px solid var(--border);
-    }
-    .skip-link:focus { left: 0; }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-    .nav-drop { position: relative; }
-    .nav-drop > a::after { content: ' \0be'; font-size: 10px; opacity: .6; }
-    .nav-drop.active > a { color: var(--accent); font-weight: 500; }
-    .nav-menu {
-      display: none; position: absolute; top: 100%; left: -10px;
-      min-width: 170px; background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: 8px; padding: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 101;
-    }
-    .nav-drop:hover .nav-menu, .nav-drop:focus-within .nav-menu { display: block; }
-    .nav-menu a { display: block; padding: 7px 10px; border-radius: 6px; font-size: 14px; color: var(--text); }
-    .nav-menu a:hover { background: var(--accent-soft); color: var(--bright); }
-    .nav-menu a.active { color: var(--accent); }
-    .burger {
-      display: none; background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 6px; padding: 5px 8px; cursor: pointer;
-      font-family: inherit; flex-shrink: 0;
-    }
-    .mobile-menu { display: none; }
-    @media (max-width: 640px) {
-      header nav { display: none; }
-      .burger { display: flex; align-items: center; }
-      .mobile-menu { display: block; position: absolute; top: 60px; left: 0; right: 0;
-        background: var(--bg); border-bottom: 1px solid var(--border);
-        padding: 8px 16px 16px; z-index: 99; }
-      .mobile-menu[hidden] { display: none; }
-      .mm-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
-        color: var(--muted); margin: 12px 0 4px; }
-      .mobile-menu a { display: block; padding: 8px 0; font-size: 15px; color: var(--text);
-        border-bottom: 1px solid var(--border); }
-      .mobile-menu a:last-child { border-bottom: none; }
-    }
-
-    section.band {
-      max-width: none; margin: 0 0 64px; padding: 56px 0 48px;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    section.band > * { max-width: 860px; margin-left: auto; margin-right: auto; }
-    section.band > .section-title { margin-top: 0; }
-    section.band > div[style] { padding: 0 24px; }
-
-    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
-    .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-    .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
-    .footer-cols a:hover { color: var(--accent); }
-  </style>
+  <link rel="stylesheet" href="/assets/css/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Anton Petnitsky",
-    "alternateName": [
-      "Антон Петницкий",
-      "Антон Пятницкий",
-      "Антон Петлицкий",
-      "Антон Питницкий",
-      "Антон Пиатницкий",
-      "Антон Пьятницкий",
-      "Антон Петницький",
-      "Антон Пятницький",
-      "Антон Пятніцкі",
-      "Петницкий",
-      "Пятницкий",
-      "Питницкий",
-      "Пятніцкі",
-      "Anton Piatnitski",
-      "Anton Petnitski",
-      "Anton Piatnitsky",
-      "Anton Petnitskiy",
-      "Anton Petnitskii",
-      "Anton Piatnitskii",
-      "Anton Petnitzky",
-      "Anton Piatnitzki",
-      "Anton Petnisky",
-      "Anton Petnicki",
-      "Anton Piatnicki",
-      "Anton Petnitskij",
-      "Anton Piatnitskij",
-      "Anton Pietnitski",
-      "Petnitsky",
-      "Petnitskiy",
-      "Piatnitski"
-    ],
+    "alternateName": ["Антон Петницкий", "Anton Piatnitski", "Petnitsky", "Piatnitski"],
     "url": "https://antonpetnitsky.com",
     "email": "mailto:anton.petnitsky@gmail.com",
-    "jobTitle": "Full-Stack Developer & Robotics Engineer",
+    "jobTitle": "Software Developer & Robotics Engineer",
     "address": { "@type": "PostalAddress", "addressLocality": "Minsk", "addressCountry": "BY" },
     "sameAs": [
       "https://github.com/Mukller",
@@ -1053,686 +47,218 @@
   </script>
 </head>
 <body>
-<a class="skip-link" href="#main" data-en="Skip to content" data-ru="Перейти к содержанию">Skip to content</a>
+<a class="skip-link" href="#main" data-en="Skip to content" data-ru="К содержанию">Skip to content</a>
 
-<!-- HEADER -->
-<header>
-  <span class="logo">Anton Petnitsky</span>
+<header class="top">
+  <a class="logo" href="/">Anton Petnitsky</a>
   <nav>
-    <div class="nav-drop">
-      <a href="/projects/">Projects</a>
-      <div class="nav-menu">
-        <a href="/projects/">Catalog</a>
-        <a href="/robotics/">Robotics</a>
-        <a href="/print3d/">3D Print</a>
-      </div>
-    </div>
-    <div class="nav-drop">
-      <a href="/homelab/">Infra</a>
-      <div class="nav-menu">
-        <a href="/homelab/">Homelab</a>
-        <a href="/minecraft/">Minecraft</a>
-        <a href="/uses/">Uses</a>
-      </div>
-    </div>
-    <a href="/now/">Now</a>
-    <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </nav>
-  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
-  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-    <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-  </button>
-  <button class="burger" id="burgerBtn" aria-label="Menu">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-  </button>
-  <div class="mobile-menu" id="mobileMenu" hidden>
-    <div class="mm-title">Projects</div>
-    <a href="/projects/">Catalog</a>
+    <a href="/" aria-current="page">Index</a>
+    <a href="/projects/">Projects</a>
     <a href="/robotics/">Robotics</a>
-    <a href="/print3d/">3D Print</a>
-    <div class="mm-title">Infra</div>
-    <a href="/homelab/">Homelab</a>
-    <a href="/minecraft/">Minecraft</a>
-    <a href="/uses/">Uses</a>
-    <div class="mm-title">Site</div>
     <a href="/now/">Now</a>
+    <a href="/homelab/">Homelab</a>
     <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </div>
+  </nav>
+  <button class="theme-toggle" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'); localStorage.setItem('ap_theme', document.documentElement.getAttribute('data-theme'))" aria-label="Toggle theme"></button>
 </header>
 
-<!-- HERO -->
-<div class="hero" id="main">
-  <div class="hero-frame" id="heroFrame">
-    <div class="hero-layer" id="heroBase">
-    <div class="hero-wm" aria-hidden="true">
-      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
-      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
-      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
-      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
-    </div>
-    <div class="hero-avatar">
-      <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
-    </div>
-    <h1 class="hero-title" id="titleBase" aria-label="Anton Petnitsky">Hi, I'm Anton</h1>
-    <div class="hero-tagline" data-en="Software Developer &amp; Robotics Engineer" data-ru="Разработчик ПО и инженер-робототехник">Software Developer &amp; Robotics Engineer</div>
-    <p class="hero-desc" data-en="Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus. I make things that work — from embedded systems to web backends." data-ru="Создаю Telegram-боты, автономных роботов и AI-инструменты из Минска, Беларусь. Делаю вещи, которые работают — от встраиваемых систем до веб-бэкендов.">
-      Building Telegram bots, autonomous robots, and AI tools from Minsk, Belarus.
-      I make things that work — from embedded systems to web backends.
-    </p>
-    <div class="hero-meta">
-      <span data-en="Minsk, Belarus · Remote only" data-ru="Минск, Беларусь · только удалённо">Minsk, Belarus · Remote only</span>
-      <span data-en="Class of 2026" data-ru="Выпуск 2026">Class of 2026</span>
-      <span data-en="Robofinist competitor" data-ru="Участник Робофиниста">Robofinist competitor</span>
-      <span data-en="Python · Flutter · Embedded" data-ru="Python · Flutter · Embedded">Python · Flutter · Embedded</span>
-      <span class="hire-badge" data-en="Available for hire" data-ru="Открыт для предложений">Available for hire</span>
-    </div>
-    <div class="hero-links">
-      <a class="btn btn-primary" href="https://github.com/Mukller" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
+<main id="main">
+
+<section class="hero">
+  <p class="kicker">Minsk, Belarus <span class="dot" aria-label="available"></span> Open to work · 2026</p>
+  <h1>Anton<br>Petnitsky<span class="accent">.</span></h1>
+  <p class="sub">Software developer and robotics engineer. I build Telegram bots, autonomous robots, and AI tools that actually run in production. Class of 2026, self-taught, prefers working code over perfect architecture.</p>
+  <div class="links">
+    <a href="/projects/">Projects</a>
+    <a href="/robotics/">Robotics</a>
+    <a href="/cv-en.html">CV — EN</a>
+    <a href="/cv-ru.html">Резюме — RU</a>
+    <a href="mailto:anton.petnitsky@gmail.com">Email</a>
+  </div>
+  <div class="meta">
+    <span>Python · Flutter · Embedded</span>
+    <span>ESP32 · OpenCV · Docker</span>
+    <span>Robofinist & FIRA</span>
+    <span>github.com/Mukller</span>
+  </div>
+</section>
+
+<section class="now-strip">
+  <span class="marker">Now — 29 Aug 2026</span>
+  <ol>
+    <li>
+      <span class="what">Shipping v3 of this site — kill the v2 corruption, keep the минимализм, ship the <a href="/projects/">projects catalog</a> as a single page.</span>
+      <span class="when">This week</span>
+    </li>
+    <li>
+      <span class="what">Calibrating the FIRA autonomous RC car — YOLO lane detection vs. hand-tuned HSV. Two weeks to <a href="https://github.com/Mukller/fira-autonomous-rc-car" rel="noopener">competition</a>.</span>
+      <span class="when">Aug → Sep 2026</span>
+    </li>
+    <li>
+      <span class="what">Running <a href="https://t.me/chotokek" rel="noopener">Safalife</a> in production — courier app, OSRM routing, 99% uptime through 8 months of self-hosted infrastructure.</span>
+      <span class="when">Since 2025</span>
+    </li>
+    <li>
+      <span class="what">Teaching an <a href="https://github.com/Mukller" rel="noopener">AI persona</a> to write like me — embeddings, voice profile, dream-time consolidation. Three months in.</span>
+      <span class="when">Since Jun 2026</span>
+    </li>
+  </ol>
+</section>
+
+<section class="about">
+  <span class="marker">About</span>
+  <h2>Self-taught, working from Minsk, building 25+ open-source projects across robots, bots, and infra.</h2>
+
+  <div class="timeline">
+    <ol>
+      <li>
+        <span class="yr">2026</span>
+        <span class="ttl">Class of 2026 — Lyceum BSU, Mathematics & CS</span>
+        <span class="dsc">Top of the cohort in applied math. Class representative for two years. Wrote a 60-page thesis on PID + Kalman fusion for self-balancing robots.</span>
+      </li>
+      <li>
+        <span class="yr">2025 →</span>
+        <span class="ttl">Safalife in production</span>
+        <span class="dsc">Designed and shipped a Flutter + FastAPI + OSRM courier delivery app for a logistics company in Uzbekistan. Still running. 24/7. Self-hosted.</span>
+      </li>
+      <li>
+        <span class="yr">2024</span>
+        <span class="ttl">Robofinist &amp; FIRA — first robots</span>
+        <span class="dsc">Built a self-balancing robot (ESP32 + TMC2209 + MPU6050) and an autonomous RC car (YOLO + OpenCV). Two competition seasons, four prototypes, three burned MCUs.</span>
+      </li>
+      <li>
+        <span class="yr">2022</span>
+        <span class="ttl">First Telegram bot deployed</span>
+        <span class="dsc">A reminder bot for my mom. Then a homework bot for class. Then a bot that talked to my home server. Then I had 14 bots running and a server in a closet.</span>
+      </li>
+      <li>
+        <span class="yr">2020</span>
+        <span class="ttl">First line of Python</span>
+        <span class="dsc">Taught myself Python to automate a homework assignment. Then again to write a Telegram bot. Then to do everything else.</span>
+      </li>
+    </ol>
+  </div>
+
+  <dl class="facts">
+    <div><dt>Age</dt><dd>18</dd></div>
+    <div><dt>Cohort</dt><dd>2026</dd></div>
+    <div><dt>Repos</dt><dd>54</dd></div>
+    <div><dt>Uptime</dt><dd>24/7</dd></div>
+    <div><dt>Available</dt><dd>Yes</dd></div>
+  </dl>
+</section>
+
+<section class="skills">
+  <span class="marker">Skills</span>
+  <h2>Tools I use to ship things — not a list of everything I've ever tried.</h2>
+  <ul>
+    <li>Python <small>asyncio · aiogram · FastAPI · OpenCV · Playwright</small></li>
+    <li>Embedded <small>ESP32 · Arduino · TMC2209 · BLDC · STM32</small></li>
+    <li>Computer Vision <small>YOLO v8 · HSV · Kalman filter</small></li>
+    <li>Linux &amp; DevOps <small>Docker · nginx · systemd · PostgreSQL · SSH</small></li>
+    <li>Telegram <small>aiogram 3 · Telethon · Pyrogram</small></li>
+    <li>Mobile <small>Flutter · Android · Gradle</small></li>
+    <li>Frontend <small>HTML/CSS · vanilla JS · Three.js</small></li>
+  </ul>
+</section>
+
+<section class="projects">
+  <span class="marker">Selected Projects — 10 of 25</span>
+  <h2>Open source, running in production or in a robot. All on github.com/Mukller.</h2>
+  <ol>
+    <li>
+      <a href="https://github.com/Mukller/fira-autonomous-rc-car" rel="noopener">
+      <span class="name">fira-autonomous-rc-car<small>autonomous lane + obstacle avoidance, FIRA comp</small></span>
+      <span class="year">2026</span>
+      <span class="arrow">→</span>
       </a>
-      <a class="btn btn-ghost" href="https://t.me/chotokek" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
-        Telegram
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/Balance_robot" rel="noopener">
+      <span class="name">Balance_robot<small>self-balancing, ESP32 + MPU6050 + TMC2209</small></span>
+      <span class="year">2026</span>
+      <span class="arrow">→</span>
       </a>
-      <a class="btn btn-ghost cv-btn" href="/cv-en.html" target="_blank" data-en="CV (EN)" data-ru="CV (EN)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-        CV (EN)
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/safalife-courier-app" rel="noopener">
+      <span class="name">safalife-courier-app<small>Flutter courier app in production, Uzbekistan</small></span>
+      <span class="year">2025</span>
+      <span class="arrow">→</span>
       </a>
-      <a class="btn btn-ghost cv-btn" href="/cv-ru.html" target="_blank" data-en="CV (RU)" data-ru="Резюме (RU)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-        CV (RU)
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/safalife-api" rel="noopener">
+      <span class="name">safalife-api<small>FastAPI + PostgreSQL, OSRM routing, 24/7</small></span>
+      <span class="year">2025</span>
+      <span class="arrow">→</span>
       </a>
-    </div>
-    </div>
-
-    <div class="hero-layer hero-alt" id="heroAlt" aria-hidden="true"></div>
-  </div>
-</div>
-
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-title" data-en="About" data-ru="Обо мне">About</div>
-  <div class="about-grid">
-    <div class="card">
-      <div class="card-title" data-en="Who I am" data-ru="Кто я">Who I am</div>
-      <p data-en="Self-taught developer from Minsk, Belarus. I build practical tools — Telegram bots, automation scripts, embedded systems, and web services. I prefer shipping working code over perfect architecture." data-ru="Самоучка из Минска, Беларусь. Создаю практичные инструменты — Telegram-боты, скрипты автоматизации, встраиваемые системы и веб-сервисы. Предпочитаю выпускать рабочий код, а не идеальную архитектуру.">Self-taught developer from Minsk, Belarus. I build practical tools — Telegram bots, automation scripts, embedded systems, and web services. I prefer shipping working code over perfect architecture.</p>
-    </div>
-    <div class="card">
-      <div class="card-title" data-en="Infrastructure" data-ru="Инфраструктура">Infrastructure</div>
-      <p data-en="I run my own home server (Linux, Docker, nginx, PostgreSQL) and a VPS. Most of my projects run 24/7 in production. I manage everything from SSH." data-ru="Управляю домашним сервером (Linux, Docker, nginx, PostgreSQL) и VPS. Большинство проектов работают в продакшне 24/7. Управляю всем через SSH.">I run my own home server (Linux, Docker, nginx, PostgreSQL) and a VPS. Most of my projects run 24/7 in production. I manage everything from SSH.</p>
-    </div>
-    <div class="card">
-      <div class="card-title" data-en="Robotics" data-ru="Робототехника">Robotics</div>
-      <p data-en="I compete at Robofinist and FIRA with self-built robots: an Arkanoid-playing robot (ESP32 + OpenCV + BLDC), a self-balancing robot (ESP32 + TMC2209 + MPU6050), and an autonomous RC car." data-ru="Участвую в Робофинисте и FIRA с самодельными роботами: робот для Арканоида (ESP32 + OpenCV + BLDC), самобалансирующий робот (ESP32 + TMC2209 + MPU6050) и автономная RC-машина.">I compete at Robofinist and FIRA with self-built robots: an Arkanoid-playing robot (ESP32 + OpenCV + BLDC), a self-balancing robot (ESP32 + TMC2209 + MPU6050), and an autonomous RC car.</p>
-    </div>
-    <div class="card">
-      <div class="card-title" data-en="AI &amp; Automation" data-ru="AI и автоматизация">AI &amp; Automation</div>
-      <p data-en="I use LLMs as tools — building AI-powered bots, automating repetitive workflows, and exploring local models via Ollama. My main pet project is an AI persona system that mimics human conversation style." data-ru="Использую LLM как инструменты — строю AI-ботов, автоматизирую рутинные задачи, изучаю локальные модели через Ollama. Главный пет-проект — система AI-персоны, имитирующей стиль общения человека.">I use LLMs as tools — building AI-powered bots, automating repetitive workflows, and exploring local models via Ollama. My main pet project is an AI persona system that mimics human conversation style.</p>
-    </div>
-    <div class="card">
-      <div class="card-title" data-en="How I Work" data-ru="Как я работаю">How I Work</div>
-      <p data-en="I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it." data-ru="Напрямую общаюсь с клиентами и командой, особенно на долгих удалённых проектах — открыто говорю о сроках, объёме задач и возникающих проблемах. Быстро разбираюсь в новых инструментах и областях, когда этого требует проект.">I communicate directly with clients and teammates, especially over long remote projects — clear about scope, timelines, and problems as they come up. I pick up new tools and domains quickly when a project calls for it.</p>
-    </div>
-        </div>
-    <a class="card" href="/cv-en.html" style="color: var(--text); text-decoration: none; border-color: rgba(63,185,80,.35); display: flex; flex-direction: column; justify-content: center;">
-      <div class="card-title" style="color: var(--green);" data-en="Looking for work →" data-ru="Ищу работу →">Looking for work →</div>
-      <p data-en="Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly." data-ru="Открыт к удалённым ролям: Python-бэкенд, Telegram-боты, Flutter, инженер-робототехник. Забери CV или напиши напрямую.">Open to remote roles: Python backend, Telegram bots, Flutter, robotics engineering. Grab my CV or write directly.</p>
-      <div class="tag-row">
-        <span class="tag green" data-en="CV (EN)" data-ru="CV (EN)">CV (EN)</span>
-        <span class="tag green" data-en="Резюме (RU)" data-ru="Резюме (RU)">Резюме (RU)</span>
-        <span class="tag">t.me/chotokek</span>
-      </div>
-    </a>
-  </div>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/ai-persona-behavioral-os" rel="noopener">
+      <span class="name">ai-persona-behavioral-os<small>LLM persona trained on my own messages, 156k embeddings</small></span>
+      <span class="year">2026</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/tiktok-streak-bot" rel="noopener">
+      <span class="name">tiktok-streak-bot<small>Selenium bot that keeps chat streaks alive</small></span>
+      <span class="year">2025</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/claude-auto-continue" rel="noopener">
+      <span class="name">claude-auto-continue<small>screenshot-based auto-continue for long sessions</small></span>
+      <span class="year">2024</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/minecraft-survival-server" rel="noopener">
+      <span class="name">minecraft-survival-server<small>Velocity + 5 backends, AuthMe, TG bridge</small></span>
+      <span class="year">2024</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/3d-printer-control" rel="noopener">
+      <span class="name">3d-printer-control<small>OctoPrint + Telegram remote for Ender 5 S1</small></span>
+      <span class="year">2024</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/Mukller/voice-notes" rel="noopener">
+      <span class="name">voice-notes<small>faster-whisper + LLM, voice to Obsidian notes</small></span>
+      <span class="year">2026</span>
+      <span class="arrow">→</span>
+      </a>
+    </li>
+  </ol>
+  <a class="show-more" href="/projects/">All 25 projects</a>
 </section>
 
-<!-- SKILLS -->
-<section id="skills" class="band">
-  <div class="section-title" data-en="Skills" data-ru="Навыки">Skills</div>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-name">Python</div>
-      <div class="tag-row">
-        <span class="tag">asyncio</span>
-        <span class="tag">aiogram</span>
-        <span class="tag">OpenCV</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">Playwright</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-name" data-en="Embedded" data-ru="Embedded">Embedded</div>
-      <div class="tag-row">
-        <span class="tag green">ESP32</span>
-        <span class="tag green">Arduino</span>
-        <span class="tag green">TMC2209</span>
-        <span class="tag green">ESC / BLDC</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-name">Computer Vision</div>
-      <div class="tag-row">
-        <span class="tag orange">YOLO v8</span>
-        <span class="tag orange">HSV calibration</span>
-        <span class="tag orange">Kalman filter</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-name">Linux &amp; DevOps</div>
-      <div class="tag-row">
-        <span class="tag yellow">Docker</span>
-        <span class="tag yellow">nginx</span>
-        <span class="tag yellow">systemd</span>
-        <span class="tag yellow">PostgreSQL</span>
-        <span class="tag yellow">SSH</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-name">Telegram Bots</div>
-      <div class="tag-row">
-        <span class="tag">aiogram 3</span>
-        <span class="tag">Telethon</span>
-        <span class="tag">Pyrogram</span>
-        <span class="tag">GramJS</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-name">Web &amp; Mobile</div>
-      <div class="tag-row">
-        <span class="tag gray">HTML/CSS/JS</span>
-        <span class="tag gray">Three.js</span>
-        <span class="tag gray">Flutter</span>
-        <span class="tag gray">REST APIs</span>
-      </div>
-    </div>
-  </div>
+<section class="contacts">
+  <span class="marker">Contact</span>
+  <h2>Direct, no forms.</h2>
+  <ul>
+    <li><span class="label">Email</span><a href="mailto:anton.petnitsky@gmail.com">anton.petnitsky@gmail.com</a></li>
+    <li><span class="label">Telegram</span><a href="https://t.me/chotokek" rel="noopener">t.me/chotokek</a></li>
+    <li><span class="label">GitHub</span><a href="https://github.com/Mukller" rel="noopener">github.com/Mukller</a></li>
+    <li><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/anton-petnitsky" rel="noopener">linkedin.com/in/anton-petnitsky</a></li>
+    <li><span class="label">CV — EN</span><a href="/cv-en.html">cv-en.html</a></li>
+    <li><span class="label">CV — RU</span><a href="/cv-ru.html">cv-ru.html</a></li>
+  </ul>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-title" data-en="Open Source Projects" data-ru="Open Source проекты">Open Source Projects</div>
-  <div class="projects-grid">
-
-    <a class="project-card" href="https://github.com/Mukller/fira-autonomous-rc-car" target="_blank">
-      <div class="project-header">
-        <div class="project-name">fira-autonomous-rc-car</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Autonomous RC car for FIRA competition. Computer vision-based lane following and obstacle avoidance." data-ru="Автономная RC-машина для соревнований FIRA. Следование по полосе и объезд препятствий через компьютерное зрение.">Autonomous RC car for FIRA competition. Computer vision-based lane following and obstacle avoidance.</div>
-      <div class="project-footer">
-        <span class="tag orange">Robotics</span>
-        <span class="tag">FIRA</span>
-        <span class="tag">OpenCV</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/Balance_robot" target="_blank">
-      <div class="project-header">
-        <div class="project-name">Balance_robot</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#00979D"></span>C++</div>
-      </div>
-      <div class="project-desc" data-en="Self-balancing robot built for Robofinist 2026. ESP32 + MPU6050 + TMC2209 stepper drivers + PID control." data-ru="Самобалансирующий робот для Робофиниста 2026. ESP32 + MPU6050 + TMC2209 + ПИД-регулятор.">Self-balancing robot built for Robofinist 2026. ESP32 + MPU6050 + TMC2209 stepper drivers + PID control.</div>
-      <div class="project-footer">
-        <span class="tag orange">Robotics</span>
-        <span class="tag green">ESP32</span>
-        <span class="tag">Robofinist</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/3d-printer-control" target="_blank">
-      <div class="project-header">
-        <div class="project-name">3d-printer-control</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="OctoPrint integration with Telegram bot for remote control of Ender 5 S1. Real-time status, job tracking." data-ru="Интеграция OctoPrint с Telegram-ботом для удалённого управления Ender 5 S1. Статус в реальном времени.">OctoPrint integration with Telegram bot for remote control of Ender 5 S1. Real-time status, job tracking.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">OctoPrint</span>
-        <span class="tag yellow">v0.1.0</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/claude-auto-continue" target="_blank">
-      <div class="project-header">
-        <div class="project-name">claude-auto-continue</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive." data-ru="Автоматизация на основе скриншотов — находит и нажимает Continue / Try again в Claude, поддерживая долгие сессии.">Screenshot-based automation that detects and clicks Continue / Try again in Claude, keeping long sessions alive.</div>
-      <div class="project-footer">
-        <span class="tag">Automation</span>
-        <span class="tag">AI</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/tt-saver" target="_blank">
-      <div class="project-header">
-        <div class="project-name">tt-saver</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Telegram bot — download TikTok videos without watermark. Running 24/7 in production." data-ru="Telegram-бот — скачивание TikTok видео без водяного знака. Работает 24/7 в продакшне.">Telegram bot — download TikTok videos without watermark. Running 24/7 in production.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag green">Live</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/chess" target="_blank">
-      <div class="project-header">
-        <div class="project-name">chess</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
-      </div>
-      <div class="project-desc" data-en="Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included." data-ru="Telegram шахматный бот с подсказками ходов и игрой против AI. Веб-фронтенд в комплекте.">Telegram chess bot with move suggestions and gameplay against an AI engine. Web frontend included.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">AI</span>
-        <span class="tag">Game</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/tg-voice-transcriber" target="_blank">
-      <div class="project-header">
-        <div class="project-name">tg-voice-transcriber</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Telegram bot that transcribes voice messages to text using speech recognition." data-ru="Telegram-бот, преобразующий голосовые сообщения в текст с помощью распознавания речи.">Telegram bot that transcribes voice messages to text using speech recognition.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">Speech AI</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/Anonka" target="_blank">
-      <div class="project-header">
-        <div class="project-name">Anonka</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Anonymous message bot — users send messages anonymously, admins reply in a forum thread." data-ru="Бот анонимных сообщений — пользователи пишут анонимно, админы отвечают в ветке форума.">Anonymous message bot — users send messages anonymously, admins reply in a forum thread.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">Community</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/hoster-ddns" target="_blank">
-      <div class="project-header">
-        <div class="project-name">hoster-ddns</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram, monitors uptime." data-ru="Автоматическое обновление DDNS на hoster.by. Получает WAN IP с роутера Keenetic, обрабатывает SMS 2FA через Telegram.">Automated DDNS updater for hoster.by. Gets WAN IP from Keenetic router, handles SMS 2FA via Telegram, monitors uptime.</div>
-      <div class="project-footer">
-        <span class="tag yellow">Automation</span>
-        <span class="tag">Playwright</span>
-        <span class="tag">2FA</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/telegram-mentioner-bot" target="_blank">
-      <div class="project-header">
-        <div class="project-name">telegram-mentioner-bot</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Mentions all members in a Telegram group with a single command. Useful for announcements and event calls." data-ru="Упоминает всех участников группы одной командой. Полезно для объявлений и созывов.">Mentions all members in a Telegram group with a single command. Useful for announcements and event calls.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">Utility</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/MiniBoardGames-3.0.0" target="_blank">
-      <div class="project-header">
-        <div class="project-name">MiniBoardGames</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
-      </div>
-      <div class="project-desc" data-en="Collection of mini board games playable in the browser. v3.0.0." data-ru="Коллекция мини-настольных игр, работающих в браузере. v3.0.0.">Collection of mini board games playable in the browser. v3.0.0.</div>
-      <div class="project-footer">
-        <span class="tag">Web</span>
-        <span class="tag">Games</span>
-      </div>
-    </a>
-
-    <a class="project-card" href="https://github.com/Mukller/hercules_support_bot" target="_blank">
-      <div class="project-header">
-        <div class="project-name">hercules_support_bot</div>
-        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
-      </div>
-      <div class="project-desc" data-en="Telegram support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot." data-ru="Telegram-бот поддержки для пользователей 3D-принтера Hercules G4 Duo. На основе ohld/telegram-support-bot.">Telegram support bot for Hercules G4 Duo 3D printer users. Based on ohld/telegram-support-bot.</div>
-      <div class="project-footer">
-        <span class="tag">Telegram</span>
-        <span class="tag">Support</span>
-        <span class="tag">3D Print</span>
-      </div>
-    </a>
-
-  </div>
-  <div style="margin-top:16px; text-align:right;">
-    <a href="/projects/" data-en="All projects →" data-ru="Все проекты →" style="font-size:14px;">All projects →</a>
-  </div>
-</section>
-
-<!-- ROBOTICS -->
-<section id="robotics">
-  <div class="section-title" data-en="Robotics &amp; Competitions" data-ru="Робототехника и соревнования">Robotics &amp; Competitions</div>
-  <div class="robotics-list">
-
-    <div class="robotics-item">
-      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="10" rx="2"/><circle cx="9.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="1.1" fill="currentColor" stroke="none"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/><path d="M5 12H3M21 12h-2"/></svg></div>
-      <div>
-        <div class="robotics-title" data-en='Arkanoid Robot "Robo Arkasha" — Robofinist 2026' data-ru='Робот-Арканоид "Робо Аркаша" — Робофинист 2026'>Arkanoid Robot "Robo Arkasha" — Robofinist 2026</div>
-        <div class="robotics-desc" data-en="Autonomous robot that plays Arkanoid in real-time. Computer vision tracks a red ball via OpenCV (HSV calibration). ESP32 receives commands over UDP from a PC and drives a BLDC motor (ESC) + L298M side motors. The entire chassis is 3D-printed from PETG." data-ru="Автономный робот, играющий в Арканоид в реальном времени. Компьютерное зрение отслеживает красный шар через OpenCV (HSV-калибровка). ESP32 получает команды по UDP с ПК и управляет BLDC-мотором (ESC) + боковыми моторами L298M. Весь корпус напечатан на 3D-принтере из PETG.">Autonomous robot that plays Arkanoid in real-time. Computer vision tracks a red ball via OpenCV (HSV calibration). ESP32 receives commands over UDP from a PC and drives a BLDC motor (ESC) + L298M side motors. The entire chassis is 3D-printed from PETG.</div>
-        <div class="tag-row">
-          <span class="tag green">ESP32</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">UDP</span>
-          <span class="tag orange">BLDC + ESC</span>
-          <span class="tag">PETG chassis</span>
-          <span class="tag">LiPo 3S</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="robotics-item">
-      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 5l-7 3M12 5l7 3M12 5v17M8 22h8"/><path d="M5 8l-3 5c0 2 1.8 3.5 3 3.5S8 15 8 13L5 8zM19 8l-3 5c0 2 1.8 3.5 3 3.5s3-1.5 3-3.5l-3-5z"/></svg></div>
-      <div>
-        <div class="robotics-title" data-en="Self-Balancing Robot — Robofinist 2026" data-ru="Самобалансирующий робот — Робофинист 2026">Self-Balancing Robot — Robofinist 2026</div>
-        <div class="robotics-desc" data-en="Two-wheeled inverted pendulum robot. ESP32 + MPU6050 IMU + 2× TMC2209 stepper motor drivers with NEMA17 motors. PID control loop, tuned from scratch. Built with teammate Kostya, assembled and debugged over several months." data-ru="Двухколёсный робот-инвертированный маятник. ESP32 + MPU6050 + 2× TMC2209 с моторами NEMA17. ПИД-регулятор настроен с нуля. Сделан с напарником Костей за несколько месяцев.">Two-wheeled inverted pendulum robot. ESP32 + MPU6050 IMU + 2× TMC2209 stepper motor drivers with NEMA17 motors. PID control loop, tuned from scratch. Built with teammate Kostya, assembled and debugged over several months.</div>
-        <div class="tag-row">
-          <span class="tag green">ESP32</span>
-          <span class="tag green">TMC2209</span>
-          <span class="tag">MPU6050</span>
-          <span class="tag">PID</span>
-          <span class="tag">NEMA17</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="robotics-item">
-      <div class="robotics-num"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l1.5-4A2 2 0 0 1 7.4 7h9.2a2 2 0 0 1 1.9 1L20 12"/><rect x="3" y="12" width="18" height="5" rx="1.5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></div>
-      <div>
-        <div class="robotics-title" data-en="Autonomous RC Car — FIRA Competition" data-ru="Автономная RC-машина — соревнования FIRA">Autonomous RC Car — FIRA Competition</div>
-        <div class="robotics-desc" data-en="RC car with autonomous navigation for FIRA competition. Computer vision-based control running on Linux. Developed in collaboration with team NDTP." data-ru="RC-машина с автономной навигацией для соревнований FIRA. Управление на основе компьютерного зрения, запускается на Linux. Разработана совместно с командой NDTP.">RC car with autonomous navigation for FIRA competition. Computer vision-based control running on Linux. Developed in collaboration with team NDTP.</div>
-        <div class="tag-row">
-          <span class="tag">FIRA</span>
-          <span class="tag">Computer Vision</span>
-          <span class="tag">Linux</span>
-          <span class="tag orange">Autonomous</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div style="margin-top:16px; text-align:right;">
-    <a href="/robotics/" data-en="Robotics in detail →" data-ru="Подробнее о роботах →" style="font-size:14px;">Robotics in detail →</a>
-  </div>
-</section>
-
-<!-- EXPLORE -->
-<section>
-  <div class="section-title" data-en="Case study" data-ru="Кейс">Case study</div>
-  <div class="about-grid">
-    <a class="card" href="/safalife/" style="color: var(--text); text-decoration: none; grid-column: 1 / -1; border-color: rgba(63,185,80,.35);">
-      <div class="card-title" data-en="Safalife — courier delivery app · in production →" data-ru="Safalife — приложение для курьеров · в продакшне →">Safalife — courier delivery app · in production →</div>
-      <p data-en="Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline." data-ru="Спроектировал, разработал и вывел в прод для логистической компании в Узбекистане: Flutter-приложение, бэкенд на FastAPI, собственная маршрутизация OSRM, подписанный релизный пайплайн.">Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline.</p>
-      <div class="tag-row">
-        <span class="tag green" data-en="In production" data-ru="В продакшне">In production</span>
-        <span class="tag">Flutter</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">OSRM</span>
-      </div>
-    </a>
-  </div>
-
-  <div class="section-title" style="margin-top: 48px;" data-en="Explore" data-ru="Разделы сайта">Explore</div>
-  <div class="about-grid">
-    <a class="card" href="/homelab/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="Homelab →" data-ru="Домашний сервер →">Homelab →</div>
-      <p data-en="What runs on my home server around the clock — and what keeps it alive." data-ru="Что крутится на домашнем сервере круглосуточно — и что не даёт ему умереть.">What runs on my home server around the clock — and what keeps it alive.</p>
-    </a>
-    <a class="card" href="/minecraft/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="Minecraft network →" data-ru="Minecraft-сеть →">Minecraft network →</div>
-      <p data-en="Five servers behind one proxy, my own plugins, Telegram admin bot." data-ru="Пять серверов за одним прокси, мои плагины, Telegram-бот администратора.">Five servers behind one proxy, my own plugins, Telegram admin bot.</p>
-    </a>
-    <a class="card" href="/print3d/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="3D printing →" data-ru="3D-печать →">3D printing →</div>
-      <p data-en="Klipper, accelerometer-tuned input shaping, a bridge for the stock screen." data-ru="Klipper, input shaping по акселерометру, мост для родного экрана.">Klipper, accelerometer-tuned input shaping, a bridge for the stock screen.</p>
-    </a>
-    <a class="card" href="/uses/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="Uses →" data-ru="Инструменты →">Uses →</div>
-      <p data-en="Hardware and tools I actually use daily." data-ru="Железо и инструменты, которыми реально пользуюсь каждый день.">Hardware and tools I actually use daily.</p>
-    </a>
-  </div>
-  <div style="margin-top:16px; text-align:right;">
-    <a href="/about/" data-en="My path, education &amp; awards →" data-ru="Мой путь, образование и награды →" style="font-size:14px;">My path, education &amp; awards →</a>
-  </div>
-</section>
-
-<!-- NOW -->
-<section id="now" class="band">
-  <div class="section-title" data-en="Now" data-ru="Сейчас">Now</div>
-  <div class="now-grid">
-    <div class="now-card">
-      <div class="now-card-header">
-        <div class="now-dot"></div>
-        <div class="now-card-title" data-en="Building" data-ru="В разработке">Building</div>
-      </div>
-      <p data-en="Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software." data-ru="Онлайн 3D-слайсер с режимами для начинающих/продвинутых и паритетом с OrcaSlicer — нарезка STL прямо в браузере без установки ПО.">Online 3D slicer with beginner/advanced modes and OrcaSlicer parity — browser-based STL slicing without installing software.</p>
-      <div class="tag-row">
-        <span class="tag">Three.js</span>
-        <span class="tag">CuraEngine</span>
-        <span class="tag yellow">PostgreSQL</span>
-        <span class="tag">WIP</span>
-      </div>
-    </div>
-    <div class="now-card">
-      <div class="now-card-header">
-        <div class="now-dot"></div>
-        <div class="now-card-title" data-en="Running in production" data-ru="Работает в продакшне">Running in production</div>
-      </div>
-      <p data-en="Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan. 10+ Telegram bots live on home server." data-ru="Приложение Safalife для курьеров — Flutter + FastAPI + маршрутизация OSRM, развёрнуто для логистической компании в Узбекистане. 10+ Telegram-ботов работают на домашнем сервере.">Safalife courier app — Flutter + FastAPI + OSRM routing, deployed for a logistics company in Uzbekistan. 10+ Telegram bots live on home server.</p>
-      <div class="tag-row">
-        <span class="tag green">Live</span>
-        <span class="tag">Flutter</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">OSRM</span>
-        <span class="tag"><a href="/safalife/" style="color: inherit;">Case study →</a></span>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:16px; text-align:right;">
-    <a href="/now/" data-en="More about what I'm doing now →" data-ru="Подробнее, чем я занят →" style="font-size:14px;">More about what I'm doing now →</a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-title" data-en="Contact" data-ru="Контакты">Contact</div>
-  <div class="contact-grid">
-
-    <a class="contact-card" href="https://github.com/Mukller" target="_blank">
-      <div class="contact-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      </div>
-      <div class="contact-text">
-        <span class="contact-label">GitHub</span>
-        <span class="contact-value">Mukller</span>
-      </div>
-    </a>
-
-    <a class="contact-card" href="https://t.me/chotokek" target="_blank">
-      <div class="contact-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.17l-2.04 9.6c-.15.68-.55.85-1.11.53l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.6-5.06c.24-.22-.05-.34-.38-.12L6.6 14.55l-3-.94c-.65-.2-.66-.65.14-.96l11.73-4.52c.54-.2 1.02.13.84.96.01 0 .25 0 .25-.92z"/></svg>
-      </div>
-      <div class="contact-text">
-        <span class="contact-label">Telegram</span>
-        <span class="contact-value">@chotokek</span>
-      </div>
-    </a>
-
-    <a class="contact-card" href="mailto:anton.petnitsky@gmail.com">
-      <div class="contact-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      </div>
-      <div class="contact-text">
-        <span class="contact-label">Email</span>
-        <span class="contact-value">anton.petnitsky@gmail.com</span>
-      </div>
-    </a>
-
-
-
-  </div>
-</section>
+</main>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-social">
-      <a class="footer-social-icon" href="mailto:anton.petnitsky@gmail.com" aria-label="Email" title="Email">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      </a>
-      <a class="footer-social-icon" href="https://www.linkedin.com/in/anton-petnitsky" target="_blank" aria-label="LinkedIn" title="LinkedIn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a class="footer-social-icon" href="https://www.tiktok.com/@anton_petnitsky" target="_blank" aria-label="TikTok" title="TikTok">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-      </a>
-      <a class="footer-social-icon" href="https://www.instagram.com/anton_petnitsky" target="_blank" aria-label="Instagram" title="Instagram">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.87 5.87 0 0 0-1.39-2.13A5.87 5.87 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg>
-      </a>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-copy">
-      <span data-en="&copy; 2026 &lt;strong&gt;Anton Petnitsky&lt;/strong&gt;. All rights reserved." data-ru="&copy; 2026 &lt;strong&gt;Антон Петницкий&lt;/strong&gt;. Все права защищены.">&copy; 2026 <strong>Anton Petnitsky</strong>. All rights reserved.</span>
-      <br>
-      <span data-en="Minsk, Belarus · Remote only" data-ru="Минск, Беларусь · Только удалённо">Minsk, Belarus · Remote only</span>
-    </div>
-    <div class="footer-license">
-      <a class="footer-badge" href="https://github.com/Mukller/antonpetnitsky.com" target="_blank">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.8 1.3 3.48 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        Open Source
-      </a>
-      <a href="https://opensource.org/licenses/MIT" target="_blank" data-en="MIT License" data-ru="Лицензия MIT">MIT License</a>
-    </div>
-  </div>
+  <span>© 2026 Anton Petnitsky · Minsk, BY</span>
+  <span><a href="https://github.com/Mukller/antonpetnitsky.com" rel="noopener">v3 · source</a></span>
 </footer>
 
-<script>
-  (function () {
-    var frame = document.getElementById('heroFrame');
-    var alt = document.getElementById('heroAlt');
-    var base = document.getElementById('heroBase');
-    if (!frame || !alt || !base) return;
-
-    alt.innerHTML = base.innerHTML;
-    var focusables = alt.querySelectorAll('a, button');
-    for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
-    var imgs = alt.querySelectorAll('img');
-    for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
-
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    /* title cycles between languages — clean crossfade, no garbage chars */
-    var tB = document.getElementById('titleBase');
-    var tA = alt.querySelector('.hero-title');
-    if (tA) tA.removeAttribute('id');
-    var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
-    var li = 0, busy = false, firstSet = true;
-
-    function swapTitle(to) {
-      if (busy || !tB || !tA) return;
-      busy = true;
-      tB.style.opacity = 0;
-      tA.style.opacity = 0;
-      setTimeout(function () {
-        tB.textContent = to;
-        tA.textContent = to;
-        tB.style.opacity = 1;
-        tA.style.opacity = 1;
-        setTimeout(function () { busy = false; }, 260);
-      }, 240);
-    }
-
-    window.heroSetLang = function (l) {
-      li = l === 'ru' ? 1 : 0;
-      var to = LINES[li];
-      if (firstSet) {
-        firstSet = false;
-        tB.textContent = to;
-        tA.textContent = to;
-        return;
-      }
-      swapTitle(to);
-    };
-
-    var R = 0, target = 0, mx = -600, my = -600, lastCX = null, lastCY = null, running = false;
-    function loop() {
-      R += (target - R) * 0.16;
-      if (Math.abs(target - R) < 0.4) R = target;
-      alt.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + mx.toFixed(1) + 'px ' + my.toFixed(1) + 'px)';
-      if (R !== target) { requestAnimationFrame(loop); } else { running = false; }
-    }
-    function wake() { if (!running) { running = true; requestAnimationFrame(loop); } }
-    function move(x, y) {
-      lastCX = x; lastCY = y;
-      var b = frame.getBoundingClientRect();
-      mx = x - b.left; my = y - b.top;
-      target = 200;
-      wake();
-    }
-    frame.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
-    frame.addEventListener('mouseleave', function () { target = 0; wake(); });
-    window.addEventListener('scroll', function () {
-      if (lastCX !== null && target > 0) move(lastCX, lastCY);
-    }, { passive: true });
-    frame.addEventListener('touchmove', function (e) {
-      var t = e.touches[0];
-      if (t) move(t.clientX, t.clientY);
-    }, { passive: true });
-    frame.addEventListener('touchend', function () { target = 0; wake(); });
-  })();
-</script>
-
-<script>
-  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.startsWith('ru') ? 'ru' : 'en');
-
-  function applyLang(l) {
-    document.querySelectorAll('[data-' + l + ']').forEach(function(el) {
-      var val = el.getAttribute('data-' + l);
-      if (val) el.innerHTML = val;
-    });
-    document.documentElement.lang = l;
-    document.getElementById('langBtn').textContent = l === 'ru' ? 'EN' : 'RU';
-    lang = l;
-    localStorage.setItem('ap_lang', l);
-    if (window.heroSetLang) window.heroSetLang(l);
-  }
-
-  function toggleLang() {
-    applyLang(lang === 'ru' ? 'en' : 'ru');
-  }
-
-  function applyTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('ap_theme', t);
-    var m = document.querySelector('meta[name="theme-color"]');
-    if (m) m.setAttribute('content', t === 'light' ? '#edf0f3' : '#0d1117');
-  }
-
-  function toggleTheme() {
-    applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
-  }
-
-  applyLang(lang);
-</script>
-<script>
-  (function () {
-    var b = document.getElementById('burgerBtn');
-    var m = document.getElementById('mobileMenu');
-    if (b && m) b.addEventListener('click', function () { m.hidden = !m.hidden; });
-  })();
-</script>
 </body>
 </html>

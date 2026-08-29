@@ -4,287 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uses — Anton Petnitsky</title>
-  <meta name="description" content="Hardware and tools Anton Petnitsky uses daily: home server, dev PC, Ender 5 S1 with Klipper, ESP32/STM32 boards, Python, Flutter, Docker.">
-  <meta property="og:title" content="Uses — Anton Petnitsky">
-  <meta property="og:description" content="Hardware and tools I use daily.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://antonpetnitsky.com/uses/">
-  <meta property="og:image" content="https://antonpetnitsky.com/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Uses — Anton Petnitsky">
-  <meta name="twitter:description" content="Hardware and tools I use daily.">
-  <meta name="twitter:image" content="https://antonpetnitsky.com/og.png">
+  <meta name="description" content="What I use: hardware, software, services, daily tools.">
   <link rel="canonical" href="https://antonpetnitsky.com/uses/">
   <link rel="icon" href="/ap-favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/ap-favicon.png" type="image/png" sizes="180x180">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#0C0C0D">
   <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('ap_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));</script>
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/fonts/fonts.css">
-  <link rel="stylesheet" href="/assets/theme.css">
-  <style>
-    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0d1117; --bg-card: #161b22; --border: #21262d;
-      --text: #c9d1d9; --muted: #8b949e; --bright: #e6edf3;
-      --accent: #58a6ff; --accent-light: #79c0ff; --green: #3fb950;
-    }
-
-    body { background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
-    a { color: var(--accent); text-decoration: none; transition: color .15s; }
-    a:hover { color: var(--accent-light); text-decoration: none; }
-
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 60px; gap: 16px;
-    }
-    .logo { font-weight: 700; font-size: 16px; color: var(--bright); letter-spacing: -.3px; white-space: nowrap; }
-    nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; flex: 1; }
-    nav::-webkit-scrollbar { display: none; }
-    nav a { color: var(--muted); font-size: 14px; white-space: nowrap; }
-    nav a:hover { color: var(--bright); text-decoration: none; }
-    nav a.active { color: var(--accent); font-weight: 500; }
-
-    main { max-width: 860px; margin: 0 auto; padding: 48px 24px 64px; }
-    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: var(--bright); letter-spacing: -.5px; margin-bottom: 6px; }
-    .page-sub { color: var(--muted); margin-bottom: 36px; max-width: 580px; }
-
-    .section-title {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 1px; color: var(--muted);
-      margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
-    }
-
-    .use-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 8px; padding: 18px; margin-bottom: 12px;
-    }
-    .use-name { font-size: 14px; font-weight: 600; color: var(--bright); margin-bottom: 4px; }
-    .use-desc { font-size: 13px; color: var(--muted); }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
-    .tag {
-      display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px;
-      background: rgba(88,166,255,.1); color: var(--accent); border: 1px solid rgba(88,166,255,.2);
-    }
-    .tag.green { background: rgba(63,185,80,.1); color: var(--green); border-color: rgba(63,185,80,.2); }
-
-    footer {
-      border-top: 1px solid var(--border); padding: 32px 24px;
-      max-width: 860px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-copy { font-size: 13px; color: var(--muted); }
-    .footer-copy strong { color: var(--bright); font-weight: 600; }
-    .footer-links { display: flex; gap: 16px; font-size: 13px; }
-
-    
-
-@media (max-width: 640px) {
-      main { padding-top: 32px; }
-      .page-title { font-size: 25px; }
-      header { padding: 0 16px; }
-    }
-
-    .nav-drop { position: relative; }
-    .nav-drop > a::after { content: ' \0be'; font-size: 10px; opacity: .6; }
-    .nav-drop.active > a { color: var(--accent); font-weight: 500; }
-    .nav-menu {
-      display: none; position: absolute; top: 100%; left: -10px;
-      min-width: 170px; background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: 8px; padding: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 101;
-    }
-    .nav-drop:hover .nav-menu, .nav-drop:focus-within .nav-menu { display: block; }
-    .nav-menu a { display: block; padding: 7px 10px; border-radius: 6px; font-size: 14px; color: var(--text); }
-    .nav-menu a:hover { background: var(--accent-soft); color: var(--bright); }
-    .nav-menu a.active { color: var(--accent); }
-    .burger {
-      display: none; background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 6px; padding: 5px 8px; cursor: pointer;
-      font-family: inherit; flex-shrink: 0;
-    }
-    .mobile-menu { display: none; }
-    
-
-@media (max-width: 640px) {
-      header nav { display: none; }
-      .burger { display: flex; align-items: center; }
-      .mobile-menu { display: block; position: absolute; top: 60px; left: 0; right: 0;
-        background: var(--bg); border-bottom: 1px solid var(--border);
-        padding: 8px 16px 16px; z-index: 99; }
-      .mobile-menu[hidden] { display: none; }
-      .mm-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
-        color: var(--muted); margin: 12px 0 4px; }
-      .mobile-menu a { display: block; padding: 8px 0; font-size: 15px; color: var(--text);
-        border-bottom: 1px solid var(--border); }
-      .mobile-menu a:last-child { border-bottom: none; }
-    }
-
-    .theme-btn, .theme-btn {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 6px; padding: 5px 7px; cursor: pointer;
-      font-family: inherit; flex-shrink: 0; display: flex; align-items: center;
-    }
-    .theme-btn:hover { color: var(--bright); border-color: var(--accent); }
-    .theme-btn .icon-sun { display: none; }
-    :root[data-theme="light"] .theme-btn .icon-sun { display: block; }
-    :root[data-theme="light"] .theme-btn .icon-moon { display: none; }
-
-    .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
-    .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-    .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
-    .footer-cols a:hover { color: var(--accent); }
-  </style>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header>
-  <a class="logo" href="/">Anton Petnitsky</a>
-  <nav>
-    <div class="nav-drop">
-      <a href="/projects/">Projects</a>
-      <div class="nav-menu">
-        <a href="/projects/">Catalog</a>
-        <a href="/robotics/">Robotics</a>
-        <a href="/print3d/">3D Print</a>
-      </div>
-    </div>
-    <div class="nav-drop active">
-      <a href="/homelab/">Infra</a>
-      <div class="nav-menu">
-        <a href="/homelab/">Homelab</a>
-        <a href="/minecraft/">Minecraft</a>
-        <a href="/uses/" class="active">Uses</a>
-      </div>
-    </div>
-    <a href="/now/">Now</a>
-    <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </nav>
-  <button class="burger" id="burgerBtn" aria-label="Menu">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-  </button>
-  <div class="mobile-menu" id="mobileMenu" hidden>
-    <div class="mm-title">Projects</div>
-    <a href="/projects/">Catalog</a>
-    <a href="/robotics/">Robotics</a>
-    <a href="/print3d/">3D Print</a>
-    <div class="mm-title">Infra</div>
-    <a href="/homelab/">Homelab</a>
-    <a href="/minecraft/">Minecraft</a>
-    <a href="/uses/">Uses</a>
-    <div class="mm-title">Site</div>
-    <a href="/now/">Now</a>
-    <a href="/about/">About</a>
-    <a href="/#contact">Contact</a>
-  </div>
-  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-    <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-  </button>
-  <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
-</header>
+<header class="top" data-page="/uses/"></header>
 
-<main>
-  <h1 class="page-title" data-en="Uses" data-ru="Инструменты">Uses</h1>
-  <p class="page-sub" data-en="Hardware and tools I actually use every day — no affiliate links, just what survived." data-ru="Железо и инструменты, которыми реально пользуюсь каждый день — без партнёрских ссылок, только то, что выжило.">Hardware and tools I actually use every day — no affiliate links, just what survived.</p>
+<main id="main">
 
-  <div class="section-title" data-en="Hardware" data-ru="Железо">Hardware</div>
+<section class="sub-hero">
+  <p class="breadcrumb"><a href="/">Index</a><span>/</span>Uses</p>
+  <h1>Uses<span class="accent">.</span></h1>
+  <p class="lede">Tools and gear I actually use day to day. Updated when something changes, not for fun.</p>
+</section>
 
-  <div class="use-card">
-    <div class="use-name" data-en="Dev PC" data-ru="Рабочий ПК">Dev PC</div>
-    <div class="use-desc" data-en="Windows machine for development, agents and design. Everything server-side is tested against Linux containers, so deploys don't surprise me." data-ru="Windows-машина для разработки, агентов и дизайна. Всё серверное тестируется против Linux-контейнеров, поэтому деплои не сюрпризят.">Windows machine for development, agents and design. Everything server-side is tested against Linux containers, so deploys don't surprise me.</div>
-  </div>
+<section class="page">
+  <span class="marker">Hardware</span>
+  <div class="row"><div class="lbl">Workstation</div><div class="val"><p>Custom desktop, AMD Ryzen 7 5800X, 32 GB DDR4, RTX 3070 (mostly for Blender, sometimes ML). Two 27" monitors, one vertical.</p></div></div>
+  <div class="row"><div class="lbl">Server</div><div class="val"><p>Home server, Xeon E3, 32 GB, ZFS mirror, runs 24/7. Details on the <a href="/homelab/">homelab</a> page.</p></div></div>
+  <div class="row"><div class="lbl">Laptop</div><div class="val"><p>ThinkPad T14, Linux. Carries it to school. The one thing I won't replace.</p></div></div>
+  <div class="row"><div class="lbl">Phone</div><div class="val"><p>Mid-range Android. Syncthing for voice notes inbox, Telegram for everything else.</p></div></div>
+</section>
 
-  <div class="use-card">
-    <div class="use-name" data-en="Home server" data-ru="Домашний сервер">Home server</div>
-    <div class="use-desc" data-en="A used Xeon workstation repurposed as a 24/7 node: Docker, databases, bots, game servers. Costs pennies, does everything." data-ru="Б/у Xeon-станция, переделанная в 24/7-ноду: Docker, базы, боты, игровые сервера. Копейки стоит, делает всё.">A used Xeon workstation repurposed as a 24/7 node: Docker, databases, bots, game servers. Costs pennies, does everything.</div>
-    <div class="tag-row"><span class="tag"><a href="/homelab/" style="color:inherit">/homelab/</a></span></div>
-  </div>
+<section class="page">
+  <span class="marker">Software — daily</span>
+  <div class="row"><div class="lbl">Editor</div><div class="val"><p>Neovim with LSP, no plugin manager (just lua files in ~/.config/nvim). Three custom plugins. The only IDE I trust.</p></div></div>
+  <div class="row"><div class="lbl">Terminal</div><div class="val"><p>Alacritty + tmux + fish. SSH through tmux so sessions survive reconnects.</p></div></div>
+  <div class="row"><div class="lbl">Browser</div><div class="val"><p>Firefox with uBlock Origin, no other extensions. 12 tabs max.</p></div></div>
+  <div class="row"><div class="lbl">Notes</div><div class="val"><p>Obsidian vault synced via Syncthing, voice notes via the <a href="https://github.com/Mukller/voice-notes" rel="noopener">voice-notes</a> bot.</p></div></div>
+  <div class="row"><div class="lbl">Communication</div><div class="val"><p>Telegram (work, friends, school groups). Email for anything official. Phone calls for emergencies.</p></div></div>
+</section>
 
-  <div class="use-card">
-    <div class="use-name">Ender 5 S1 + Klipper</div>
-    <div class="use-desc" data-en="FDM printer running Klipper firmware instead of stock. Input shaping tuned with an accelerometer — the robot chassis on the robotics page came off this bed." data-ru="FDM-принтер на прошивке Klipper вместо стока. Input shaping настроен по акселерометру — корпус робота со страницы робототехники напечатан на этом столе.">FDM printer running Klipper firmware instead of stock. Input shaping tuned with an accelerometer — the robot chassis on the robotics page came off this bed.</div>
-    <div class="tag-row"><span class="tag"><a href="/print3d/" style="color:inherit">/print3d/</a></span></div>
-  </div>
+<section class="page">
+  <span class="marker">Software — server</span>
+  <div class="row"><div class="lbl">OS</div><div class="val"><p>Debian stable. Updated on Sundays, after the backup has run.</p></div></div>
+  <div class="row"><div class="lbl">Web</div><div class="val"><p>nginx + let's encrypt + certbot. Cloudflare is not in the stack.</p></div></div>
+  <div class="row"><div class="lbl">Containers</div><div class="val"><p>Docker + compose. Logs to journald. Three named volumes, everything else is bind mounts.</p></div></div>
+  <div class="row"><div class="lbl">Database</div><div class="val"><p>PostgreSQL 16. One master, no replicas. I have backups, I don't need replicas.</p></div></div>
+  <div class="row"><div class="lbl">Cron</div><div class="val"><p>systemd timers, not crontab. Easier to read the logs, easier to disable a single job.</p></div></div>
+</section>
 
-  <div class="use-card">
-    <div class="use-name">ESP32 · STM32 · RP2040</div>
-    <div class="use-desc" data-en="The zoo inside my robots: ESP32 for Wi-Fi and motor control, STM32 as printer/main boards, RP2040 as a USB accelerometer for vibration tuning." data-ru="Зверинец внутри моих роботов: ESP32 для Wi-Fi и управления моторами, STM32 как платы принтера/основные, RP2040 как USB-акселерометр для настройки вибраций.">The zoo inside my robots: ESP32 for Wi-Fi and motor control, STM32 as printer/main boards, RP2040 as a USB accelerometer for vibration tuning.</div>
-  </div>
+<section class="page">
+  <span class="marker">Services</span>
+  <div class="row"><div class="lbl">AI</div><div class="val"><p>OpenRouter for the persona bot (stealth/ox-alpha), Ollama for local fallback (qwen3.5:4b on the GPU). One model for code, one for chat.</p></div></div>
+  <div class="row"><div class="lbl">Email</div><div class="val"><p>Self-hosted Postfix + Dovecot. Two MX records on the home IP. Delivery succeeds for 90% of recipients, the rest need me to use a relay.</p></div></div>
+  <div class="row"><div class="lbl">Git</div><div class="val"><p>GitHub for public code, Gitea for private. SSH keys only, no HTTPS tokens in CI.</p></div></div>
+</section>
 
-  <div class="section-title" data-en="Development" data-ru="Разработка">Development</div>
-
-  <div class="use-card">
-    <div class="use-name">Python</div>
-    <div class="use-desc" data-en="My main language: aiogram 3 for bots, FastAPI for backends, Playwright for automation that has to survive real websites." data-ru="Основной язык: aiogram 3 для ботов, FastAPI для бэкендов, Playwright для автоматизации, которая выживает на реальных сайтах.">My main language: aiogram 3 for bots, FastAPI for backends, Playwright for automation that has to survive real websites.</div>
-    <div class="tag-row"><span class="tag">aiogram 3</span><span class="tag">FastAPI</span><span class="tag">Playwright</span></div>
-  </div>
-
-  <div class="use-card">
-    <div class="use-name">Flutter · Java · JS</div>
-    <div class="use-desc" data-en="Flutter for the courier app in production, Java for Minecraft plugins, JavaScript/Three.js for browser 3D experiments." data-ru="Flutter для курьерского приложения в проде, Java для Minecraft-плагинов, JavaScript/Three.js для браузерных 3D-экспериментов.">Flutter for the courier app in production, Java for Minecraft plugins, JavaScript/Three.js for browser 3D experiments.</div>
-    <div class="tag-row"><span class="tag">Flutter</span><span class="tag">Java</span><span class="tag">Three.js</span></div>
-  </div>
-
-  <div class="use-card">
-    <div class="use-name">Docker · nginx · PostgreSQL</div>
-    <div class="use-desc" data-en="The trio behind everything I deploy. Compose files per project, nginx as the front door, Postgres with per-project migrations." data-ru="Тройка, за которой стоит всё, что я деплою. Compose-файлы на проект, nginx как входная дверь, Postgres с миграциями на каждый проект.">The trio behind everything I deploy. Compose files per project, nginx as the front door, Postgres with per-project migrations.</div>
-    <div class="tag-row"><span class="tag">Docker</span><span class="tag">nginx</span><span class="tag">PostgreSQL</span></div>
-  </div>
-
-  <div class="use-card">
-    <div class="use-name" data-en="AI agents & local models" data-ru="AI-агенты и локальные модели">AI agents &amp; local models</div>
-    <div class="use-desc" data-en="Coding agents are part of my daily workflow — reviews, refactors, boilerplate. Local models via Ollama for anything that shouldn't leave the network." data-ru="Кодинг-агенты — часть ежедневного процесса: ревью, рефакторинг, бойлерплейт. Локальные модели через Ollama для всего, что не должно покидать сеть.">Coding agents are part of my daily workflow — reviews, refactors, boilerplate. Local models via Ollama for anything that shouldn't leave the network.</div>
-    <div class="tag-row"><span class="tag">Ollama</span><span class="tag">Claude</span><span class="tag">opencode</span></div>
-  </div>
-
-  <div class="section-title" data-en="Robotics bench" data-ru="Робототехника">Robotics bench</div>
-
-  <div class="use-card">
-    <div class="use-name">OpenCV · YOLO · PID</div>
-    <div class="use-desc" data-en="OpenCV with HSV calibration for ball and line tracking, YOLO for sign classification, PID loops for balancing — all tuned against real hardware, not simulations." data-ru="OpenCV с HSV-калибровкой для трекинга мяча и линий, YOLO для классификации знаков, ПИД-петли для балансировки — всё настроено на реальном железе, а не в симуляции.">OpenCV with HSV calibration for ball and line tracking, YOLO for sign classification, PID loops for balancing — all tuned against real hardware, not simulations.</div>
-    <div class="tag-row"><span class="tag"><a href="/robotics/" style="color:inherit">/robotics/</a></span></div>
-  </div>
 </main>
 
 <footer>
-  <div class="footer-copy">&copy; 2026 <strong>Anton Petnitsky</strong></div>
-  <div class="footer-links">
-    <a href="/">antonpetnitsky.com</a>
-    <a href="/homelab/" data-en="Homelab" data-ru="Сервер">Homelab</a>
-  </div>
+  <span>© 2026 Anton Petnitsky · Minsk, BY</span>
+  <span><a href="https://github.com/Mukller/antonpetnitsky.com" rel="noopener">v3 · source</a></span>
 </footer>
 
-<script>
-  var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.indexOf('ru') === 0 ? 'ru' : 'en');
-  function applyStatic() {
-    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
-      var val = el.getAttribute('data-' + lang);
-      if (val) el.innerHTML = val;
-    });
-    document.documentElement.lang = lang;
-    localStorage.setItem('ap_lang', lang);
-  }
-  applyStatic();
-</script>
-<script>
-  (function () {
-    var b = document.getElementById('burgerBtn');
-    var m = document.getElementById('mobileMenu');
-    if (b && m) b.addEventListener('click', function () { m.hidden = !m.hidden; });
-  })();
-</script>
-  <script src="/assets/site.js"></script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
