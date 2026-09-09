@@ -1001,7 +1001,22 @@
     .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
     .footer-cols a { display: block; font-size: 13px; color: var(--muted); padding: 3px 0; }
     .footer-cols a:hover { color: var(--accent); }
-  </style>
+  
+
+/* Theme button icon colors fix */
+    .theme-btn svg,
+    .theme-btn svg * {
+        stroke: inherit;
+        fill: none;
+    }
+    :root[data-theme="dark"] .theme-btn svg,
+    :root[data-theme="dark"] .theme-btn svg * {
+        stroke: #e6edf3 !important;
+    }
+    :root[data-theme="light"] .theme-btn svg,
+    :root[data-theme="light"] .theme-btn svg * {
+        stroke: #1f2328 !important;
+    }</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
