@@ -1,8 +1,7 @@
-/* Light theme overrides — loaded on every page after page styles */
+/* light theme overrides — loaded on every page after page styles */
 :root[data-theme="light"] {
   --bg: #edf0f3;
   --bg-card: #f7f9fa;
-  --band-bg: #e4e8ec;
   --border: #d5dbe1;
   --text: #3d444d;
   --muted: #59646e;
@@ -11,9 +10,6 @@
   --accent-light: #0550ae;
   --green: #1a7f37;
   --green-hover: #187733;
-  --red: #cf222e;
-  --yellow: #9a6700;
-  --orange: #bc4c00;
   --header-a: rgba(237, 240, 243, 0.95);
   --header-b: rgba(237, 240, 243, 0.8);
   --wm: rgba(31, 35, 40, .06);
@@ -28,4 +24,19 @@
   --flash-wm: rgba(230, 237, 243, .07);
   --header-a: rgba(237, 240, 243, 0.95);
   --header-b: rgba(237, 240, 243, 0.8);
+}
+
+/* Theme button icon colors */
+.theme-btn svg,
+.theme-btn svg * {
+  stroke: inherit;
+  fill: none;
+}
+:root[data-theme="dark"] .theme-btn svg,
+:root[data-theme="dark"] .theme-btn svg * {
+  stroke: #e6edf3 !important;
+}
+:root[data-theme="light"] .theme-btn svg,
+:root[data-theme="light"] .theme-btn svg * {
+  stroke: #1f2328 !important;
 }
