@@ -222,7 +222,9 @@ footer {
   border-top: 1px solid var(--line);
   padding: 32px 0 64px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   font-size: 11px;
   color: var(--fg-soft);
   letter-spacing: 0.04em;

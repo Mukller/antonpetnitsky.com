@@ -49,9 +49,9 @@
       --orange:    #ffa657;
       --header-a:  rgba(13, 17, 23, 0.95);
       --header-b:  rgba(13, 17, 23, 0.8);
-      --wm:        rgba(230, 237, 243, .05);
+      --wm:        rgba(230, 237, 243, .18);
       --accent-soft: rgba(88, 166, 255, .1);
-      --flash-bg:    #e9eef5;
+      --flash-bg:    #ffffff;
       --flash-text:  #0d1117;
       --flash-muted: #57606a;
       --flash-accent:#1f6feb;
@@ -85,17 +85,17 @@
       --container-max: 860px;
       --container-padding: 24px;
 
-      /* Light theme overrides */
+      /* Flashlight variables — pure white spotlight */
       --header-a:  rgba(255, 255, 255, 0.95);
       --header-b:  rgba(255, 255, 255, 0.8);
-      --wm:        rgba(31, 35, 40, .06);
+      --wm:        rgba(230, 237, 243, .18);
       --accent-soft: rgba(9, 105, 218, .08);
-      --flash-bg:    #0d1117;
-      --flash-text:  #f0f6fc;
-      --flash-muted: #8b949e;
-      --flash-accent:#58a6ff;
+      --flash-bg:    #ffffff;
+      --flash-text:  #0d1117;
+      --flash-muted: #57606a;
+      --flash-accent:#1f6feb;
       --flash-green: #3fb950;
-      --flash-border: rgba(240, 246, 252, .3);
+      --flash-border: rgba(13, 17, 23, .3);
       --flash-card:  #161b22;
       --flash-wm:    rgba(230, 237, 243, .07);
     }
@@ -127,7 +127,7 @@
       --green-hover: #187733;
       --header-a:  rgba(237, 240, 243, 0.95);
       --header-b:  rgba(237, 240, 243, 0.8);
-      --wm:        rgba(31, 35, 40, .06);
+      --wm:        rgba(31, 35, 40, .12);
       --accent-soft: rgba(9, 105, 218, .08);
       --flash-bg:    #0d1117;
       --flash-text:  #f0f6fc;
@@ -135,7 +135,7 @@
       --flash-accent:#58a6ff;
       --flash-green: #3fb950;
       --flash-border: rgba(240, 246, 252, .3);
-      --flash-card:  #161b22;
+      --flash-card:  #ffffff;
       --flash-wm:    rgba(230, 237, 243, .07);
     }
 
@@ -277,25 +277,34 @@
 
     .hero-wm {
       position: absolute;
-      inset: -12% -6%;
+      inset: -28% -18%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      align-items: center;
       pointer-events: none;
       user-select: none;
     }
 
     .wm-row {
-      font-size: clamp(64px, 9vw, 112px);
+      font-size: clamp(36px, 5vw, 56px);
       font-weight: 800;
       letter-spacing: .28em;
       white-space: nowrap;
       line-height: 1;
       color: var(--wm);
+      opacity: .22;
+      transform: rotate(-30deg);
     }
-    .wm-row:nth-child(2) { transform: translateX(-12%); }
-    .wm-row:nth-child(3) { transform: translateX(8%); }
-    .wm-row:nth-child(4) { transform: translateX(-5%); }
+    .wm-row:nth-child(2) { transform: rotate(-30deg); }
+    .wm-row:nth-child(3) { transform: rotate(-30deg); }
+    .wm-row:nth-child(4) { transform: rotate(-30deg); }
+    .wm-row:nth-child(5) { transform: rotate(-30deg); }
+    .wm-row:nth-child(6) { transform: rotate(-30deg); }
+    .wm-row:nth-child(7) { transform: rotate(-30deg); }
+    .wm-row:nth-child(8) { transform: rotate(-30deg); }
+    .wm-row:nth-child(9) { transform: rotate(-30deg); }
+    .wm-row:nth-child(10) { transform: rotate(-30deg); }
 
     .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
 
@@ -321,7 +330,7 @@
       will-change: clip-path;
       clip-path: circle(0px at -500px -500px);
     }
-    .hero-alt .wm-row { color: var(--flash-wm); }
+    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(36px, 5vw, 56px); letter-spacing: .24em; transform: rotate(-30deg); }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
@@ -1039,11 +1048,8 @@
       <a href="/homelab/">Infra</a>
       <div class="nav-menu">
         <a href="/homelab/">Homelab</a>
-        <a href="/minecraft/">Minecraft</a>
-        <a href="/uses/">Uses</a>
       </div>
     </div>
-    <a href="/now/">Now</a>
     <a href="/about/">About</a>
     <a href="/#contact">Contact</a>
   </nav>
@@ -1062,10 +1068,7 @@
     <a href="/print3d/">3D Print</a>
     <div class="mm-title">Infra</div>
     <a href="/homelab/">Homelab</a>
-    <a href="/minecraft/">Minecraft</a>
-    <a href="/uses/">Uses</a>
     <div class="mm-title">Site</div>
-    <a href="/now/">Now</a>
     <a href="/about/">About</a>
     <a href="/#contact">Contact</a>
   </div>
@@ -1076,6 +1079,12 @@
   <div class="hero-frame" id="heroFrame">
     <div class="hero-layer" id="heroBase">
     <div class="hero-wm" aria-hidden="true">
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
@@ -1217,6 +1226,33 @@
         <span class="tag gray">REST APIs</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="band">
+  <div class="section-title" data-en="Services" data-ru="Услуги">Services</div>
+  <div class="services-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 860px;">
+    <a class="card" href="mailto:anton.petnitsky@gmail.com" style="color: var(--text); text-decoration: none; border-color: rgba(63,185,80,.35);">
+      <div class="card-title" style="color: var(--green);" data-en="Custom site — price negotiable" data-ru="Сайт под ключ — цена обсуждаема">Custom site — price negotiable</div>
+      <p data-en="Modern portfolio, landing page, or web service. Design + frontend + backend. HTML/CSS/JS, Three.js, Flutter web, Python (FastAPI/Flask)." data-ru="Современный портфолио, лендинг или веб-сервис. Дизайн + фронт + бэкенд. HTML/CSS/JS, Three.js, Flutter web, Python (FastAPI/Flask).">Modern portfolio, landing page, or web service. Design + frontend + backend. HTML/CSS/JS, Three.js, Flutter web, Python (FastAPI/Flask).</p>
+      <div class="tag-row">
+        <span class="tag">Web</span>
+        <span class="tag">Design</span>
+        <span class="tag green">Full-stack</span>
+        <span class="tag">Negotiable price</span>
+      </div>
+    </a>
+    <a class="card" href="mailto:anton.petnitsky@gmail.com" style="color: var(--text); text-decoration: none; border-color: rgba(58, 134, 255, .35);">
+      <div class="card-title" style="color: var(--accent);" data-en="Mobile app — Flutter" data-ru="Мобильное приложение — Flutter">Mobile app — Flutter</div>
+      <p data-en="Native mobile app from design to release: UI/UX, Dart (Flutter), REST API integration, Play Store / App Store publish, signed releases." data-ru="Нативное мобильное приложение от дизайна до релиза: UI/UX, Dart (Flutter), интеграция REST API, публикация в Play Store / App Store, подписанные релизы.">Native mobile app from design to release: UI/UX, Dart (Flutter), REST API integration, Play Store / App Store publish, signed releases.</p>
+      <div class="tag-row">
+        <span class="tag">Flutter</span>
+        <span class="tag">Dart</span>
+        <span class="tag">Mobile</span>
+        <span class="tag">App Store</span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -1375,6 +1411,110 @@
       </div>
     </a>
 
+    <a class="project-card" href="https://github.com/Mukller/omnimotor-robot-assistant" target="_blank">
+      <div class="project-header">
+        <div class="project-name">omni-robot-assistant</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#00979D"></span>C++</div>
+      </div>
+      <div class="project-desc" data-en="Home robot assistant on 3-wheel omnidirectional platform. ESP32, LiDAR, vision-based navigation." data-ru="Домашний робот-ассистент на 3-колёсной омни-платформе. ESP32, LiDAR, навигация через зрение.">Home robot assistant on 3-wheel omnidirectional platform. ESP32, LiDAR, vision-based navigation.</div>
+      <div class="project-footer">
+        <span class="tag orange">Robotics</span>
+        <span class="tag green">ESP32</span>
+        <span class="tag">LiDAR</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Mukller/smart-speaker" target="_blank">
+      <div class="project-header">
+        <div class="project-name">smart-speaker</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
+      </div>
+      <div class="project-desc" data-en="Offline voice assistant: Vosk STT + Silero TTS. Russian language model, local processing." data-ru="Оффлайн голосовой ассистент: Vosk STT + Silero TTS. Русская языковая модель, локальная обработка.">Offline voice assistant: Vosk STT + Silero TTS. Russian language model, local processing.</div>
+      <div class="project-footer">
+        <span class="tag">Speech AI</span>
+        <span class="tag">Vosk</span>
+        <span class="tag">Silero</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Mukller/abtop" target="_blank">
+      <div class="project-header">
+        <div class="project-name">abtop</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</div>
+      </div>
+      <div class="project-desc" data-en="Real-time system monitor for Apache and nginx in the terminal." data-ru="Мониторинг системы в реальном времени для Apache и nginx в терминале.">Real-time system monitor for Apache and nginx in the terminal.</div>
+      <div class="project-footer">
+        <span class="tag yellow">DevOps</span>
+        <span class="tag">Monitoring</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Mukller/klipper-dwin-bridge" target="_blank">
+      <div class="project-header">
+        <div class="project-name">klipper-dwin-bridge</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#00979D"></span>C++</div>
+      </div>
+      <div class="project-desc" data-en="Klipper to Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero." data-ru="Мост между Klipper и экраном Creality DWIN для Ender 5 S1 на Pi Zero.">Klipper to Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero.</div>
+      <div class="project-footer">
+        <span class="tag">3D Print</span>
+        <span class="tag green">Klipper</span>
+        <span class="tag">Embedded</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Mukller/ai-system-prompts" target="_blank">
+      <div class="project-header">
+        <div class="project-name">ai-system-prompts</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</div>
+      </div>
+      <div class="project-desc" data-en="Extracted system prompts from major AI models: Claude, ChatGPT, Gemini." data-ru="Извлечённые системные промпты из основных AI-моделей: Claude, ChatGPT, Gemini.">Extracted system prompts from major AI models: Claude, ChatGPT, Gemini.</div>
+      <div class="project-footer">
+        <span class="tag">AI</span>
+        <span class="tag">Security</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Mukller/tg-birthday-assistant" target="_blank">
+      <div class="project-header">
+        <div class="project-name">tg-birthday-assistant</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#f1e05a"></span>TypeScript</div>
+      </div>
+      <div class="project-desc" data-en="Telegram Birthday Assistant: NestJS + Prisma + Redis + BullMQ. Sends automated birthday greetings." data-ru="Telegram-помощник ко дню рождения: NestJS + Prisma + Redis + BullMQ. Отправляет автоматические поздравления с днём рождения.">Telegram Birthday Assistant: NestJS + Prisma + Redis + BullMQ. Sends automated birthday greetings.</div>
+      <div class="project-footer">
+        <span class="tag">Telegram</span>
+        <span class="tag">NestJS</span>
+        <span class="tag">BullMQ</span>
+      </div>
+    </a>
+
+    <div class="project-card" style="cursor: default;">
+      <div class="project-header">
+        <div class="project-name">minecraft-server</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#59660C"></span>Java</div>
+      </div>
+      <div class="project-desc" data-en="Velocity proxy + 5 backends (Survival SMP, Anarchy, Minigames, Lobby, Limbo). AuthMe proxy auth, Geyser for Bedrock, Telegram admin bot. Self-hosted on home server." data-ru="Velocity прокси + 5 бэкендов (Survival SMP, Anarchy, Minigames, Lobby, Limbo). AuthMe прокси-авторизация, Geyser для Bedrock, Telegram-бот админа. На домашнем сервере.">Velocity proxy + 5 backends (Survival SMP, Anarchy, Minigames, Lobby, Limbo). AuthMe proxy auth, Geyser for Bedrock, Telegram admin bot. Self-hosted on home server.</div>
+      <div class="project-footer">
+        <span class="tag">Velocity</span>
+        <span class="tag">Paper</span>
+        <span class="tag">Geyser</span>
+        <span class="tag green">Self-hosted</span>
+      </div>
+    </div>
+
+    <div class="project-card" style="cursor:default;">
+      <div class="project-header">
+        <div class="project-name">uses</div>
+        <div class="project-lang"><span class="lang-dot" style="background:#535353"></span>Hardware & Software</div>
+      </div>
+      <div class="project-desc" data-en="Daily tools: Neovim + LSP, Alacritty + tmux + fish, Firefox + uBlock. Workstation: Ryzen 7 5800X, RTX 3070. Server: Xeon E3, 32GB, ZFS, Docker + PostgreSQL. Obsidian + Syncthing for notes." data-ru="Ежедневные инструменты: Neovim + LSP, Alacritty + tmux + fish, Firefox + uBlock. Воркстейшн: Ryzen 7 5800X, RTX 3070. Сервер: Xeon E3, 32GB, ZFS, Docker + PostgreSQL. Obsidian + Syncthing для заметок.">Daily tools: Neovim + LSP, Alacritty + tmux + fish, Firefox + uBlock. Workstation: Ryzen 7 5800X, RTX 3070. Server: Xeon E3, 32GB, ZFS, Docker + PostgreSQL. Obsidian + Syncthing for notes.</div>
+      <div class="project-footer">
+        <span class="tag">Neovim</span>
+        <span class="tag">tmux</span>
+        <span class="tag">Docker</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+
   </div>
   <div style="margin-top:16px; text-align:right;">
     <a href="/projects/" data-en="All projects →" data-ru="Все проекты →" style="font-size:14px;">All projects →</a>
@@ -1441,8 +1581,8 @@
 <section>
   <div class="section-title" data-en="Case study" data-ru="Кейс">Case study</div>
   <div class="about-grid">
-    <a class="card" href="/safalife/" style="color: var(--text); text-decoration: none; grid-column: 1 / -1; border-color: rgba(63,185,80,.35);">
-      <div class="card-title" data-en="Safalife — courier delivery app · in production →" data-ru="Safalife — приложение для курьеров · в продакшне →">Safalife — courier delivery app · in production →</div>
+    <div class="card" style="grid-column: 1 / -1; border-color: rgba(63,185,80,.35);">
+      <div class="card-title" data-en="Safalife — courier delivery app · in production" data-ru="Safalife — приложение для курьеров · в продакшне">Safalife — courier delivery app · in production</div>
       <p data-en="Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline." data-ru="Спроектировал, разработал и вывел в прод для логистической компании в Узбекистане: Flutter-приложение, бэкенд на FastAPI, собственная маршрутизация OSRM, подписанный релизный пайплайн.">Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline.</p>
       <div class="tag-row">
         <span class="tag green" data-en="In production" data-ru="В продакшне">In production</span>
@@ -1450,7 +1590,7 @@
         <span class="tag">FastAPI</span>
         <span class="tag">OSRM</span>
       </div>
-    </a>
+    </div>
   </div>
 
   <div class="section-title" style="margin-top: 48px;" data-en="Explore" data-ru="Разделы сайта">Explore</div>
@@ -1459,21 +1599,14 @@
       <div class="card-title" data-en="Homelab →" data-ru="Домашний сервер →">Homelab →</div>
       <p data-en="What runs on my home server around the clock — and what keeps it alive." data-ru="Что крутится на домашнем сервере круглосуточно — и что не даёт ему умереть.">What runs on my home server around the clock — and what keeps it alive.</p>
     </a>
-    <a class="card" href="/minecraft/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="Minecraft network →" data-ru="Minecraft-сеть →">Minecraft network →</div>
-      <p data-en="Five servers behind one proxy, my own plugins, Telegram admin bot." data-ru="Пять серверов за одним прокси, мои плагины, Telegram-бот администратора.">Five servers behind one proxy, my own plugins, Telegram admin bot.</p>
-    </a>
     <a class="card" href="/print3d/" style="color: var(--text); text-decoration: none;">
       <div class="card-title" data-en="3D printing →" data-ru="3D-печать →">3D printing →</div>
       <p data-en="Klipper, accelerometer-tuned input shaping, a bridge for the stock screen." data-ru="Klipper, input shaping по акселерометру, мост для родного экрана.">Klipper, accelerometer-tuned input shaping, a bridge for the stock screen.</p>
     </a>
-    <a class="card" href="/uses/" style="color: var(--text); text-decoration: none;">
-      <div class="card-title" data-en="Uses →" data-ru="Инструменты →">Uses →</div>
-      <p data-en="Hardware and tools I actually use daily." data-ru="Железо и инструменты, которыми реально пользуюсь каждый день.">Hardware and tools I actually use daily.</p>
+    <a class="card" href="/about/" style="color: var(--text); text-decoration: none;">
+      <div class="card-title" data-en="About →" data-ru="Обо мне →">About →</div>
+      <p data-en="My path, education, awards and what I've built over the years." data-ru="Мой путь, образование, награды и то, что я построил за годы.">My path, education, awards and what I've built over the years.</p>
     </a>
-  </div>
-  <div style="margin-top:16px; text-align:right;">
-    <a href="/about/" data-en="My path, education &amp; awards →" data-ru="Мой путь, образование и награды →" style="font-size:14px;">My path, education &amp; awards →</a>
   </div>
 </section>
 
@@ -1505,12 +1638,12 @@
         <span class="tag">Flutter</span>
         <span class="tag">FastAPI</span>
         <span class="tag">OSRM</span>
-        <span class="tag"><a href="/safalife/" style="color: inherit;">Case study →</a></span>
+        <span class="tag"><span style="color: inherit;">Case study</span></span>
       </div>
     </div>
   </div>
   <div style="margin-top:16px; text-align:right;">
-    <a href="/now/" data-en="More about what I'm doing now →" data-ru="Подробнее, чем я занят →" style="font-size:14px;">More about what I'm doing now →</a>
+    <span data-en="Building online tools, running production services." data-ru="Разрабатываю онлайн-инструменты, запускаю сервисы в прод.">Building online tools, running production services.</span>
   </div>
 </section>
 

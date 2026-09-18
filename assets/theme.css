@@ -40,3 +40,12 @@
 :root[data-theme="light"] .theme-btn svg * {
   stroke: #1f2328 !important;
 }
+
+/* Flashlight avatar - white circle on dark theme */
+:root[data-theme="dark"] .hero-alt .hero-avatar {
+  border-color: #fff !important;
+  background: #fff !important;
+}
+:root[data-theme="dark"] .hero-alt .hero-avatar img {
+  filter: none !important;
+}
