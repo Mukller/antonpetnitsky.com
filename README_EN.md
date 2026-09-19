@@ -26,7 +26,6 @@ cv-en.html          CV in English
 50x.html            server error page (500/502/503/504)
 projects/           full projects catalog with filters
 robotics/           robots: specs, achievements, media slots
-now/                what I'm doing right now
 ap-favicon.svg     favicon (favicon.svg is taken by the catalog app)
 assets/fonts/      self-hosted Inter Variable (latin + cyrillic), no Google Fonts
 og.png              social preview image (Open Graph)

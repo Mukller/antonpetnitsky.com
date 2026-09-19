@@ -26,7 +26,6 @@
       { href: '/',           label: 'Index' },
       { href: '/projects/',  label: 'Projects' },
       { href: '/robotics/',  label: 'Robotics' },
-      { href: '/now/',       label: 'Now' },
       { href: '/homelab/',   label: 'Homelab' },
       { href: '/about/',     label: 'About' }
     ];

@@ -26,7 +26,6 @@ cv-en.html          CV на английском
 50x.html            страница ошибок сервера (500/502/503/504)
 projects/           каталог всех проектов с фильтрами
 robotics/           роботы: спеки, достижения, слоты под медиа
-now/                чем занят прямо сейчас
 ap-favicon.svg     фавикон (favicon.svg занят приложением-каталогом)
 assets/fonts/      self-hosted Inter Variable (latin + cyrillic), без Google Fonts
 og.png              превью для соцсетей (Open Graph)
