@@ -115,6 +115,27 @@ server {
         client_max_body_size 25m;
     }
 
+    # Kolonka - Smart Speaker Web Interface (port 5003)
+    location /kolonka/ {
+        proxy_pass http://127.0.0.1:5003/webapi_client/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    location /kolonka/sendTxtCmd {
+        proxy_pass http://127.0.0.1:5003/sendTxtCmd;
+        proxy_set_header Host $host;
+    }
+    location /kolonka/sendRawTxt {
+        proxy_pass http://127.0.0.1:5003/sendRawTxt;
+        proxy_set_header Host $host;
+    }
+    location /kolonka/webapi_client/ {
+        proxy_pass http://127.0.0.1:5003/webapi_client/;
+        proxy_set_header Host $host;
+    }
+
     # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
