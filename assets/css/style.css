@@ -592,4 +592,26 @@ section.page .row .val a:hover { color: var(--accent); border-bottom-color: var(
   section.about .timeline { margin-top: 40px; }
   section.about .facts { margin-top: 40px; }
   .sub-hero { min-height: 22vh; padding-top: 6vh; }
+
+/* Sticky mobile CTA */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background var(--t);
+}
+.sticky-mobile-cta:hover { background: var(--accent-dim); color: var(--bg); text-decoration: none; }
+@media (min-width: 721px) { .sticky-mobile-cta { display: none; } }
 }
