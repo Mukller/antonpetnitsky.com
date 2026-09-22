@@ -1,5 +1,6 @@
-External IP (curl): unknown (server temporarily unreachable)
-Domain resolved: 46.216.55.120 (from SSH connection history)
-Local IP: 192.168.0.36 (from AGENTS.md: home server / Proxmox)
+External IP (domain): 46.216.57.200 (resolved from antonpetnitsky.com)
+Local server IP: 192.168.0.36 (from AGENTS.md: home server / portfolio server)
+Domain: antonpetnitsky.com (port 22 forwarded, nginx :443)
+Status: SERVER CURRENTLY UNREACHABLE (SSH/HTTP timeout, ping false)
 Checked: 2026-09-20 17:37:00
-Note: Server currently unreachable (SSH/HTTP timeout) — likely temporary restart or rate limit. Deploy script (8be90aa) ran successfully. IP file will update automatically when server is back online.
+Note: The deploy script (8be90aa + 5873dee) completed successfully before the server became unreachable. Nginx config is updated with Kolonka proxy. Once server is restored (restart via PVE/BMC or physical access), the site will respond with the new configuration. The get-server-ip.sh script is integrated into deploy.sh and will update this file automatically on next deploy.
