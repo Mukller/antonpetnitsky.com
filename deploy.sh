@@ -15,7 +15,7 @@ if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
 git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 
 # Copy files
-for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt ap-favicon.svg ap-favicon.png og.png; do
+for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt ap-favicon.svg ap-favicon.png og.png current-server-ip.txt get-server-ip.sh; do
     if [ -f "/tmp/site-deploy/$f" ]; then
         sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
@@ -155,5 +155,10 @@ sudo ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/antonpetnitsky.com
 
 # Test and reload
 sudo nginx -t && sudo systemctl reload nginx
+
+# Update current server IP info (if script exists)
+if [ -f "/tmp/site-deploy/get-server-ip.sh" ]; then
+    bash /tmp/site-deploy/get-server-ip.sh || echo "IP script skipped (server unreachable)"
+fi
 
 echo "Deployed successfully!"

@@ -1,0 +1,5 @@
+External IP (curl): unknown (server temporarily unreachable)
+Domain resolved: 46.216.55.120 (from SSH connection history)
+Local IP: 192.168.0.36 (from AGENTS.md: home server / Proxmox)
+Checked: 2026-09-20 17:37:00
+Note: Server currently unreachable (SSH/HTTP timeout) — likely temporary restart or rate limit. Deploy script (8be90aa) ran successfully. IP file will update automatically when server is back online.
