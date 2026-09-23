@@ -1,6 +1,6 @@
-External IP (domain): 46.216.57.200 (resolved from antonpetnitsky.com)
-Local server IP: 192.168.0.36 (from AGENTS.md: home server / portfolio server)
-Domain: antonpetnitsky.com (port 22 forwarded, nginx :443)
-Status: SERVER CURRENTLY UNREACHABLE (SSH/HTTP timeout, ping false)
-Checked: 2026-09-20 17:37:00
-Note: The deploy script (8be90aa + 5873dee) completed successfully before the server became unreachable. Nginx config is updated with Kolonka proxy. Once server is restored (restart via PVE/BMC or physical access), the site will respond with the new configuration. The get-server-ip.sh script is integrated into deploy.sh and will update this file automatically on next deploy.
+External IP (curl): 46.216.19.51
+Domain resolved: 46.216.19.51
+Local IP: 192.168.0.36
+Checked: 2026-09-23 11:54:24
+Status: SERVER ONLINE (deploy successful, site 200 OK)
+Note: Deploy successful (commit e60cc41). Nginx config with Kolonka proxy + security headers active. IP updated automatically via get-server-ip.sh.
