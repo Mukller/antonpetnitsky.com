@@ -614,4 +614,23 @@ section.page .row .val a:hover { color: var(--accent); border-bottom-color: var(
 }
 .sticky-mobile-cta:hover { background: var(--accent-dim); color: var(--bg); text-decoration: none; }
 @media (min-width: 721px) { .sticky-mobile-cta { display: none; } }
+
+/* Mobile touch targets — larger clickable areas */
+@media (max-width: 720px) {
+  .contact-card, .project-card, nav a { min-height: 44px; display: flex; align-items: center; padding: 8px 4px; }
+  .contact-card { padding: 12px 8px; }
+  .hero .links a { padding: 8px 12px; min-height: 44px; }
+  .now-strip ol { gap: 16px; }
+  .faq-item { padding: 16px; }
+  .faq-item h3 { font-size: 15px; }
+  .faq-item p { font-size: 13px; }
+  footer { padding: 24px 16px; }
+}
+
+/* Very small screens — adjust font size */
+@media (max-width: 360px) {
+  html, body { font-size: 14px; }
+  .hero h1 { font-size: 32px; letter-spacing: -0.02em; }
+  section h2 { font-size: 20px; }
+  .contact-label, .contact-value { font-size: 14px; }
 }
