@@ -1,6 +1,6 @@
 External IP (curl): 46.216.19.51
 Domain resolved: 46.216.19.51
 Local IP: 192.168.0.36
-Checked: 2026-09-23 11:54:24
-Status: SERVER ONLINE (deploy successful, site 200 OK)
-Note: Deploy successful (commit e60cc41). Nginx config with Kolonka proxy + security headers active. IP updated automatically via get-server-ip.sh.
+Checked: 2026-09-23 14:14:51
+Status: SERVER ONLINE (re-deploy successful after temporary unreachability, site 200 OK)
+Note: Server was temporarily unreachable (timeout) but is now back online. Deploy script (commit 8be90aa + 5873dee + 2e7038f + universal-deploy-template) completed successfully. IP tracking script (get-server-ip.sh) integrated and working. Universal deploy template available for all repos.
