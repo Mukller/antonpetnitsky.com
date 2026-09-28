@@ -106,6 +106,20 @@ server {
     # app's dynamic sitemap under a new name — /sitemap.xml is our static index
     location = /sitemap-app.xml { proxy_pass http://127.0.0.1:8200/sitemap.xml; }
 
+    # app's public JSON API (/api/catalog, /api/tags/suggest, /api/avatar/...).
+    # Required: the profile editor's tag autocomplete fetches /api/tags/suggest
+    # from the browser. Without this block those requests fall through to the
+    # portfolio's location / and 404, breaking the feature in production.
+    # "^~" is deliberate: it wins over the regex locations below, so no future
+    # portfolio rule can accidentally shadow the API.
+    location ^~ /api/ {
+        proxy_pass http://127.0.0.1:8200;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
     location ~ ^/(login|register|logout|dashboard|settings|admin|forgot-password|reset-password|verify-email|favorites)(/|$) {
         proxy_pass http://127.0.0.1:8200;
         proxy_set_header Host $host;
@@ -141,6 +155,26 @@ server {
     location /kolonka/webapi_client/ {
         proxy_pass http://127.0.0.1:5003/webapi_client/;
         proxy_set_header Host $host;
+    }
+
+    # ── OmniPrint online slicer (:8090) ──
+    # The frontend is built with Vite base '/print/', so it builds asset and
+    # API URLs under /print/. The trailing slash on proxy_pass strips that
+    # prefix, so /print/assets/x.js -> /assets/x.js and /print/api/y ->
+    # /api/y on the container. Without this block /print/ falls through to the
+    # portfolio root and 404s.
+    location /print/ {
+        proxy_pass http://127.0.0.1:8090/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # STL uploads are tens of MB.
+        client_max_body_size 100m;
+        # Slicing runs OrcaSlicer's CLI server-side and regularly exceeds the
+        # 60s default before it answers, which would surface as a 504 mid-slice.
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
     }
 
     # everything else → portfolio static files
