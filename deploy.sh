@@ -251,6 +251,24 @@ server {
         proxy_send_timeout 300s;
     }
 
+    # ── Encyclyka — fashion media & creative community (:8091) ──
+    # Static site, served by a loopback-only nginx vhost (see the Encyclyka
+    # repo: deploy/encyclyka.nginx.conf). Same shape as /print/ above: the
+    # trailing slash on proxy_pass strips the prefix, so /encyclyka/css/x.css
+    # -> /css/x.css and /encyclyka/ -> / on the upstream. Every link inside
+    # Encyclyka is relative for exactly that reason.
+    # "^~" is deliberate: it wins over the regex locations further down, so the
+    # catalog's regexes (styles.css / app.js / favicon.svg / locale prefixes)
+    # can never capture an /encyclyka/... request.
+    location = /encyclyka { return 301 /encyclyka/; }
+    location ^~ /encyclyka/ {
+        proxy_pass http://127.0.0.1:8091/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
     # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
