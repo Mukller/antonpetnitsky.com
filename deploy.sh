@@ -143,9 +143,38 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_hide_header cache-control;
+        add_header cache-control "no-store, no-cache, must-revalidate, max-age=0" always;
     }
     location /kolonka/sendTxtCmd {
         proxy_pass http://127.0.0.1:5003/sendTxtCmd;
+        proxy_set_header Host $host;
+    }
+    # SSE: ответ модели печатается по частям, буферизация его бы съела
+    location /kolonka/sendTxtCmdStream {
+        proxy_pass http://127.0.0.1:5003/sendTxtCmdStream;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 600s;
+        chunked_transfer_encoding on;
+    }
+    # Синтез речи: WAV отдаётся в браузер, в контейнере нет /dev/snd.
+    # Точное совпадение (=), иначе префикс перехватит /kolonka/ttsHealth.
+    location = /kolonka/tts {
+        proxy_pass http://127.0.0.1:5003/tts;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        proxy_read_timeout 180s;
+    }
+    location = /kolonka/ttsHealth {
+        proxy_pass http://127.0.0.1:5003/ttsHealth;
         proxy_set_header Host $host;
     }
     location /kolonka/sendRawTxt {
