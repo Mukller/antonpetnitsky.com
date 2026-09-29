@@ -209,6 +209,19 @@ server {
         proxy_pass http://127.0.0.1:5003/sttHealth;
         proxy_set_header Host $host;
     }
+    # Плеер: список своих файлов и отдача потоком с поддержкой Range,
+    # иначе в <audio> не работает перемотка.
+    location = /kolonka/music {
+        proxy_pass http://127.0.0.1:5003/music;
+        proxy_set_header Host $host;
+    }
+    location = /kolonka/music/file {
+        proxy_pass http://127.0.0.1:5003/music/file;
+        proxy_set_header Host $host;
+        proxy_set_header Range $http_range;
+        proxy_buffering off;
+        proxy_read_timeout 600s;
+    }
     location /kolonka/sendRawTxt {
         proxy_pass http://127.0.0.1:5003/sendRawTxt;
         proxy_set_header Host $host;
