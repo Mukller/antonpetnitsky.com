@@ -193,6 +193,22 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
+    # Распознавание речи: тело запроса — WAV, поэтому нужен большой лимит
+    # и отключённая буферизация, иначе клиент шлёт минуты до ответа.
+    location = /kolonka/stt {
+        proxy_pass http://127.0.0.1:5003/stt;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        client_max_body_size 16m;
+        proxy_request_buffering off;
+        proxy_read_timeout 300s;
+    }
+    location = /kolonka/sttHealth {
+        proxy_pass http://127.0.0.1:5003/sttHealth;
+        proxy_set_header Host $host;
+    }
     location /kolonka/sendRawTxt {
         proxy_pass http://127.0.0.1:5003/sendRawTxt;
         proxy_set_header Host $host;
