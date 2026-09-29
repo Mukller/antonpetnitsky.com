@@ -177,6 +177,22 @@ server {
         proxy_pass http://127.0.0.1:5003/ttsHealth;
         proxy_set_header Host $host;
     }
+    # Реальный список плагинов и переключение. Пишущий /plugin/toggle меняет
+    # options/*.json, поэтому точное совпадение и никаких префиксов.
+    location = /kolonka/plugins {
+        proxy_pass http://127.0.0.1:5003/plugins;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+    location = /kolonka/plugin/toggle {
+        proxy_pass http://127.0.0.1:5003/plugin/toggle;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
     location /kolonka/sendRawTxt {
         proxy_pass http://127.0.0.1:5003/sendRawTxt;
         proxy_set_header Host $host;
