@@ -222,6 +222,19 @@ server {
         proxy_buffering off;
         proxy_read_timeout 600s;
     }
+    # Будильник: состояние таймеров и сам звонок (в контейнере нет звуковой
+    # карты, поэтому wav проигрывает браузер).
+    location = /kolonka/timers {
+        proxy_pass http://127.0.0.1:5003/timers;
+        proxy_set_header Host $host;
+        proxy_hide_header cache-control;
+        add_header cache-control "no-store" always;
+    }
+    location = /kolonka/timerwav {
+        proxy_pass http://127.0.0.1:5003/timerwav;
+        proxy_set_header Host $host;
+        proxy_set_header Range $http_range;
+    }
     location /kolonka/sendRawTxt {
         proxy_pass http://127.0.0.1:5003/sendRawTxt;
         proxy_set_header Host $host;
