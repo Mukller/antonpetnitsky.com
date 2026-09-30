@@ -146,9 +146,29 @@ server {
         proxy_hide_header cache-control;
         add_header cache-control "no-store, no-cache, must-revalidate, max-age=0" always;
     }
-    location /kolonka/sendTxtCmd {
+    location = /kolonka/sendTxtCmd {
         proxy_pass http://127.0.0.1:5003/sendTxtCmd;
         proxy_set_header Host $host;
+    }
+    # Один префиксный маршрут на ВСЕ эндпоинты ассистента. Раньше каждый
+    # endpoint получал свою location = ... и правило забывали при добавлении:
+    # поиск музыки отдавал 404, пока не вспомнили. Теперь /kolonka/api/X идёт
+    # в /X, и новые эндпоинты не требуют правок nginx вовсе.
+    # Буферизация выключена обязательна: sendTxtCmdStream отдаёт SSE, а с
+    # буферизацией клиент получил бы весь ответ разом в конце.
+    location /kolonka/api/ {
+        proxy_pass http://127.0.0.1:5003/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_request_buffering off;
+        proxy_read_timeout 300s;
+        client_max_body_size 16m;
+        proxy_hide_header cache-control;
+        add_header cache-control "no-store" always;
     }
     # SSE: ответ модели печатается по частям, буферизация его бы съела
     location /kolonka/sendTxtCmdStream {
