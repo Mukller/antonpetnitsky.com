@@ -1,12 +1,16 @@
 # Release Info
 
-## Current Version: v0.2.0
+## Current Version: v0.3.0
 
-**Release date:** 2026-08-23
+**Release date:** 2026-09-30
 
 ## Overview
 
 See [README](README.md) for full documentation and [CHANGELOG](CHANGELOG.md) for version history.
+
+v0.3.0 is an infrastructure release: the site's own content is unchanged, but
+the nginx vhost in `deploy.sh` now reproduces production exactly, and CI refuses
+a deploy that has lost one of the blocks that were lost before.
 
 ## Installation
 
