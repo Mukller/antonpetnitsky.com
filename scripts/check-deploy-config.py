@@ -91,6 +91,7 @@ REQUIRED = [
     ("healthcheck каталога", loc("/healthz")),
     ("auth-роуты каталога", re.compile(r"location\s+~\s+\^/\(login\|register")),
     ("sitemap приложения", loc("/sitemap-app.xml")),
+    ("RSS-лента приложения", loc("/feed.xml")),
     ("Botka Mini App", loc("/botka/")),
     ("Kolonka (TTS)", loc("/kolonka/")),
     ("OmniPrint", loc("/print/")),

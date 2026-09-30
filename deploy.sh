@@ -105,6 +105,13 @@ server {
     location = /robots.txt { proxy_pass http://127.0.0.1:8200; }
     # app's dynamic sitemap under a new name — /sitemap.xml is our static index
     location = /sitemap-app.xml { proxy_pass http://127.0.0.1:8200/sitemap.xml; }
+    # The app serves an RSS feed at its own /feed.xml. Without this block the
+    # request fell through to the portfolio's `location /` and 404'd, because
+    # the app's per-language feed is only reachable at /ru/feed.xml. Feed
+    # readers and aggregators look at the root, so proxy it. (The app also
+    # serves its own /sitemap.xml at the root, but /sitemap.xml is our static
+    # index and stays ours — the app's copy is served as /sitemap-app.xml.)
+    location = /feed.xml { proxy_pass http://127.0.0.1:8200/feed.xml; }
 
     # app's public JSON API (/api/catalog, /api/tags/suggest, /api/avatar/...).
     # Required: the profile editor's tag autocomplete fetches /api/tags/suggest

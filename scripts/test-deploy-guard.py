@@ -83,6 +83,16 @@ CASES = [
         "/kolonka/",
     ),
     (
+        "потерян RSS-лента каталога",
+        lambda b: b.replace("location = /feed.xml {", "location = /feed-old.xml {"),
+        "RSS-лента приложения",
+    ),
+    (
+        "потерян sitemap приложения",
+        lambda b: b.replace("location = /sitemap-app.xml {", "location = /sitemap-old.xml {"),
+        "sitemap приложения",
+    ),
+    (
         "потерян локали каталога",
         lambda b: re.sub(r"location\s+~\s+\^/\(ru\|en\|uk[^)]*\)[^{]*\{", "", b, count=1),
         "локали каталога",
