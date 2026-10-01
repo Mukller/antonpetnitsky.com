@@ -324,7 +324,12 @@ server {
         proxy_pass http://127.0.0.1:8091/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # $remote_addr, not $proxy_add_x_forwarded_for. The inbox
+        # rate-limits on the client address, and an APPENDED
+        # X-Forwarded-For carries whatever the caller sent in the
+        # leftmost entry - a fresh bucket per request. X-Real-IP
+        # comes from $remote_addr and is not appendable.
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
