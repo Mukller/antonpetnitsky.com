@@ -36,6 +36,16 @@ sudo tee "$NGINX_CONF" > /dev/null <<'EOF'
 # Source of truth: deploy.sh in Mukller/antonpetnitsky.com repo.
 # Do NOT hand-edit or redeploy stale copies — portfolio (root!), gzip,
 # /assets/ cache, sitemap-index and catalog proxy all live here.
+#
+# WebSocket для канала устройства (умная колонка). Без этой map nginx не
+# передаёт Upgrade и соединение /kolonka/api/ws/device не поднимается:
+# колонка молча не работает, а HTTP-эндпоинты рядом отвечают нормально.
+# Файл подключается внутри http{}, поэтому map здесь допустима.
+map $http_upgrade $jane_connection {
+    default upgrade;
+    ''      close;
+}
+
 server {
     listen 80;
     server_name antonpetnitsky.com www.antonpetnitsky.com;
@@ -172,10 +182,19 @@ server {
         proxy_buffering off;
         proxy_cache off;
         proxy_request_buffering off;
-        proxy_read_timeout 300s;
         client_max_body_size 16m;
         proxy_hide_header cache-control;
         add_header cache-control "no-store" always;
+        # канал устройства: WebSocket. http_version 1.1 обязателен, на 1.0
+        # апгрейд не проходит и соединение закрывается на рукопожатии
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $jane_connection;
+        # таймауты длинные: устройство может молчать, и короткий read_timeout
+        # рвёт соединение на живом, а не на молчащем канале. Дублировать
+        # директиву нельзя, nginx такой конфиг не грузит.
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
     }
     # SSE: ответ модели печатается по частям, буферизация его бы съела
     location /kolonka/sendTxtCmdStream {
