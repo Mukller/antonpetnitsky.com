@@ -1,6 +1,22 @@
-External IP (curl): 46.216.19.51
+External IP (curl): 46.216.37.176
 Domain resolved: 46.216.19.51
 Local IP: 192.168.0.36
-Checked: 2026-09-23 14:14:51
-Status: SERVER ONLINE (re-deploy successful after temporary unreachability, site 200 OK)
-Note: Server was temporarily unreachable (timeout) but is now back online. Deploy script (commit 8be90aa + 5873dee + 2e7038f + universal-deploy-template) completed successfully. IP tracking script (get-server-ip.sh) integrated and working. Universal deploy template available for all repos.
+Checked: 2026-10-03 23:26
+Status: SERVER ONLINE on the LAN (SSH, API, Telegram bots all serving).
+       INBOUND ACCESS BROKEN -- the WAN address changed and the A record
+       still points at the previous one.
+
+Note: MISMATCH ON PURPOSE. "Domain resolved" is what antonpetnitsky.com
+still returns (46.216.19.51, the old address), while "External IP" is what
+the box actually has right now (46.216.37.176). That gap is exactly why
+every port (22/80/443/25565) is closed from outside while the box works
+fine on 192.168.0.0/24.
+
+Fix: point the A record for antonpetnitsky.com at 46.216.37.176 at
+hoster.by (NS u1/u2.hoster.by). The address is dynamic and has changed
+three times already (46.216.57.200 -> 46.216.19.51 -> 46.216.37.176), so
+this will need redoing, or a dynamic-DNS client should be set up instead.
+
+Do not trust the DNS to find this box. Read this file, or query the box
+directly over the LAN (192.168.0.36). The safalife watchdog now logs a
+WARNING whenever the WAN address changes, with the before/after values.
