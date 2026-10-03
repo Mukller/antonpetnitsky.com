@@ -28,7 +28,7 @@ src = open(DEPLOY, encoding="utf-8").read()
 
 def heredoc(text: str) -> tuple[str, str]:
     m = re.search(
-        r"""sudo\s+tee\s+"?\$NGINX_CONF"?\s*>\s*/dev/null\s*<<'(\w+)'\n(.*?)\n\1""",
+        r"""(?:\$SUDO|sudo)\s+tee\s+"?\$NGINX_CONF"?\s*>\s*/dev/null\s*<<'(\w+)'\n(.*?)\n\1""",
         text,
         re.S,
     )
@@ -147,6 +147,34 @@ with tempfile.TemporaryDirectory() as td:
         print("  %-58s %s" % ("удалена закрывающая скобка", "поймано" if caught else "НЕ ПОЙМАНО"))
         if not caught:
             missed.append("скобки")
+
+print()
+print("=== 4. строка записи heredoc должна распознаваться, а её поломка — нет ===")
+# deploy.sh writes the config through a `$SUDO` variable rather than a literal
+# `sudo`. The guard has to understand that spelling (it used to look for
+# `sudo tee` only, so the guard reported "no heredoc" and CI went red), but the
+# relaxation must not turn the extraction into "match anything": break the
+# write line and the guard has to fail again.
+with tempfile.TemporaryDirectory() as td:
+    path = os.path.join(td, "deploy-noheredoc.sh")
+    broken = re.sub(
+        r"^.*tee\s+\"?\$NGINX_CONF\"?\s*>\s*/dev/null\s*<<'\w+'\s*$",
+        "cat > /tmp/nowhere <<'EOF'",
+        src,
+        count=1,
+        flags=re.M,
+    )
+    if broken == src:
+        print("  %-58s ПРОПУЩЕНО (трансформация ничего не сделала)" % "сломана строка записи heredoc")
+        missed.append("heredoc")
+    else:
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(broken)
+        rc, out = run_guard(path)
+        caught = rc != 0 and "heredoc" in out
+        print("  %-58s %s" % ("сломана строка записи heredoc", "поймано" if caught else "НЕ ПОЙМАНО"))
+        if not caught:
+            missed.append("heredoc")
 
 print()
 if missed:

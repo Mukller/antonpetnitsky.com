@@ -40,10 +40,15 @@ def warn(msg: str) -> None:
 
 
 def extract_nginx_conf(path: str) -> str | None:
-    """Pull the heredoc body out of deploy.sh."""
+    """Pull the heredoc body out of deploy.sh.
+
+    The write line goes through a `$SUDO` variable (it expands to `sudo -n`
+    when the caller is not root and to `sudo` otherwise), so the literal
+    `sudo tee` spelling is not the only one that has to be recognised.
+    """
     src = open(path, encoding="utf-8").read()
     m = re.search(
-        r"""sudo\s+tee\s+"?\$NGINX_CONF"?\s*>\s*/dev/null\s*<<'(\w+)'\n(.*?)\n\1""",
+        r"""(?:\$SUDO|sudo)\s+tee\s+"?\$NGINX_CONF"?\s*>\s*/dev/null\s*<<'(\w+)'\n(.*?)\n\1""",
         src,
         re.S,
     )
