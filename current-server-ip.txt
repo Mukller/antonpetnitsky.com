@@ -1,22 +1,44 @@
 External IP (curl): 46.216.37.176
-Domain resolved: 46.216.19.51
+Domain resolved: 46.216.37.176
 Local IP: 192.168.0.36
-Checked: 2026-10-03 23:26
-Status: SERVER ONLINE on the LAN (SSH, API, Telegram bots all serving).
-       INBOUND ACCESS BROKEN -- the WAN address changed and the A record
-       still points at the previous one.
+Checked: 2026-10-03 23:55
+Status: SERVER FULLY ONLINE, inbound access restored.
+       External reachability confirmed from outside the LAN: TCP 22, 80,
+       443, 25565 answered by check-host.net nodes in DE/BG/US/ID/PL/RU/SE/
+       IR/HU/AT/UK. https://antonpetnitsky.com/ returned HTTP 200 from 5
+       external nodes (HK, ID, MD, NL, SE). Uptime 9h12m at the time of the
+       check, so the box was powered on around 2026-10-03 14:18.
 
-Note: MISMATCH ON PURPOSE. "Domain resolved" is what antonpetnitsky.com
-still returns (46.216.19.51, the old address), while "External IP" is what
-the box actually has right now (46.216.37.176). That gap is exactly why
-every port (22/80/443/25565) is closed from outside while the box works
-fine on 192.168.0.0/24.
+History of the WAN address (dynamic, it keeps moving):
+  46.216.57.200  seen 2026-09-22 (server unreachable at that moment)
+  46.216.19.51   seen 2026-09-23 .. 2026-10-03 ~14:18
+  46.216.37.176  from 2026-10-03 ~14:18
 
-Fix: point the A record for antonpetnitsky.com at 46.216.37.176 at
-hoster.by (NS u1/u2.hoster.by). The address is dynamic and has changed
-three times already (46.216.57.200 -> 46.216.19.51 -> 46.216.37.176), so
-this will need redoing, or a dynamic-DNS client should be set up instead.
+The outage window: the box was off from 2026-10-02 ~21:58 to 2026-10-03
+~14:18 (power/ISP, not DNS -- the A record still pointed at 46.216.19.51 the
+whole time and public resolvers confirmed it). When it came back the WAN
+address had already changed, so every inbound port stayed closed until the A
+record was fixed.
 
-Do not trust the DNS to find this box. Read this file, or query the box
-directly over the LAN (192.168.0.36). The safalife watchdog now logs a
-WARNING whenever the WAN address changes, with the before/after values.
+How the A record got fixed on 2026-10-03 23:47: the hoster-ddns client
+(Mukller/hoster-ddns, C:\Users\Ecat\Documents\hoster-ddns) finally ran
+successfully. Its scheduled task had been failing silently with result
+0x80070002 (ERROR_FILE_NOT_FOUND) because the action called plain "python",
+which resolves to the Microsoft Store alias stub
+C:\Users\Ecat\AppData\Local\Microsoft\WindowsApps\python.exe (version
+0.0.0.0) instead of a real interpreter. Fixed by pointing the task at
+C:\Users\Ecat\AppData\Local\Programs\Python\Python313\python.exe with
+WorkingDirectory set to the repo, and by installing python-dotenv into that
+interpreter (playwright 1.61.0 and requests 2.33.0 were already there).
+The run picked up the 2FA code through the Telegram relay and updated the
+record 46.216.55.237 -> 46.216.37.176 (the cache file .last_ip had been stuck
+at 46.216.55.237 since 2026-07-30).
+
+Still worth knowing:
+  * The router (192.168.0.1) proxies DNS and kept answering with the old
+    address for as long as the old TTL lived (~8 min after the update), so a
+    PC on the LAN can see the stale address briefly after a change.
+  * The DDNS task runs every 15 min, so any future WAN change should self-heal
+    within ~15 min. Check the task result before assuming DNS is broken.
+  * Read this file, or query the box over the LAN (192.168.0.36, ssh by key),
+    rather than trusting DNS to locate it.
