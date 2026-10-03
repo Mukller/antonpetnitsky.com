@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Deploy antonpetnitsky.com to local server
 # Run from: ssh anton@192.168.0.36
 
@@ -7,8 +7,20 @@ set -e
 SITE_DIR="/var/www/antonpetnitsky.com"
 NGINX_CONF="/etc/nginx/sites-available/antonpetnitsky.com"
 
+# Bare `sudo` needs a tty to prompt for a password, so this script died when run
+# detached (cron, CI, `ssh host 'bash deploy.sh'` with no tty) with
+# "sudo: a terminal is required to read the password" — and because of `set -e`
+# it died on the very first line, changing nothing. Prefer the
+# non-interactive form when it is genuinely allowed, and fall back to plain
+# `sudo` so a human at a terminal still gets a prompt.
+if sudo -n true 2>/dev/null; then
+    SUDO="sudo -n"
+else
+    SUDO="sudo"
+fi
+
 # Create web root
-sudo mkdir -p "$SITE_DIR"
+$SUDO mkdir -p "$SITE_DIR"
 
 # Clone or pull latest
 if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
@@ -17,21 +29,30 @@ git clone https://github.com/Mukller/antonpetnitsky.com.git /tmp/site-deploy
 # Copy files
 for f in index.html cv-ru.html cv-en.html 404.html 50x.html sitemap.xml sitemap-pages.xml robots.txt privacy-policy.html terms.html ap-favicon.svg ap-favicon.png og.png current-server-ip.txt get-server-ip.sh; do
     if [ -f "/tmp/site-deploy/$f" ]; then
-        sudo cp "/tmp/site-deploy/$f" "$SITE_DIR/"
+        $SUDO cp "/tmp/site-deploy/$f" "$SITE_DIR/"
     fi
 done
 
 # Copy page directories
 for d in projects robotics homelab print3d about assets; do
     if [ -d "/tmp/site-deploy/$d" ]; then
-        sudo cp -r "/tmp/site-deploy/$d" "$SITE_DIR/"
+        $SUDO cp -r "/tmp/site-deploy/$d" "$SITE_DIR/"
     fi
 done
-sudo chown -R www-data:www-data "$SITE_DIR"
-sudo chmod -R 755 "$SITE_DIR"
+$SUDO chown -R www-data:www-data "$SITE_DIR"
+$SUDO chmod -R 755 "$SITE_DIR"
+
+# Keep the live config before overwriting it. `nginx -t` failing after the
+# overwrite would leave a broken file on disk: nginx keeps serving from the
+# already-loaded config, so the site looks fine until the next reload/restart,
+# and then it dies for everyone. Restoring on failure keeps disk and memory
+# telling the same story.
+if [ -f "$NGINX_CONF" ]; then
+    $SUDO cp "$NGINX_CONF" "${NGINX_CONF}.bak"
+fi
 
 # Write nginx config
-sudo tee "$NGINX_CONF" > /dev/null <<'EOF'
+$SUDO tee "$NGINX_CONF" > /dev/null <<'EOF'
 # CANONICAL nginx config for antonpetnitsky.com
 # Source of truth: deploy.sh in Mukller/antonpetnitsky.com repo.
 # Do NOT hand-edit or redeploy stale copies — portfolio (root!), gzip,
@@ -341,10 +362,18 @@ server {
 EOF
 
 # Enable site
-sudo ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/antonpetnitsky.com
+$SUDO ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/antonpetnitsky.com
 
-# Test and reload
-sudo nginx -t && sudo systemctl reload nginx
+# Test and reload — rolling back the file if the new config is not loadable.
+if ! $SUDO nginx -t; then
+    echo "nginx rejected the new config; restoring ${NGINX_CONF}.bak" >&2
+    if [ -f "${NGINX_CONF}.bak" ]; then
+        $SUDO cp "${NGINX_CONF}.bak" "$NGINX_CONF"
+        $SUDO nginx -t || echo "WARNING: the restored config also fails nginx -t" >&2
+    fi
+    exit 1
+fi
+$SUDO systemctl reload nginx
 
 # Update current server IP info (if script exists)
 if [ -f "/tmp/site-deploy/get-server-ip.sh" ]; then
