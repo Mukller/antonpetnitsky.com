@@ -101,8 +101,15 @@ CASES = [
 
 
 def run_guard(path: str) -> tuple[int, str]:
-    r = subprocess.run([sys.executable, GUARD, path], capture_output=True, text=True)
-    return r.returncode, r.stdout + r.stderr
+    # The encoding must be pinned. With text=True Python decodes the guard's
+    # output using the locale code page, which is cp1251 on a Russian Windows box.
+    # That does not raise -- the bytes decode into mojibake ('корень' arrives as
+    # 'РєРѕСЂРµРЅСЊ') -- so every Cyrillic marker lookup below silently fails and
+    # each broken config is reported as "not caught" even though the guard did its
+    # job. UTF-8 is what the guard actually writes, on every platform.
+    r = subprocess.run([sys.executable, GUARD, path], capture_output=True,
+                       encoding="utf-8", errors="replace")
+    return r.returncode, (r.stdout or "") + (r.stderr or "")
 
 
 print("=== 1. исправный конфиг должен проходить ===")
