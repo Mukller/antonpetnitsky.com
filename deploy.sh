@@ -174,17 +174,6 @@ server {
         client_max_body_size 25m;
     }
 
-    # Potatobot admin panel (potatobot container, port 8082).
-    # Unique prefix on purpose: /admin/ is already claimed by the research
-    # catalog above, so a bare /admin/ location would route there instead.
-    location ^~ /potato-admin/ {
-        proxy_pass http://127.0.0.1:8082/;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
     # Kolonka - Smart Speaker Web Interface (port 5003)
     location /kolonka/ {
         proxy_pass http://127.0.0.1:5003/webapi_client/;
