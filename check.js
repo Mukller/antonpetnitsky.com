@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const checks = [
-  { file: 'index.html',  must: ['class="hero"', 'class="now-strip"', 'class="about"', 'class="skills"', 'class="projects"', 'class="contacts"', 'skip-link', '<footer', '</title>'] },
+  // Sections are addressed by id, not by class, and the /now/ strip was removed
+  // on purpose (see AGENTS.md), so only ids that really exist are asserted here.
+  { file: 'index.html',  must: ['class="hero"', '<section id="about">', '<section id="skills"', '<section id="projects">', '<section id="reviews">', '<section id="contact">', 'skip-link', '<footer', '</title>'] },
   { file: 'projects/index.html', must: ['class="sub-hero"', 'breadcrumb', '<ol', 'fira-autonomous-rc-car'] },
   { file: 'robotics/index.html', must: ['class="sub-hero"', 'Balance_robot', 'fira-autonomous-rc-car'] },
   { file: 'about/index.html',     must: ['class="sub-hero"', 'Timeline', 'Education', 'How I work'] },
