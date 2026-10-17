@@ -354,12 +354,6 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    # ── css-minecraft (static site /css-minecraft/) ──
-    location /css-minecraft/ {
-        alias /home/anton/www/css-minecraft/;
-        try_files $uri $uri/ =404;
-    }
-
     # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
