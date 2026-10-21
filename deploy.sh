@@ -73,11 +73,12 @@ $SUDO tee "$NGINX_CONF" > /dev/null <<'EOF'
 # Do NOT hand-edit or redeploy stale copies — portfolio (root!), gzip,
 # /assets/ cache, sitemap-index and catalog proxy all live here.
 #
-# WebSocket для канала устройства (умная колонка). Без этой map nginx не
-# передаёт Upgrade и соединение /kolonka/api/ws/device не поднимается:
-# колонка молча не работает, а HTTP-эндпоинты рядом отвечают нормально.
-# Файл подключается внутри http{}, поэтому map здесь допустима.
-map $http_upgrade $jane_connection {
+# WebSocket для всех приложений на этом vhost. Без этой map nginx не
+# передаёт Upgrade и соединение не поднимается: колонка молча не
+# работает, а HTTP-эндпоинты рядом отвечают нормально; то же с живым
+# статусом принтера на /print/. Файл подключается внутри http{}, поэтому
+# map здесь допустима.
+map $http_upgrade $connection_upgrade {
     default upgrade;
     ''      close;
 }
@@ -240,7 +241,7 @@ server {
         # апгрейд не проходит и соединение закрывается на рукопожатии
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $jane_connection;
+        proxy_set_header Connection $connection_upgrade;
         # таймауты длинные: устройство может молчать, и короткий read_timeout
         # рвёт соединение на живом, а не на молчащем канале. Дублировать
         # директиву нельзя, nginx такой конфиг не грузит.
@@ -353,8 +354,17 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        # STL uploads are tens of MB.
-        client_max_body_size 100m;
+        # Websocket (живой статус принтера). Без этих заголовков Upgrade
+        # не доходит до приложения: nginx отвечает 404 вместо 101, и
+        # сокет выглядит мёртвым, хотя остальное работает.
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        # STL uploads are tens of MB. The backend accepts up to 5 files of
+        # 50 MB each, so the limit has to be above that — at 100m a
+        # customer uploading two 35 MB models was refused by the proxy
+        # with a raw nginx 413 page, before the app could explain itself.
+        client_max_body_size 260m;
         # Slicing runs OrcaSlicer's CLI server-side and regularly exceeds the
         # 60s default before it answers, which would surface as a 504 mid-slice.
         proxy_read_timeout 300s;
