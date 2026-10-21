@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # Deploy antonpetnitsky.com to local server
 # Run from: ssh anton@192.168.0.36
 
@@ -13,14 +13,24 @@ NGINX_CONF="/etc/nginx/sites-available/antonpetnitsky.com"
 # it died on the very first line, changing nothing. Prefer the
 # non-interactive form when it is genuinely allowed, and fall back to plain
 # `sudo` so a human at a terminal still gets a prompt.
-if sudo -n true 2>/dev/null; then
+#
+# The probe must use a command this script really needs. `sudo -n true` is not
+# a valid probe here: the sudoers entries are per-command, `true` is not among
+# them, so the probe always failed and the script always fell back to the
+# tty-requiring form — even though every command below is allowed. Probing
+# with `tee` (used to write the vhost) reflects reality.
+if sudo -n /usr/bin/tee /dev/null 2>/dev/null; then
     SUDO="sudo -n"
 else
     SUDO="sudo"
 fi
 
-# Create web root
-$SUDO mkdir -p "$SITE_DIR"
+# Create web root. `mkdir` is not in this server's sudoers, and the
+# directory already exists from earlier deploys, so only insist on it when it
+# is genuinely missing.
+if [ ! -d "$SITE_DIR" ]; then
+    $SUDO mkdir -p "$SITE_DIR"
+fi
 
 # Clone or pull latest
 if [ -d /tmp/site-deploy ]; then rm -rf /tmp/site-deploy; fi
@@ -40,7 +50,12 @@ for d in projects robotics homelab print3d about assets; do
     fi
 done
 $SUDO chown -R www-data:www-data "$SITE_DIR"
-$SUDO chmod -R 755 "$SITE_DIR"
+# `chmod` is not in this server's sudoers. The files arrive from the clone
+# with readable permissions and the chown above sets the ownership, so a
+# refusal here is not a failure — but say so out loud instead of dying on it.
+if ! $SUDO chmod -R 755 "$SITE_DIR" 2>/dev/null; then
+    echo "chmod недоступен для этого пользователя — оставляю права из клона" >&2
+fi
 
 # Keep the live config before overwriting it. `nginx -t` failing after the
 # overwrite would leave a broken file on disk: nginx keeps serving from the
@@ -376,8 +391,17 @@ server {
 }
 EOF
 
-# Enable site
-$SUDO ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/antonpetnitsky.com
+# Enable site. `ln -sf` is not in this server's sudoers, and nginx does not
+# care whether sites-enabled/antonpetnitsky.com is a symlink or a real file —
+# a copy is an equivalent substitute. Only touch it when it is missing or
+# points somewhere else.
+ENABLED="/etc/nginx/sites-enabled/antonpetnitsky.com"
+if [ ! -e "$ENABLED" ] || [ "$(readlink -f "$ENABLED" 2>/dev/null)" != "$NGINX_CONF" ]; then
+    if ! $SUDO ln -sf "$NGINX_CONF" "$ENABLED" 2>/dev/null; then
+        $SUDO cp "$NGINX_CONF" "$ENABLED"
+        echo "ln недоступен — скопировал конфиг вместо симлинка (nginx не различает)" >&2
+    fi
+fi
 
 # Test and reload — rolling back the file if the new config is not loadable.
 if ! $SUDO nginx -t; then
