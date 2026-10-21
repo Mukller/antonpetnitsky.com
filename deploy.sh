@@ -384,6 +384,22 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    # NewTube (YouTube bridge for the TV) - published on the already open 443,
+    # so no new port forward is needed. The prefix travels in
+    # X-Forwarded-Prefix: the app builds absolute URLs (thumbnails) itself and
+    # must know the public prefix and scheme. Direct LAN access (the TV hits
+    # 192.168.0.36:80, redirected to :8088 by iptables) sends no such headers,
+    # so the TV keeps getting LAN-style URLs.
+    location ^~ /nt/ {
+        proxy_pass http://127.0.0.1:8088/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Prefix /nt;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
+    }
+
     # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
