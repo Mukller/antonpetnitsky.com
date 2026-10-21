@@ -174,6 +174,21 @@ server {
         client_max_body_size 25m;
     }
 
+    # Safalife API (:8000) — второй публичный адрес для приложения курьеров.
+    # Funnel-адрес живёт в личном tailnet и ПЕРЕИМЕНОВЫВАЕМ: когда узел
+    # переименовали, все установленные приложения молча перестали работать,
+    # и починить их можно было только новой сборкой. Этот маршрут даёт
+    # запасной адрес, зависящий лишь от домена.
+    # Слэш в proxy_pass срезает префикс /safalife/, поэтому
+    # /safalife/auth/login доходит до API как /auth/login.
+    location ^~ /safalife/ {
+        proxy_pass http://127.0.0.1:8000/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
     # Kolonka - Smart Speaker Web Interface (port 5003)
     location /kolonka/ {
         proxy_pass http://127.0.0.1:5003/webapi_client/;

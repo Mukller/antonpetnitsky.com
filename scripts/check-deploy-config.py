@@ -23,6 +23,17 @@ import sys
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# The output is read by a regression test that looks for Cyrillic markers.
+# Without a pinned encoding the console encoding is used, which is cp1251 on a
+# Russian Windows box and UTF-8 on CI — the same bytes decode differently, so
+# the markers were silently lost and every broken config looked "not caught"
+# even though this guard had done its job. UTF-8 everywhere, no exceptions.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):  # pragma: no cover - old/odd streams
+        pass
+
 # An explicit path can be passed so the guard itself can be regression-tested
 # against a deliberately broken config.
 DEPLOY = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "deploy.sh")
@@ -98,6 +109,7 @@ REQUIRED = [
     ("sitemap приложения", loc("/sitemap-app.xml")),
     ("RSS-лента приложения", loc("/feed.xml")),
     ("Botka Mini App", loc("/botka/")),
+    ("Safalife API (запасной адрес приложения)", loc("/safalife/")),
     ("Kolonka (TTS)", loc("/kolonka/")),
     ("OmniPrint", loc("/print/")),
     ("Encyclyka", loc("/encyclyka/")),

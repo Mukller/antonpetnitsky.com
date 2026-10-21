@@ -260,7 +260,7 @@
 <!-- HEADER -->
 <div class="cv-header">
   <h1>Anton Petnitsky</h1>
-  <div class="cv-title">Full-Stack Developer · Python &amp; TypeScript · AI/LLM Integration · Backend Systems</div>
+  <div class="cv-title">Backend Developer &middot; Python &amp; C++ &middot; AI/LLM Integration &middot; Backend Systems</div>
   <div class="cv-contacts">
     <span><a href="mailto:anton.petnitsky@gmail.com">anton.petnitsky@gmail.com</a></span>
     <span><a href="https://github.com/Mukller" target="_blank">github.com/Mukller</a></span>
@@ -360,14 +360,22 @@
 
   <div class="section-title" style="margin-top:14px">Additional Projects</div>
   <ul class="bullet-list">
-    <li><strong>MiniBoardGames 3.0.0</strong> — 20+ mini-games in one Minecraft plugin (2048, Flappy Bird, Battleship), multiplayer 4–100+ players, persistent leaderboards. <em>Java, PaperMC, MySQL</em></li>
-    <li><strong>Casino Stars Bot</strong> — Telegram slot-machine game monetized via Paid Messages; automated jackpot detection and gift payouts via Telegram Gift API. <em>Python, aiogram 3.13</em></li>
-    <li><strong>Telegram Presence Tracker</strong> — Online/offline monitoring (aiogram bot + Telethon worker), 1s polling with flood-wait backoff. 24/7 on systemd. <em>Python, PostgreSQL, Redis</em></li>
-    <li><strong>TikTok Saver Bot</strong> — Telegram bot for TikTok video/photo/audio downloads; parallel CDN downloads + yt-dlp fallback. 24/7 under systemd. <em>Python, aiogram 3, yt-dlp</em></li>
-    <li><strong>3D Printer Control</strong> — Raspberry Pi stack (OctoPrint + Klipper) + custom Telegram bot, AI print-quality monitoring, smart-plug automation. <em>Python, OctoPrint</em></li>
-    <li><strong>Claude Auto-Continue</strong> — Windows desktop automation (UIA tree traversal) to auto-recover coding-assistant sessions; 3 public releases (v1.0.0–v3.1.0). <em>Python, Tkinter, UI Automation</em></li>
-    <li><strong>AdvancedSpyInventory / HackedServer / DailyStreak</strong> — Minecraft plugins for anti-cheat, inventory monitoring, and activity tracking. <em>Java, PaperMC, Packet API</em></li>
-    <li><strong>Minecraft Server Infrastructure ("Техношилд" / MineLore)</strong> — Velocity proxy + ~150 concurrent players + 10+ plugins + Discord bridge + Bedrock cross-play. <em>Java, Spigot, Velocity, Geyser</em></li>
+    <li><strong>antonpetnitsky.com</strong> — hybrid portfolio + research catalog + Botka Mini App (nginx, docker, CI/CD) <a href="https://github.com/Mukller/antonpetnitsky.com">GitHub</a></li>
+    <li><strong>botka-platform</strong> — Mini App for exam prep (spaced repetition, 5 question types, 25k+ tasks, Docker, nginx, Telegram bot) <a href="https://github.com/Mukller/botka-platform">GitHub</a></li>
+    <li><strong>research-catalog / encyclyka</strong> — scientific community catalog (Hono + Drizzle + SQLite, 8 languages, SSR) <a href="https://antonpetnitsky.com/encyclyka/">Live</a></li>
+    <li><strong>opencode-chrome</strong> — Chrome extension + MCP bridge for agent-driven browser automation <a href="https://github.com/Mukller/opencode-chrome">GitHub</a></li>
+    <li><strong>voice-notes</strong> — voice-to-observation pipeline (faster-whisper + OpenRouter + Obsidian sync, server-side) <a href="https://github.com/Mukller/voice-notes">GitHub</a></li>
+    <li><strong>tiktok-archive</strong> — personal TikTok archive (Playwright, SQLAlchemy/asyncpg, Whisper, Docker) <a href="https://github.com/Mukller/tiktok-archive">GitHub</a></li>
+    <li><strong>smart-speaker</strong> — offline Russian smart speaker (Vosk + Silero + ESP32, Armbian server) <a href="https://github.com/Mukller/smart-speaker">GitHub</a></li>
+    <li><strong>konspektik-plotter</strong> — CoreXY pen-plotter for handwritten notes (OpenSCAD CAD, CLI drive, 221 tests) <a href="https://github.com/Mukller/konspektik-plotter">GitHub</a></li>
+    <li><strong>Balance_robot</strong> — ESP32 self-balancing robot with PID, line tracking, web joystick (Robofinist 2026, 1st place) <a href="https://github.com/Mukller/Balance_robot">GitHub</a></li>
+    <li><strong>ai-system-prompts</strong>
+    <li><strong>Open Source Contributions</strong> — 30+ PR reviews, 11 external issues, 6 code reviews; botka-platform v0.6.0 + research-catalog deployed. <a href="https://github.com/Mukller">Profile</a></li> — extracted system prompts from Claude, GPT-4, Gemini, Grok, Cursor, Copilot <a href="https://github.com/Mukller/ai-system-prompts">GitHub</a></li>
+    <li><strong>casino-stars-bot</strong> — Telegram slot-machine bot monetized via Paid Messages; automated jackpot detection and gift payouts via Telegram Gift API. <a href="https://github.com/Mukller/casino-stars-bot">GitHub</a></li>
+    <li><strong>telegram-mentioner-bot</strong> — Telegram bot that mentions all group members with a single /all command. <a href="https://github.com/Mukller/telegram-mentioner-bot">GitHub</a></li>
+    <li><strong>AdvancedSpyInventory</strong> — PaperMC plugin for real-time player inventory monitoring (anti-cheat / fairness). <a href="https://github.com/Mukller/AdvancedSpyInventory">GitHub</a></li>
+    <li><strong>awesome-cctv-cameras</strong> — Open database of 2100+ CCTV/IP camera specs across 71 brands (CC0, searchable). <a href="https://github.com/Mukller/awesome-cctv-cameras">GitHub</a></li>
+    <li><strong>hercules_support_bot</strong> — Telegram support bot for Hercules 3D printer users. <a href="https://github.com/Mukller/hercules_support_bot">GitHub</a></li>
   </ul>
 </div>
 
@@ -376,21 +384,45 @@
   <div class="section-title">Robotics &amp; Hardware</div>
 
   <div class="robot-item">
-    <div class="robot-name">Arkanoid Robot "Robo Arkasha" — Robofinist 2026</div>
-    <div class="robot-desc">Autonomous robot playing Arkanoid in real-time. PC-side OpenCV pipeline (HSV tracking, Kalman filter) sends ball position over UDP to ESP32 motor controller (BLDC via ESC + dual DC motors).</div>
-    <div class="robot-tech">Python · OpenCV · ESP32 · C++</div>
+    <div class="robot-name">Balance_robot &middot; <a href="https://github.com/Mukller/Balance_robot" target="_blank">github.com/Mukller/Balance_robot</a></div>
+    <div class="robot-desc">Self-balancing robot on ESP32 with line tracking, obstacle avoidance and web joystick control. Real-time PID, WiFi-enabled, documented web interface. Robofinist 2026 &mdash; 1st place, &laquo;Line Following&raquo;.</div>
+    <div class="robot-tech">C++ &middot; Arduino &middot; ESP32 &middot; WiFi</div>
   </div>
 
   <div class="robot-item">
-    <div class="robot-name">FIRA Autonomous RC Car · <a href="https://github.com/Mukller/fira-autonomous-rc-car" target="_blank">github.com/Mukller/fira-autonomous-rc-car</a></div>
+    <div class="robot-name">Two-wheel inverted pendulum</div>
+    <div class="robot-desc">ESP32 + MPU6050 + 2&times; TMC2209 + NEMA17. Custom PID tuning from scratch. Multiple regional/national competition victories; presented at scientific research conferences. 3 GitHub releases.</div>
+    <div class="robot-tech">C++ &middot; Arduino &middot; ESP32</div>
+  </div>
+
+  <div class="robot-item">
+    <div class="robot-name">FIRA Autonomous RC Car &middot; <a href="https://github.com/Mukller/fira-autonomous-rc-car" target="_blank">github.com/Mukller/fira-autonomous-rc-car</a></div>
     <div class="robot-desc">1:10-scale autonomous RC car for FIRA/RoboCup Autonomous Cars League. ROS 2 package (lane detection, steering/speed control, serial bridge), camera calibration tooling.</div>
-    <div class="robot-tech">ROS 2 · Python · Arduino · C++</div>
+    <div class="robot-tech">ROS 2 &middot; Python &middot; Arduino &middot; C++</div>
   </div>
 
   <div class="robot-item">
-    <div class="robot-name">Self-Balancing Robot · <a href="https://github.com/Mukller/Balance_robot" target="_blank">github.com/Mukller/Balance_robot</a></div>
-    <div class="robot-desc">Two-wheeled inverted pendulum (ESP32 + MPU6050 + 2× TMC2209 + NEMA17). Custom PID tuning from scratch. Multiple regional/national competition victories; presented at scientific research conferences. 3 GitHub releases.</div>
-    <div class="robot-tech">C++ · Arduino · ESP32</div>
+    <div class="robot-name">Arkanoid Robot &laquo;Robo Arkasha&raquo; &mdash; Robofinist 2026</div>
+    <div class="robot-desc">Autonomous robot playing Arkanoid in real time. PC-side OpenCV pipeline (HSV tracking, Kalman filter) sends ball position over UDP to an ESP32 motor controller (BLDC via ESC + dual DC motors).</div>
+    <div class="robot-tech">Python &middot; OpenCV &middot; ESP32 &middot; C++</div>
+  </div>
+
+  <div class="robot-item">
+    <div class="robot-name">CR-200B Klipper host (OLinuXino Lime2 + Orbiter 2.0)</div>
+    <div class="robot-desc">Klipper / Moonraker / Mainsail host for Creality CR-200B with a direct-drive Orbiter extruder: UART bring-up, static IP, camera streaming through nginx, plus a guard against the board&rsquo;s known 1 Gbit PHY bug (link up, no packets).</div>
+    <div class="robot-tech">Klipper &middot; Moonraker &middot; Armbian &middot; nginx &middot; Python</div>
+  </div>
+
+  <div class="robot-item">
+    <div class="robot-name">konspektik-plotter &middot; <a href="https://github.com/Mukller/konspektik-plotter" target="_blank">github.com/Mukller/konspektik-plotter</a></div>
+    <div class="robot-desc">CoreXY pen-plotter that writes lecture notes by hand: text &rarr; handwriting &rarr; G-code. OpenSCAD CAD v2 (900&times;650 mm frame), CLI pipeline, SELFCHECK limit logic, 221 automated tests.</div>
+    <div class="robot-tech">Python &middot; OpenSCAD &middot; CAD/CAM &middot; G-code</div>
+  </div>
+
+  <div class="robot-item">
+    <div class="robot-name">klipper-dwin-bridge &middot; <a href="https://github.com/Mukller/klipper-dwin-bridge" target="_blank">github.com/Mukller/klipper-dwin-bridge</a></div>
+    <div class="robot-desc">Klipper &harr; Creality DWIN touchscreen bridge for Ender 5 S1 on Pi Zero 2 W: stock screen UI plus Marlin-style live tuning (steps/mm, PID, bed mesh, filament profiles).</div>
+    <div class="robot-tech">Python &middot; Klipper &middot; DWIN &middot; Raspberry Pi</div>
   </div>
 
 </div>
@@ -402,8 +434,11 @@
     <li><strong>JuniorSkills Belarus — 1st Place, "Line Following"</strong> — team CyberLab (Minsk), March 2023</li>
     <li><strong>Educational Robotics Cup</strong> — regional Robofinist-circuit competition, Minsk Region</li>
     <li><strong>XII Minsk Open Robot Tournament</strong> — multi-day robotics competition</li>
-    <li><strong>XV Frunzensky District Championship</strong> — represented Gymnasium №39, first round</li>
+    <li><strong>XV Frunzensky District Championship</strong> — represented Gymnasium №39, first round. <em>Full list of competitions, diplomas, and confirmations of participation is available upon request; search "Anton Petnitsky" — results and certificates are publicly documented.</em></li>
+    <li><strong>Robotics &amp; Programming competitions (full archive)</strong> — numerous regional and open-circuit competitions in educational robotics (Robofinist series, Minsk open tournaments, district championships) — all diplomas and confirmations of participation can be provided upon request; information is also available via public search as Anton Petnitsky.</li>
   </ul>
+  <ul class="bullet-list"><li><strong>Additional achievements &amp; competitions</strong> — numerous diplomas and confirmations of participation in robotics, programming, and academic competitions (full list available upon request; searchable via "Anton Petnitsky" — results and certificates are publicly documented).</li></ul>
+
 </div>
 
 <!-- EDUCATION -->
@@ -422,14 +457,15 @@
 </div>
 
 <!-- CURRENTLY LEARNING -->
-<div class="section">
-  <div class="section-title">Currently Learning</div>
-  <p style="font-size:13px;color:var(--muted)">Go (Golang), Kubernetes, gRPC, Helm, MQTT, GitLab CI/CD, cloud platforms (AWS/Azure/GCP), Django/Flask, SCADA/PLC/HMI fundamentals.</p>
-</div>
+
 
 <!-- STATS -->
 <div class="section">
-  <div class="section-title">Portfolio Stats</div>
+    <div class="section">
+    <div class="section-title">Academic Work</div><div style="font-size:13px;color:var(--muted);margin-top:4px;"><strong>Disciplines covered (theoretical):</strong> Management, Jurisprudence, Economics, Finance, Marketing, Logistics.</div>
+    <p style="font-size:13px;color:var(--muted)">2 years completing coursework, diploma projects and thesis (VKR) on order across engineering and IT disciplines: Management, Jurisprudence, Economics, Finance, Marketing, Logistics — all theoretical subjects with full documentation and verification.</p>
+  </div>
+<div class="section-title">Portfolio Stats</div>
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-num">83</div>
@@ -458,8 +494,34 @@
 
 <!-- AVAILABLE -->
 <div class="section">
-  <div class="section-title">Available For</div>
-  <p style="font-size:13px;color:var(--muted)"><strong>Remote positions:</strong> Full-time · Contract · Freelance &nbsp;|&nbsp; <strong>Timezone:</strong> UTC/EET (flexible) &nbsp;|&nbsp; <strong>Start:</strong> Immediate<br><strong>Preferred roles:</strong> Backend Engineer · Full-Stack Developer · AI/Bot Developer · Junior Software Engineer</p>
+    <div class="section">
+    <div class="section-title">Publications / Articles</div>
+    <ul class="bullet-list">
+      <li><strong>Automatic object counting and tracking on a production line</strong> — BNTU (NIК), student article, 2026. Topic: YOLOv8 + ByteTrack + line crossing. Full document available upon request.</li>
+      <li><strong>Local AI pipeline for lecture summarization and student self-organization</strong> — MGU XI Conference (Section 5), 2026. Topic: voice-notes pipeline (Whisper + OpenRouter + SM-2). Full document available upon request.</li>
+      <li><strong>SPEC-001 — Botka Platform documentation</strong> — internal specification (architecture, stages 1–8, metrics). Full document available upon request.</li>
+    </ul>
+    <p style="font-size:13px;color:var(--muted)"><em>Many additional papers, reports and coursework projects exist across engineering, IT and management disciplines. A full list of diplomas, conference papers, and confirmations of participation can be provided if you reach out — results are also searchable via public search for "Anton Petnitsky".</em></p>
+  </div>
+<div class="section-title">Available For</div>
+  <div class="skills-table">
+    <div class="skill-row">
+      <span class="skill-label">Work format</span>
+      <span>Remote (worldwide) &middot; Full-time &middot; Contract &middot; Freelance</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Timezone</span>
+      <span>UTC/EET, flexible</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Start</span>
+      <span>Immediately</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-label">Preferred roles</span>
+      <span>Backend Engineer &middot; Full-Stack Developer &middot; AI/Bot Developer &middot; Mid-level Software Engineer &middot; DevOps &amp; Infrastructure Engineer &middot; Robotics &amp; Hardware Engineer</span>
+    </div>
+  </div>
 </div>
 
 </body>

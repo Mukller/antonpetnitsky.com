@@ -20,6 +20,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEPLOY = os.path.join(ROOT, "deploy.sh")
 GUARD = os.path.join(ROOT, "scripts", "check-deploy-config.py")
 
+# Same reason as in the guard: the Cyrillic markers below are compared
+# against what the guard printed, and both sides must agree on the encoding.
+# UTF-8 here, UTF-8 there.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):  # pragma: no cover - old/odd streams
+        pass
+
 if not os.path.isfile(DEPLOY):
     sys.exit("deploy.sh не найден")
 
@@ -76,6 +85,11 @@ CASES = [
         "потерян OmniPrint",
         lambda b: b.replace("location /print/ {", "location /print-old/ {"),
         "/print/",
+    ),
+    (
+        "потерян Safalife API (запасной адрес приложения)",
+        lambda b: b.replace("location ^~ /safalife/ {", "location ^~ /safalife-old/ {"),
+        "/safalife/",
     ),
     (
         "потерян Kolonka",
