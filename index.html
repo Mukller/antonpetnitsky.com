@@ -59,10 +59,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Base colors */
+      /* Dark theme — main page (light theme overrides below) */
       --bg:        #0d1117;
       --bg-card:   #161b22;
-      --border:    #21262d;
+      --border:    #2b3138;
       --band-bg:    #1c2128;
       --text:      #c9d1d9;
       --muted:     #8b949e;
@@ -76,16 +76,17 @@
       --orange:    #ffa657;
       --header-a:  rgba(13, 17, 23, 0.95);
       --header-b:  rgba(13, 17, 23, 0.8);
-      --wm:        rgba(230, 237, 243, .18);
+      --wm:        rgba(230, 237, 243, .14);
       --accent-soft: rgba(88, 166, 255, .1);
-      --flash-bg:    #ffffff;
-      --flash-text:  #0d1117;
-      --flash-muted: #57606a;
+      /* Flashlight inside dark = soft paper, not pure white */
+      --flash-bg:    #f5f1e8;
+      --flash-text:  #1c1a17;
+      --flash-muted: #6f675a;
       --flash-accent:#1f6feb;
-      --flash-green: #1a7f37;
-      --flash-border: rgba(13, 17, 23, .3);
+      --flash-green: #2e7d46;
+      --flash-border: rgba(28, 26, 23, .18);
       --flash-card:  #ffffff;
-      --flash-wm:    rgba(13, 17, 23, .07);
+      --flash-wm:    rgba(28, 26, 23, .08);
 
       /* Spacing system */
       --space-xs: 4px;
@@ -112,19 +113,19 @@
       --container-max: 860px;
       --container-padding: 24px;
 
-      /* Flashlight variables — pure white spotlight */
-      --header-a:  rgba(255, 255, 255, 0.95);
-      --header-b:  rgba(255, 255, 255, 0.8);
-      --wm:        rgba(230, 237, 243, .18);
-      --accent-soft: rgba(9, 105, 218, .08);
-      --flash-bg:    #ffffff;
-      --flash-text:  #0d1117;
-      --flash-muted: #57606a;
+      /* Flashlight variables — keep consistent with top block */
+      --header-a:  rgba(13, 17, 23, 0.95);
+      --header-b:  rgba(13, 17, 23, 0.8);
+      --wm:        rgba(230, 237, 243, .14);
+      --accent-soft: rgba(88, 166, 255, .1);
+      --flash-bg:    #f5f1e8;
+      --flash-text:  #1c1a17;
+      --flash-muted: #6f675a;
       --flash-accent:#1f6feb;
-      --flash-green: #3fb950;
-      --flash-border: rgba(13, 17, 23, .3);
-      --flash-card:  #161b22;
-      --flash-wm:    rgba(230, 237, 243, .07);
+      --flash-green: #2e7d46;
+      --flash-border: rgba(28, 26, 23, .18);
+      --flash-card:  #ffffff;
+      --flash-wm:    rgba(28, 26, 23, .08);
     }
 
     @media (max-width: 640px) {
@@ -141,29 +142,31 @@
     }
 
     :root[data-theme="light"] {
-      --bg:        #edf0f3;
-      --bg-card:   #f7f9fa;
-      --border:    #d5dbe1;
-      --band-bg:    #e8ecf0;
-      --text:      #3d444d;
-      --muted:     #59646e;
-      --bright:    #1f2328;
-      --accent:    #0969da;
-      --accent-light: #0550ae;
-      --green:     #1a7f37;
-      --green-hover: #187733;
-      --header-a:  rgba(237, 240, 243, 0.95);
-      --header-b:  rgba(237, 240, 243, 0.8);
-      --wm:        rgba(31, 35, 40, .12);
-      --accent-soft: rgba(9, 105, 218, .08);
-      --flash-bg:    #0d1117;
-      --flash-text:  #f0f6fc;
-      --flash-muted: #8b949e;
-      --flash-accent:#58a6ff;
-      --flash-green: #3fb950;
-      --flash-border: rgba(240, 246, 252, .3);
-      --flash-card:  #ffffff;
-      --flash-wm:    rgba(230, 237, 243, .07);
+      /* Soft warm paper — not the harsh #edf0f3 / pure-white flashlight */
+      --bg:        #f2ede6;
+      --bg-card:   #faf7f1;
+      --border:    #ddd5c9;
+      --band-bg:    #eee7db;
+      --text:      #4a4438;
+      --muted:     #6f675a;
+      --bright:    #23201b;
+      --accent:    #3b6fdb;
+      --accent-light: #2f5cb8;
+      --green:     #2e7d46;
+      --green-hover: #27693a;
+      --header-a:  rgba(242, 237, 230, 0.95);
+      --header-b:  rgba(242, 237, 230, 0.8);
+      --wm:        rgba(122, 106, 82, .14);
+      --accent-soft: rgba(59, 111, 219, .08);
+      /* Flashlight inside the light theme = deep ink circle, but muted */
+      --flash-bg:    #1c1a17;
+      --flash-text:  #ece6da;
+      --flash-muted: #a39a89;
+      --flash-accent:#8fb0e8;
+      --flash-green: #69b981;
+      --flash-border: rgba(236, 230, 218, .22);
+      --flash-card:  #2a2723;
+      --flash-wm:    rgba(236, 230, 218, .08);
     }
 
 /* Utility classes for spacing */
@@ -300,17 +303,19 @@
       position: relative;
       padding: 64px 24px 48px;
       text-align: center;
+      overflow: hidden;
     }
 
     .hero-wm {
       position: absolute;
-      inset: -28% -18%;
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       pointer-events: none;
       user-select: none;
+      overflow: hidden;
     }
 
     .wm-row {
@@ -321,17 +326,23 @@
       line-height: 1;
       color: var(--wm);
       opacity: .22;
-      transform: rotate(-30deg);
+      transform: rotate(-12deg);
+      transform-origin: center;
+      width: 160%;
+      text-align: center;
     }
-    .wm-row:nth-child(2) { transform: rotate(-30deg); }
-    .wm-row:nth-child(3) { transform: rotate(-30deg); }
-    .wm-row:nth-child(4) { transform: rotate(-30deg); }
-    .wm-row:nth-child(5) { transform: rotate(-30deg); }
-    .wm-row:nth-child(6) { transform: rotate(-30deg); }
-    .wm-row:nth-child(7) { transform: rotate(-30deg); }
-    .wm-row:nth-child(8) { transform: rotate(-30deg); }
-    .wm-row:nth-child(9) { transform: rotate(-30deg); }
-    .wm-row:nth-child(10) { transform: rotate(-30deg); }
+    .wm-row:nth-child(1) { transform: rotate(-12deg); }
+    .wm-row:nth-child(2) { transform: rotate(-12deg); }
+    .wm-row:nth-child(3) { transform: rotate(-12deg); }
+    .wm-row:nth-child(4) { transform: rotate(-12deg); }
+    .wm-row:nth-child(5) { transform: rotate(-12deg); }
+    .wm-row:nth-child(6) { transform: rotate(-12deg); }
+    .wm-row:nth-child(7) { transform: rotate(-12deg); }
+    .wm-row:nth-child(8) { transform: rotate(-12deg); }
+    .wm-row:nth-child(9) { transform: rotate(-12deg); }
+    .wm-row:nth-child(10) { transform: rotate(-12deg); }
+    .wm-row:nth-child(11) { transform: rotate(-12deg); }
+    .wm-row:nth-child(12) { transform: rotate(-12deg); }
 
     .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
 
@@ -356,8 +367,13 @@
       pointer-events: none;
       will-change: clip-path;
       clip-path: circle(0px at -500px -500px);
+      /* Anchor halos: decorative lines above and below the hero content,
+         drawn outside the visible frame so the watermark doesn't "float". */
+      box-shadow:
+        0 -1px 0 0 var(--flash-border),
+        0 1px 0 0 var(--flash-border);
     }
-    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(36px, 5vw, 56px); letter-spacing: .24em; transform: rotate(-30deg); }
+    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(36px, 5vw, 56px); letter-spacing: .28em; transform: rotate(-12deg); transform-origin: center; width: 160%; text-align: center; }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
@@ -366,6 +382,25 @@
     .hero-alt .hire-badge { color: var(--flash-green); }
     .hero-alt .btn { border-color: var(--flash-border); color: var(--flash-text); background: transparent; }
     .hero-alt .btn-primary { background: var(--flash-green); border-color: var(--flash-green); color: #fff; }
+
+    /* ── Top / bottom anchor lines for the hero watermark ──
+       A soft horizontal rule on the very top edge and bottom edge of the
+       frame, inside both the base and the inverted layer so they line up. */
+    .hero-frame .hero-line-top,
+    .hero-frame .hero-line-bottom {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .hero-frame .hero-line-top { top: 0; }
+    .hero-frame .hero-line-bottom { bottom: 0; }
+    .hero-alt .hero-line-top,
+    .hero-alt .hero-line-bottom {
+      background: var(--flash-border);
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .hero-alt { display: none; }
@@ -1116,6 +1151,8 @@
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
       <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
+      <div class="wm-row">ANTON ANTON ANTON ANTON ANTON</div>
     </div>
     <div class="hero-avatar">
       <img src="https://github.com/Mukller.png" alt="Anton Petnitsky">
@@ -1151,9 +1188,10 @@
         CV (RU)
       </a>
     </div>
-    </div>
 
     <div class="hero-layer hero-alt" id="heroAlt" aria-hidden="true"></div>
+    <div class="hero-line-top" aria-hidden="true"></div>
+    <div class="hero-line-bottom" aria-hidden="true"></div>
   </div>
 </div>
 
