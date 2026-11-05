@@ -82,6 +82,11 @@ CASES = [
         "/encyclyka/",
     ),
     (
+        "потерян Lyuda",
+        lambda b: b.replace("location ^~ /lyuda/ {", "location ^~ /lyuda-old/ {"),
+        "Lyuda",
+    ),
+    (
         "потерян OmniPrint",
         lambda b: b.replace("location /print/ {", "location /print-old/ {"),
         "/print/",

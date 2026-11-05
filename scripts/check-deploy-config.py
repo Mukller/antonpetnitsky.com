@@ -96,7 +96,7 @@ def loc(path_fragment: str) -> re.Pattern:
 
 
 REQUIRED = [
-    ("корень (статика портфолио)", re.compile(r"root\s+/var/www")),
+    ("корень (статика портфолио)", re.compile(r"root\s+/var/www/antonpetnitsky\.com;\s*index\s+index\.html")),
     ("try_files для статики", re.compile(r"try_files\s+\$uri")),
     ("gzip", re.compile(r"gzip\s+on")),
     ("immutable-кеш /assets/", loc("/assets/")),
@@ -113,6 +113,8 @@ REQUIRED = [
     ("Kolonka (TTS)", loc("/kolonka/")),
     ("OmniPrint", loc("/print/")),
     ("Encyclyka", loc("/encyclyka/")),
+    ("Lyuda", loc("/lyuda/")),
+    ("Lyuda assets", loc("/lyuda/assets/")),
     ("редирект 80 -> 443", re.compile(r"return\s+301\s+https")),
     ("ssl-сертификат", re.compile(r"ssl_certificate")),
     ("HSTS", re.compile(r"Strict-Transport-Security")),

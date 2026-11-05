@@ -410,6 +410,24 @@ server {
         proxy_send_timeout 300s;
     }
 
+
+    # ── Lyuda — portfolio of Lyudmila Gaishun (static, /var/www/antonpetnitsky.com/lyuda) ──
+    # Статика раздаётся напрямую из корня портфолио, без апстрима: все ссылки
+    # внутри lyuda относительные (assets/...). ^~ чтобы каталог-регексы не
+    # перехватывали /lyuda/assets/...
+    location = /lyuda { return 301 /lyuda/; }
+    location ^~ /lyuda/ {
+        root /var/www/antonpetnitsky.com;
+        try_files /lyuda/index.html /lyuda/404.html =404;
+        gzip on;
+        gzip_types text/css application/javascript application/json image/svg+xml;
+    }
+    location ^~ /lyuda/assets/ {
+        root /var/www/antonpetnitsky.com;
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=2592000, immutable";
+    }
+
     # everything else → portfolio static files
     location / {
         try_files $uri $uri/ =404;
