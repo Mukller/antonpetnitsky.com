@@ -492,16 +492,16 @@
 
     /* ── SECTION WRAPPER ───────────────────────────
        --container-max is the single width source of truth.
-       Sections are centered with that max-width; inner grids/cards are
-       full-width, so FAQ/Reviews/Location/Contact match the rest. */
+       box-sizing is set on section so 860px includes the 24px side
+       padding — inner content is then 812px wide, matching everywhere. */
+    *, *::before, *::after { box-sizing: border-box; }
     section {
       max-width: var(--container-max, 860px);
       margin: 0 auto 64px;
       padding: 0 24px;
-      box-sizing: border-box;
     }
-    section > * { width: 100%; box-sizing: border-box; max-width: none; }
-    section .faq-grid, section .contact-grid, section > div[style] { width: 100%; max-width: none; }
+    section > * { width: auto; max-width: none; }
+    section .faq-grid, section .contact-grid, section > div[style] { width: auto; max-width: none; }
 
     /* ── HERO SPACING ──────────────────────────────── */
     .hero {
