@@ -373,8 +373,10 @@
       box-shadow:
         0 -1px 0 0 var(--flash-border),
         0 1px 0 0 var(--flash-border);
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
-    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(42px, 6vw, 64px); letter-spacing: .02em; word-spacing: 0.15em; transform: rotate(-30deg); transform-origin: center; width: 250%; text-align: center; line-height: 1.35; }
+    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(42px, 6vw, 64px); letter-spacing: .02em; word-spacing: 0.15em; transform: rotate(-30deg); transform-origin: center; width: 250%; text-align: center; line-height: 1.35; contain: strict; }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
@@ -484,6 +486,14 @@
       padding: 0 24px;
     }
 
+    /* ── HERO SPACING ──────────────────────────────── */
+    .hero {
+      margin: 32px auto 24px;
+    }
+    .hero-layer {
+      padding: 64px 24px 56px;
+    }
+
     .section-title {
       font-size: 11px;
       font-weight: 600;
@@ -496,7 +506,8 @@
     }
 
     /* ── ABOUT ───────────────────────────────────── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    #about { margin-top: 40px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .card {
       background: var(--bg-card);
@@ -1010,15 +1021,17 @@
       .mobile-menu a:last-child { border-bottom: none; }
     }
 
+    /* Bands used to stand out with a different card background — now they
+       match the rest of the page (same background, no full-bleed stripe). */
     section.band {
-      max-width: none; margin: 0 0 64px; padding: 56px 0 48px;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      max-width: 860px; margin: 0 auto 64px; padding: 0 24px;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
     }
-    section.band > * { max-width: 860px; margin-left: auto; margin-right: auto; }
+    section.band > * { max-width: none; margin-left: 0; margin-right: 0; }
     section.band > .section-title { margin-top: 0; }
-    section.band > div[style] { padding: 0 24px; }
+    section.band > div[style] { padding: 0; }
 
     .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 24px; width: 100%; }
     .footer-cols .fc-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
@@ -1205,10 +1218,6 @@
         CV (RU)
       </a>
     </div>
-
-    <div class="hero-layer hero-alt" id="heroAlt" aria-hidden="true"></div>
-    <div class="hero-line-top" aria-hidden="true"></div>
-    <div class="hero-line-bottom" aria-hidden="true"></div>
   </div>
 </div>
 
@@ -1661,21 +1670,7 @@
 
 <!-- EXPLORE -->
 <section>
-  <div class="section-title" data-en="Case study" data-ru="Кейс">Case study</div>
-  <div class="about-grid">
-    <div class="card" style="grid-column: 1 / -1; border-color: rgba(63,185,80,.35);">
-      <div class="card-title" data-en="Safalife — courier delivery app · in production" data-ru="Safalife — приложение для курьеров · в продакшне">Safalife — courier delivery app · in production</div>
-      <p data-en="Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline." data-ru="Спроектировал, разработал и вывел в прод для логистической компании в Узбекистане: Flutter-приложение, бэкенд на FastAPI, собственная маршрутизация OSRM, подписанный релизный пайплайн.">Designed, built and deployed for a logistics company in Uzbekistan: Flutter app, FastAPI backend, self-hosted OSRM routing, signed release pipeline.</p>
-      <div class="tag-row">
-        <span class="tag green" data-en="In production" data-ru="В продакшне">In production</span>
-        <span class="tag">Flutter</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">OSRM</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-title" style="margin-top: 48px;" data-en="Explore" data-ru="Разделы сайта">Explore</div>
+  <div class="section-title" data-en="Explore" data-ru="Разделы сайта">Explore</div>
   <div class="about-grid">
     <a class="card" href="/homelab/" style="color: var(--text); text-decoration: none;">
       <div class="card-title" data-en="Homelab →" data-ru="Домашний сервер →">Homelab →</div>
@@ -1695,7 +1690,7 @@
 <!-- FAQ -->
 <section id="faq">
   <div class="section-title" data-en="FAQ" data-ru="Вопросы">FAQ</div>
-  <div class="faq-grid" style="display: grid; gap: 16px; max-width: 860px;">
+  <div class="faq-grid" style="display: grid; gap: 16px;">
     <div class="faq-item" style="border: 1px solid var(--border); border-radius: 8px; padding: 20px; background: var(--bg-card);">
       <h3 style="font-size: 16px; font-weight: 600; color: var(--bright); margin-bottom: 8px;" data-en="What kind of work do you take?" data-ru="Какие проекты вы берёте в работу?">What kind of work do you take?</h3>
       <p style="font-size: 14px; color: var(--muted); line-height: 1.6;" data-en="Web services, Telegram bots, Flutter apps, embedded systems (ESP32/Arduino), AI integrations, automation scripts. I prefer projects that solve real user problems over pure design exercises." data-ru="Веб-сервисы, Telegram-боты, Flutter-приложения, встраиваемые системы (ESP32/Arduino), интеграции с ИИ, скрипты автоматизации. Предпочитаю проекты, которые решают реальные проблемы пользователей, а не чистые дизайн-упражнения.">Web services, Telegram bots, Flutter apps, embedded systems (ESP32/Arduino), AI integrations, automation scripts. I prefer projects that solve real user problems over pure design exercises.</p>
@@ -1722,7 +1717,7 @@
 <!-- TESTIMONIALS -->
 <section id="reviews">
   <div class="section-title" data-en="Reviews" data-ru="Отзывы">Reviews</div>
-  <div style="display: grid; gap: 16px; max-width: 860px;">
+  <div style="display: grid; gap: 16px;">
     <blockquote style="border-left: 2px solid var(--accent); padding: 16px 20px; background: var(--bg-card); border-radius: 0 8px 8px 0; font-size: 14px; line-height: 1.6; color: var(--text);">
       <p data-en="Anton delivered our courier app faster than any contractor we've worked with. The self-hosted routing and signed release pipeline saved us thousands in API fees." data-ru="Антон разработал приложение для курьеров быстрее любого подрядчика, с которым мы работали. Собственная маршрутизация и подписанный релизный пайплайн сэкономили нам тысячи на API.">"Anton delivered our courier app faster than any contractor we've worked with. The self-hosted routing and signed release pipeline saved us thousands in API fees."</p>
       <cite style="display: block; margin-top: 8px; font-size: 12px; color: var(--muted); font-style: normal;" data-en="— Logistics company, Uzbekistan" data-ru="— Логистическая компания, Узбекистан">— Logistics company, Uzbekistan</cite>
@@ -1748,7 +1743,7 @@
 <!-- MAPS -->
 <section id="maps">
   <div class="section-title" data-en="Location" data-ru="Местоположение">Location</div>
-  <div style="max-width: 860px; border: 1px solid var(--border); border-radius: 8px; padding: 24px; background: var(--bg-card);">
+  <div style="border: 1px solid var(--border); border-radius: 8px; padding: 24px; background: var(--bg-card);">
     <p style="font-size: 14px; color: var(--muted); line-height: 1.6;" data-en="Based in Minsk, Belarus. All services run remotely from my home server. I work globally — remote only." data-ru="Нахожусь в Минске, Беларусь. Все сервисы работают удалённо с домашнего сервера. Работаю глобально — только удалённо.">Based in Minsk, Belarus. All services run remotely from my home server. I work globally — remote only.</p>
     <a href="https://maps.google.com/?q=Minsk,Belarus" target="_blank" style="display: inline-block; margin-top: 12px; font-size: 13px; color: var(--accent); text-decoration: underline;" data-en="View on Google Maps →" data-ru="Посмотреть на карте →">View on Google Maps →</a>
   </div>
@@ -1796,7 +1791,7 @@
 
 <!-- Response promise -->
 <div style="max-width: 860px; margin: 0 auto; padding: 24px 24px 48px; text-align: center;">
-  <p style="font-size: 14px; color: var(--muted);" data-en="Response promise: initial reply within 24 hours. Production services monitored 24/7." data-ru="Обещание ответа: первое сообщение в течение 24 часов. Продакшн-сервисы мониторятся круглосуточно.">Response promise: initial reply within 24 hours. Production services monitored 24/7.</p>
+  <p style="font-size: 17px; color: var(--text);" data-en="Response promise: initial reply within 24 hours. Production services monitored 24/7." data-ru="Обещание ответа: первое сообщение в течение 24 часов. Продакшн-сервисы мониторятся круглосуточно.">Response promise: initial reply within 24 hours. Production services monitored 24/7.</p>
 </div>
 
 <footer>
@@ -1838,38 +1833,29 @@
   </div>
 </footer>
 
-<script>
+  <script>
   (function () {
     var frame = document.getElementById('heroFrame');
-    var alt = document.getElementById('heroAlt');
-    var base = document.getElementById('heroBase');
-    if (!frame || !alt || !base) return;
+    if (!frame) return;
 
-    alt.innerHTML = base.innerHTML;
-    var focusables = alt.querySelectorAll('a, button');
-    for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
-    var imgs = alt.querySelectorAll('img');
-    for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
+    /* No duplicated layer: the hero shows the base content only.
+       (The inverted flashlight layer was removed — it duplicated the
+       buttons' text under the cursor and caused misalignment.) */
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     /* title cycles between languages — clean crossfade, no garbage chars */
     var tB = document.getElementById('titleBase');
-    var tA = alt.querySelector('.hero-title');
-    if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false, firstSet = true;
 
     function swapTitle(to) {
-      if (busy || !tB || !tA) return;
+      if (busy || !tB) return;
       busy = true;
       tB.style.opacity = 0;
-      tA.style.opacity = 0;
       setTimeout(function () {
         tB.textContent = to;
-        tA.textContent = to;
         tB.style.opacity = 1;
-        tA.style.opacity = 1;
         setTimeout(function () { busy = false; }, 260);
       }, 240);
     }
@@ -1880,39 +1866,12 @@
       if (firstSet) {
         firstSet = false;
         tB.textContent = to;
-        tA.textContent = to;
         return;
       }
       swapTitle(to);
     };
-
-    var R = 0, target = 0, mx = -600, my = -600, lastCX = null, lastCY = null, running = false;
-    function loop() {
-      R += (target - R) * 0.16;
-      if (Math.abs(target - R) < 0.4) R = target;
-      alt.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + mx.toFixed(1) + 'px ' + my.toFixed(1) + 'px)';
-      if (R !== target) { requestAnimationFrame(loop); } else { running = false; }
-    }
-    function wake() { if (!running) { running = true; requestAnimationFrame(loop); } }
-    function move(x, y) {
-      lastCX = x; lastCY = y;
-      var b = frame.getBoundingClientRect();
-      mx = x - b.left; my = y - b.top;
-      target = 200;
-      wake();
-    }
-    frame.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
-    frame.addEventListener('mouseleave', function () { target = 0; wake(); });
-    window.addEventListener('scroll', function () {
-      if (lastCX !== null && target > 0) move(lastCX, lastCY);
-    }, { passive: true });
-    frame.addEventListener('touchmove', function (e) {
-      var t = e.touches[0];
-      if (t) move(t.clientX, t.clientY);
-    }, { passive: true });
-    frame.addEventListener('touchend', function () { target = 0; wake(); });
   })();
-</script>
+  </script>
 
 <script>
   var lang = localStorage.getItem('ap_lang') || (navigator.language && navigator.language.startsWith('ru') ? 'ru' : 'en');
@@ -2039,6 +1998,5 @@
       }
     })();
   </script>
-  <a href="mailto:anton.petnitsky@gmail.com" class="sticky-mobile-cta" data-en="Contact me →" data-ru="Написать мне →">Contact me →</a>
 </body>
 </html>
