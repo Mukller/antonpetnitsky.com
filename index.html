@@ -492,10 +492,11 @@
 
     /* ── SECTION WRAPPER ───────────────────────────
        --container-max is the single width source of truth.
-       Sections are centered with that max-width; with box-sizing
-       border-box set globally (first rule above), the 860px includes
-       the 24px side padding, so inner content is 812px wide — the
-       same for FAQ, Reviews, Location and Contact as everywhere else. */
+       box-sizing: border-box globally => 860px includes 24px side
+       padding, so inner content is 812px — the same everywhere.
+       No inner element should carry its own max-width, otherwise
+       FAQ/Reviews/Contact shrink below the rest of the page. */
+    *, *::before, *::after { box-sizing: border-box; }
     section {
       max-width: var(--container-max, 860px);
       margin: 0 auto 64px;
