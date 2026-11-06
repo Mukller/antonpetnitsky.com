@@ -484,7 +484,10 @@
       max-width: 860px;
       margin: 0 auto 64px;
       padding: 0 24px;
+      box-sizing: border-box;
     }
+    section > * { width: 100%; box-sizing: border-box; }
+    section .faq-grid, section .contact-grid { width: 100%; }
 
     /* ── HERO SPACING ──────────────────────────────── */
     .hero {
@@ -1218,6 +1221,9 @@
         CV (RU)
       </a>
     </div>
+    <div class="hero-layer hero-alt" id="heroAlt" aria-hidden="true"></div>
+    <div class="hero-line-top" aria-hidden="true"></div>
+    <div class="hero-line-bottom" aria-hidden="true"></div>
   </div>
 </div>
 
@@ -1791,7 +1797,7 @@
 
 <!-- Response promise -->
 <div style="max-width: 860px; margin: 0 auto; padding: 24px 24px 48px; text-align: center;">
-  <p style="font-size: 17px; color: var(--text);" data-en="Response promise: initial reply within 24 hours. Production services monitored 24/7." data-ru="Обещание ответа: первое сообщение в течение 24 часов. Продакшн-сервисы мониторятся круглосуточно.">Response promise: initial reply within 24 hours. Production services monitored 24/7.</p>
+  <p style="font-size: 17px; color: var(--muted);" data-en="Response promise: initial reply within 24 hours. Production services monitored 24/7." data-ru="Обещание ответа: первое сообщение в течение 24 часов. Продакшн-сервисы мониторятся круглосуточно.">Response promise: initial reply within 24 hours. Production services monitored 24/7.</p>
 </div>
 
 <footer>
@@ -1836,26 +1842,35 @@
   <script>
   (function () {
     var frame = document.getElementById('heroFrame');
-    if (!frame) return;
+    var alt = document.getElementById('heroAlt');
+    var base = document.getElementById('heroBase');
+    if (!frame || !alt || !base) return;
 
-    /* No duplicated layer: the hero shows the base content only.
-       (The inverted flashlight layer was removed — it duplicated the
-       buttons' text under the cursor and caused misalignment.) */
+    alt.innerHTML = base.innerHTML;
+    var focusables = alt.querySelectorAll('a, button');
+    for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
+    var imgs = alt.querySelectorAll('img');
+    for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     /* title cycles between languages — clean crossfade, no garbage chars */
     var tB = document.getElementById('titleBase');
+    var tA = alt.querySelector('.hero-title');
+    if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false, firstSet = true;
 
     function swapTitle(to) {
-      if (busy || !tB) return;
+      if (busy || !tB || !tA) return;
       busy = true;
       tB.style.opacity = 0;
+      tA.style.opacity = 0;
       setTimeout(function () {
         tB.textContent = to;
+        tA.textContent = to;
         tB.style.opacity = 1;
+        tA.style.opacity = 1;
         setTimeout(function () { busy = false; }, 260);
       }, 240);
     }
@@ -1866,10 +1881,37 @@
       if (firstSet) {
         firstSet = false;
         tB.textContent = to;
+        tA.textContent = to;
         return;
       }
       swapTitle(to);
     };
+
+    var R = 0, target = 0, mx = -600, my = -600, lastCX = null, lastCY = null, running = false;
+    function loop() {
+      R += (target - R) * 0.16;
+      if (Math.abs(target - R) < 0.4) R = target;
+      alt.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + mx.toFixed(1) + 'px ' + my.toFixed(1) + 'px)';
+      if (R !== target) { requestAnimationFrame(loop); } else { running = false; }
+    }
+    function wake() { if (!running) { running = true; requestAnimationFrame(loop); } }
+    function move(x, y) {
+      lastCX = x; lastCY = y;
+      var b = frame.getBoundingClientRect();
+      mx = x - b.left; my = y - b.top;
+      target = 200;
+      wake();
+    }
+    frame.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY); });
+    frame.addEventListener('mouseleave', function () { target = 0; wake(); });
+    window.addEventListener('scroll', function () {
+      if (lastCX !== null && target > 0) move(lastCX, lastCY);
+    }, { passive: true });
+    frame.addEventListener('touchmove', function (e) {
+      var t = e.touches[0];
+      if (t) move(t.clientX, t.clientY);
+    }, { passive: true });
+    frame.addEventListener('touchend', function () { target = 0; wake(); });
   })();
   </script>
 
