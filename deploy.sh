@@ -418,7 +418,7 @@ server {
     location = /lyuda { return 301 /lyuda/; }
     location ^~ /lyuda/ {
         root /var/www/antonpetnitsky.com;
-        try_files /lyuda/index.html /lyuda/404.html =404;
+        try_files $uri $uri/ /lyuda/index.html /lyuda/404.html =404;
         gzip on;
         gzip_types text/css application/javascript application/json image/svg+xml;
     }
