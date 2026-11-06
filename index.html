@@ -320,7 +320,7 @@
 
     .wm-row {
       font-size: clamp(42px, 6vw, 64px);
-      font-weight: 800;
+      font-weight: 400;
       letter-spacing: .02em;
       word-spacing: 0.15em;
       white-space: nowrap;
@@ -383,6 +383,7 @@
     .hero-alt .hire-badge { color: var(--flash-green); }
     .hero-alt .btn { border-color: var(--flash-border); color: var(--flash-text); background: transparent; }
     .hero-alt .btn-primary { background: var(--flash-green); border-color: var(--flash-green); color: #fff; }
+    .hero-alt .hero-bg { background: var(--flash-bg); }
 
     /* ── Top / bottom anchor lines for the hero watermark ──
        A soft horizontal rule on the very top edge and bottom edge of the
@@ -1843,6 +1844,20 @@
     for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
     var imgs = alt.querySelectorAll('img');
     for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
+
+    /* The clone sits inside the circle — the underlying watermark
+       (base layer) bleeds through on the buttons. Flatten it there. */
+    var cloneBtns = alt.querySelectorAll('.btn');
+    for (var b = 0; b < cloneBtns.length; b++) {
+      var btn = cloneBtns[b];
+      var txt = btn.textContent.toLowerCase().replace(/[^a-zа-яё]/g, '').trim();
+      if (txt.indexOf('github') >= 0 || txt.indexOf('telegram') >= 0 ||
+          txt.indexOf('cv') >= 0 || txt.indexOf('резюме') >= 0) {
+        btn.style.overflow = 'hidden';
+        var junk = btn.querySelectorAll('.hero-wm, .wm-row');
+        for (var k = 0; k < junk.length; k++) junk[k].style.display = 'none';
+      }
+    }
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
