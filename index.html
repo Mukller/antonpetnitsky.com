@@ -364,7 +364,7 @@
       position: absolute;
       inset: 0;
       z-index: 10;
-      background: var(--flash-bg);
+      background: transparent;
       pointer-events: none;
       will-change: clip-path;
       clip-path: circle(0px at -500px -500px);
@@ -373,9 +373,18 @@
       box-shadow:
         0 -1px 0 0 var(--flash-border),
         0 1px 0 0 var(--flash-border);
-      transform: translateZ(0);
-      backface-visibility: hidden;
+      /* The circle IS the spotlight — solid warm paper so the ANTON rows
+         do not bleed through it; contents inherit the flash colors below. */
+      overflow: visible;
+      border-radius: 0;
     }
+    .hero-alt .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--flash-bg);
+      border-radius: 0;
+    }
+    .hero-alt .hero-layer { position: relative; z-index: 1; }
     .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(42px, 6vw, 64px); letter-spacing: .02em; word-spacing: 0.15em; transform: rotate(-30deg); transform-origin: center; width: 250%; text-align: center; line-height: 1.35; contain: strict; }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
@@ -479,15 +488,18 @@
       text-decoration: none;
     }
 
-    /* ── SECTION WRAPPER ─────────────────────────── */
+    /* ── SECTION WRAPPER ───────────────────────────
+       --container-max is the single width source of truth.
+       Sections are centered with that max-width; inner grids/cards are
+       full-width, so FAQ/Reviews/Location/Contact match the rest. */
     section {
-      max-width: 860px;
+      max-width: var(--container-max, 860px);
       margin: 0 auto 64px;
       padding: 0 24px;
       box-sizing: border-box;
     }
-    section > * { width: 100%; box-sizing: border-box; }
-    section .faq-grid, section .contact-grid { width: 100%; }
+    section > * { width: 100%; box-sizing: border-box; max-width: none; }
+    section .faq-grid, section .contact-grid, section > div[style] { width: 100%; max-width: none; }
 
     /* ── HERO SPACING ──────────────────────────────── */
     .hero {
@@ -1746,15 +1758,6 @@
     </blockquote></div>
 </section>
 
-<!-- MAPS -->
-<section id="maps">
-  <div class="section-title" data-en="Location" data-ru="Местоположение">Location</div>
-  <div style="border: 1px solid var(--border); border-radius: 8px; padding: 24px; background: var(--bg-card);">
-    <p style="font-size: 14px; color: var(--muted); line-height: 1.6;" data-en="Based in Minsk, Belarus. All services run remotely from my home server. I work globally — remote only." data-ru="Нахожусь в Минске, Беларусь. Все сервисы работают удалённо с домашнего сервера. Работаю глобально — только удалённо.">Based in Minsk, Belarus. All services run remotely from my home server. I work globally — remote only.</p>
-    <a href="https://maps.google.com/?q=Minsk,Belarus" target="_blank" style="display: inline-block; margin-top: 12px; font-size: 13px; color: var(--accent); text-decoration: underline;" data-en="View on Google Maps →" data-ru="Посмотреть на карте →">View on Google Maps →</a>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-title" data-en="Contact" data-ru="Контакты">Contact</div>
@@ -1846,17 +1849,26 @@
     var base = document.getElementById('heroBase');
     if (!frame || !alt || !base) return;
 
-    alt.innerHTML = base.innerHTML;
-    var focusables = alt.querySelectorAll('a, button');
+    /* Background div inside the flashlight layer (the circle itself). */
+    var bg = document.createElement('div');
+    bg.className = 'hero-bg';
+    bg.setAttribute('aria-hidden', 'true');
+    alt.appendChild(bg);
+    /* Clone base content above the bg div. */
+    var clone = document.createElement('div');
+    clone.className = 'hero-layer';
+    clone.innerHTML = base.innerHTML;
+    alt.appendChild(clone);
+    var focusables = clone.querySelectorAll('a, button');
     for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
-    var imgs = alt.querySelectorAll('img');
+    var imgs = clone.querySelectorAll('img');
     for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     /* title cycles between languages — clean crossfade, no garbage chars */
     var tB = document.getElementById('titleBase');
-    var tA = alt.querySelector('.hero-title');
+    var tA = clone.querySelector('.hero-title');
     if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false, firstSet = true;
