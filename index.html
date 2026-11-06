@@ -78,8 +78,8 @@
       --header-b:  rgba(13, 17, 23, 0.8);
       --wm:        rgba(230, 237, 243, .14);
       --accent-soft: rgba(88, 166, 255, .1);
-      /* Flashlight inside dark = soft paper, not pure white */
-      --flash-bg:    #f5f1e8;
+      /* Flashlight inside dark = soft warm paper */
+      --flash-bg:    #f8f0dc;
       --flash-text:  #1c1a17;
       --flash-muted: #6f675a;
       --flash-accent:#1f6feb;
@@ -118,7 +118,7 @@
       --header-b:  rgba(13, 17, 23, 0.8);
       --wm:        rgba(230, 237, 243, .14);
       --accent-soft: rgba(88, 166, 255, .1);
-      --flash-bg:    #f5f1e8;
+      --flash-bg:    #f8f0dc;
       --flash-text:  #1c1a17;
       --flash-muted: #6f675a;
       --flash-accent:#1f6feb;
@@ -142,21 +142,21 @@
     }
 
     :root[data-theme="light"] {
-      /* Soft warm paper — not the harsh #edf0f3 / pure-white flashlight */
-      --bg:        #f2ede6;
-      --bg-card:   #faf7f1;
-      --border:    #ddd5c9;
-      --band-bg:    #eee7db;
-      --text:      #4a4438;
-      --muted:     #6f675a;
-      --bright:    #23201b;
+      /* Soft warm paper — cream, noticeably warmer */
+      --bg:        #f5eedd;
+      --bg-card:   #fdf9ec;
+      --border:    #e3d8be;
+      --band-bg:    #f0e7d0;
+      --text:      #4d4432;
+      --muted:     #7a6e57;
+      --bright:    #262017;
       --accent:    #3b6fdb;
       --accent-light: #2f5cb8;
       --green:     #2e7d46;
       --green-hover: #27693a;
-      --header-a:  rgba(242, 237, 230, 0.95);
-      --header-b:  rgba(242, 237, 230, 0.8);
-      --wm:        rgba(122, 106, 82, .14);
+      --header-a:  rgba(245, 238, 221, 0.95);
+      --header-b:  rgba(245, 238, 221, 0.8);
+      --wm:        rgba(133, 109, 72, .16);
       --accent-soft: rgba(59, 111, 219, .08);
       /* Flashlight inside the light theme = deep ink circle, but muted */
       --flash-bg:    #1c1a17;
@@ -323,26 +323,26 @@
       font-weight: 800;
       letter-spacing: .28em;
       white-space: nowrap;
-      line-height: 1;
+      line-height: 1.35;
       color: var(--wm);
       opacity: .22;
-      transform: rotate(-12deg);
+      transform: rotate(-30deg);
       transform-origin: center;
       width: 160%;
       text-align: center;
     }
-    .wm-row:nth-child(1) { transform: rotate(-12deg); }
-    .wm-row:nth-child(2) { transform: rotate(-12deg); }
-    .wm-row:nth-child(3) { transform: rotate(-12deg); }
-    .wm-row:nth-child(4) { transform: rotate(-12deg); }
-    .wm-row:nth-child(5) { transform: rotate(-12deg); }
-    .wm-row:nth-child(6) { transform: rotate(-12deg); }
-    .wm-row:nth-child(7) { transform: rotate(-12deg); }
-    .wm-row:nth-child(8) { transform: rotate(-12deg); }
-    .wm-row:nth-child(9) { transform: rotate(-12deg); }
-    .wm-row:nth-child(10) { transform: rotate(-12deg); }
-    .wm-row:nth-child(11) { transform: rotate(-12deg); }
-    .wm-row:nth-child(12) { transform: rotate(-12deg); }
+    .wm-row:nth-child(1) { transform: rotate(-30deg); }
+    .wm-row:nth-child(2) { transform: rotate(-30deg); }
+    .wm-row:nth-child(3) { transform: rotate(-30deg); }
+    .wm-row:nth-child(4) { transform: rotate(-30deg); }
+    .wm-row:nth-child(5) { transform: rotate(-30deg); }
+    .wm-row:nth-child(6) { transform: rotate(-30deg); }
+    .wm-row:nth-child(7) { transform: rotate(-30deg); }
+    .wm-row:nth-child(8) { transform: rotate(-30deg); }
+    .wm-row:nth-child(9) { transform: rotate(-30deg); }
+    .wm-row:nth-child(10) { transform: rotate(-30deg); }
+    .wm-row:nth-child(11) { transform: rotate(-30deg); }
+    .wm-row:nth-child(12) { transform: rotate(-30deg); }
 
     .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
 
@@ -373,7 +373,7 @@
         0 -1px 0 0 var(--flash-border),
         0 1px 0 0 var(--flash-border);
     }
-    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(36px, 5vw, 56px); letter-spacing: .28em; transform: rotate(-12deg); transform-origin: center; width: 160%; text-align: center; }
+    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(36px, 5vw, 56px); letter-spacing: .28em; transform: rotate(-30deg); transform-origin: center; width: 160%; text-align: center; line-height: 1.35; }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }

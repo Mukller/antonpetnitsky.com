@@ -1,18 +1,18 @@
 /* light theme overrides — loaded on every page after page styles */
 :root[data-theme="light"] {
-  --bg: #f2ede6;
-  --bg-card: #faf7f1;
-  --border: #ddd5c9;
-  --text: #4a4438;
-  --muted: #6f675a;
-  --bright: #23201b;
+  --bg: #f5eedd;
+  --bg-card: #fdf9ec;
+  --border: #e3d8be;
+  --text: #4d4432;
+  --muted: #7a6e57;
+  --bright: #262017;
   --accent: #3b6fdb;
   --accent-light: #2f5cb8;
   --green: #2e7d46;
   --green-hover: #27693a;
-  --header-a: rgba(242, 237, 230, 0.95);
-  --header-b: rgba(242, 237, 230, 0.8);
-  --wm: rgba(122, 106, 82, .12);
+  --header-a: rgba(245, 238, 221, 0.95);
+  --header-b: rgba(245, 238, 221, 0.8);
+  --wm: rgba(133, 109, 72, .14);
   --accent-soft: rgba(59, 111, 219, .08);
   --flash-bg: #1c1a17;
   --flash-text: #ece6da;
@@ -22,8 +22,8 @@
   --flash-border: rgba(236, 230, 218, .22);
   --flash-card: #2a2723;
   --flash-wm: rgba(236, 230, 218, .08);
-  --header-a: rgba(242, 237, 230, 0.95);
-  --header-b: rgba(242, 237, 230, 0.8);
+  --header-a: rgba(245, 238, 221, 0.95);
+  --header-b: rgba(245, 238, 221, 0.8);
 }
 
 /* Theme button icon colors */
@@ -44,7 +44,7 @@
 /* Flashlight avatar - soft paper circle on dark theme */
 :root[data-theme="dark"] .hero-alt .hero-avatar {
   border-color: rgba(28, 26, 23, .25) !important;
-  background: #f5f1e8 !important;
+  background: #f8f0dc !important;
 }
 :root[data-theme="dark"] .hero-alt .hero-avatar img {
   filter: none !important;
