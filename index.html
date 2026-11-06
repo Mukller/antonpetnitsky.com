@@ -364,7 +364,7 @@
       position: absolute;
       inset: 0;
       z-index: 10;
-      background: transparent;
+      background: var(--flash-bg);
       pointer-events: none;
       will-change: clip-path;
       clip-path: circle(0px at -500px -500px);
@@ -373,19 +373,8 @@
       box-shadow:
         0 -1px 0 0 var(--flash-border),
         0 1px 0 0 var(--flash-border);
-      /* The circle IS the spotlight — solid warm paper so the ANTON rows
-         do not bleed through it; contents inherit the flash colors below. */
-      overflow: visible;
-      border-radius: 0;
     }
-    .hero-alt .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: var(--flash-bg);
-      border-radius: 0;
-    }
-    .hero-alt .hero-layer { position: relative; z-index: 1; }
-    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(42px, 6vw, 64px); letter-spacing: .02em; word-spacing: 0.15em; transform: rotate(-30deg); transform-origin: center; width: 250%; text-align: center; line-height: 1.35; contain: strict; }
+    .hero-alt .wm-row { color: var(--flash-text); opacity: .35; font-size: clamp(42px, 6vw, 64px); letter-spacing: .02em; word-spacing: 0.15em; transform: rotate(-30deg); transform-origin: center; width: 250%; text-align: center; line-height: 1.35; }
     .hero-alt .hero-avatar { width: 108px; height: 108px; border-radius: 50%; border: 2px solid var(--border); background: var(--bg-card); margin: 0 auto 32px; position: relative; overflow: hidden; }
     .hero-alt .hero-title { color: var(--flash-text); }
     .hero-alt .hero-tagline { color: var(--flash-accent); }
@@ -1849,26 +1838,17 @@
     var base = document.getElementById('heroBase');
     if (!frame || !alt || !base) return;
 
-    /* Background div inside the flashlight layer (the circle itself). */
-    var bg = document.createElement('div');
-    bg.className = 'hero-bg';
-    bg.setAttribute('aria-hidden', 'true');
-    alt.appendChild(bg);
-    /* Clone base content above the bg div. */
-    var clone = document.createElement('div');
-    clone.className = 'hero-layer';
-    clone.innerHTML = base.innerHTML;
-    alt.appendChild(clone);
-    var focusables = clone.querySelectorAll('a, button');
+    alt.innerHTML = base.innerHTML;
+    var focusables = alt.querySelectorAll('a, button');
     for (var i = 0; i < focusables.length; i++) focusables[i].setAttribute('tabindex', '-1');
-    var imgs = clone.querySelectorAll('img');
+    var imgs = alt.querySelectorAll('img');
     for (var j = 0; j < imgs.length; j++) imgs[j].setAttribute('loading', 'eager');
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     /* title cycles between languages — clean crossfade, no garbage chars */
     var tB = document.getElementById('titleBase');
-    var tA = clone.querySelector('.hero-title');
+    var tA = alt.querySelector('.hero-title');
     if (tA) tA.removeAttribute('id');
     var LINES = ['Hi, I\'m Anton', 'Привет, я Антон'];
     var li = 0, busy = false, firstSet = true;
